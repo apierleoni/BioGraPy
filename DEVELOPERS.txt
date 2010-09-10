@@ -1,0 +1,6 @@
+::
+    python bootstrap.py
+    bin/buildout
+    bin/test
+    bin/coverage
+

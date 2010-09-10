@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uniprot xmlns="http://uniprot.org/uniprot"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://uniprot.org/uniprot http://www.uniprot.org/support/docs/uniprot.xsd">
+<entry version="67" modified="2010-02-09" dataset="Swiss-Prot" created="2006-02-07">
+  <accession>Q9Y6M7</accession>
+  <accession>A6NIA8</accession>
+  <accession>O60350</accession>
+  <accession>Q6AHZ9</accession>
+  <accession>Q9HC88</accession>
+  <accession>Q9UIB9</accession>
+  <name>S4A7_HUMAN</name>
+  <protein>
+    <recommendedName>
+      <fullName>Sodium bicarbonate cotransporter 3</fullName>
+    </recommendedName>
+    <alternativeName>
+      <fullName>Sodium bicarbonate cotransporter 2</fullName>
+    </alternativeName>
+    <alternativeName>
+      <fullName>Sodium bicarbonate cotransporter 2b</fullName>
+      <shortName>Bicarbonate transporter</shortName>
+    </alternativeName>
+    <alternativeName>
+      <fullName>Solute carrier family 4 member 7</fullName>
+    </alternativeName>
+  </protein>
+  <gene>
+    <name type="primary">SLC4A7</name>
+    <name type="synonym">BT</name>
+    <name type="synonym">NBC2</name>
+    <name type="synonym">NBC2B</name>
+    <name type="synonym">NBC3</name>
+    <name type="synonym">SBC2</name>
+    <name type="synonym">SLC4A6</name>
+  </gene>
+  <organism key="1">
+    <name type="scientific">Homo sapiens</name>
+    <name type="common">Human</name>
+    <dbReference type="NCBI Taxonomy" key="2" id="9606"/>
+    <lineage>
+      <taxon>Eukaryota</taxon>
+      <taxon>Metazoa</taxon>
+      <taxon>Chordata</taxon>
+      <taxon>Craniata</taxon>
+      <taxon>Vertebrata</taxon>
+      <taxon>Euteleostomi</taxon>
+      <taxon>Mammalia</taxon>
+      <taxon>Eutheria</taxon>
+      <taxon>Euarchontoglires</taxon>
+      <taxon>Primates</taxon>
+      <taxon>Haplorrhini</taxon>
+      <taxon>Catarrhini</taxon>
+      <taxon>Hominidae</taxon>
+      <taxon>Homo</taxon>
+    </lineage>
+  </organism>
+  <reference key="3">
+    <citation volume="246" type="journal article" name="Biochem. Biophys. Res. Commun." last="538" first="535" date="1998">
+      <title>Molecular cloning of a new sodium bicarbonate cotransporter cDNA from human retina.</title>
+      <authorList>
+        <person name="Ishibashi K."/>
+        <person name="Sasaki S."/>
+        <person name="Marumo F."/>
+      </authorList>
+      <dbReference type="DOI" key="4" id="10.1006/bbrc.1998.8658"/>
+      <dbReference type="PubMed" key="5" id="9610397"/>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM 3)</scope>
+    <scope>TISSUE SPECIFICITY</scope>
+    <source>
+      <tissue>Retina</tissue>
+    </source>
+  </reference>
+  <reference key="6">
+    <citation volume="274" type="journal article" name="J. Biol. Chem." last="16575" first="16569" date="1999">
+      <title>Cloning, tissue distribution, genomic organization, and functional characterization of NBC3, a new member of the sodium bicarbonate cotransporter family.</title>
+      <authorList>
+        <person name="Pushkin A."/>
+        <person name="Abuladze N."/>
+        <person name="Lee I."/>
+        <person name="Newman D."/>
+        <person name="Hwang J."/>
+        <person name="Kurtz I."/>
+      </authorList>
+      <dbReference type="DOI" key="7" id="10.1074/jbc.274.23.16569"/>
+      <dbReference type="MEDLINE" key="8" id="99278433"/>
+      <dbReference type="PubMed" key="9" id="10347222"/>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [MRNA] (ISOFORMS 1 AND 2)</scope>
+    <scope>FUNCTION</scope>
+    <scope>BIOPHYSICOCHEMICAL PROPERTIES</scope>
+    <scope>REGULATION</scope>
+    <scope>VARIANT LYS-326</scope>
+    <source>
+      <tissue>Kidney</tissue>
+      <tissue>Skeletal muscle</tissue>
+    </source>
+  </reference>
+  <reference key="10">
+    <citation type="submission" db="EMBL/GenBank/DDBJ databases" date="1998-03">
+      <title>Cloning of a HCO3 transporter, NT2-NBC, from human brain, similar to both the Anion exchangers (AEs) and the Na/Bicarbonate Cotransporters (NBCs).</title>
+      <authorList>
+        <person name="Romero M.F."/>
+      </authorList>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM 4)</scope>
+    <source>
+      <tissue>Neuroepithelium</tissue>
+    </source>
+  </reference>
+  <reference key="11">
+    <citation volume="8" type="journal article" name="BMC Genomics" last="399" first="399" date="2007">
+      <title>The full-ORF clone resource of the German cDNA consortium.</title>
+      <authorList>
+        <person name="Bechtel S."/>
+        <person name="Rosenfelder H."/>
+        <person name="Duda A."/>
+        <person name="Schmidt C.P."/>
+        <person name="Ernst U."/>
+        <person name="Wellenreuther R."/>
+        <person name="Mehrle A."/>
+        <person name="Schuster C."/>
+        <person name="Bahr A."/>
+        <person name="Bloecker H."/>
+        <person name="Heubner D."/>
+        <person name="Hoerlein A."/>
+        <person name="Michel G."/>
+        <person name="Wedler H."/>
+        <person name="Koehrer K."/>
+        <person name="Ottenwaelder B."/>
+        <person name="Poustka A."/>
+        <person name="Wiemann S."/>
+        <person name="Schupp I."/>
+      </authorList>
+      <dbReference type="DOI" key="12" id="10.1186/1471-2164-8-399"/>
+      <dbReference type="PubMed" key="13" id="17974005"/>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA] (ISOFORM 5)</scope>
+    <source>
+      <tissue>Cervix</tissue>
+    </source>
+  </reference>
+  <reference key="14">
+    <citation volume="440" type="journal article" name="Nature" last="1198" first="1194" date="2006">
+      <title>The DNA sequence, annotation and analysis of human chromosome 3.</title>
+      <authorList>
+        <person name="Muzny D.M."/>
+        <person name="Scherer S.E."/>
+        <person name="Kaul R."/>
+        <person name="Wang J."/>
+        <person name="Yu J."/>
+        <person name="Sudbrak R."/>
+        <person name="Buhay C.J."/>
+        <person name="Chen R."/>
+        <person name="Cree A."/>
+        <person name="Ding Y."/>
+        <person name="Dugan-Rocha S."/>
+        <person name="Gill R."/>
+        <person name="Gunaratne P."/>
+        <person name="Harris R.A."/>
+        <person name="Hawes A.C."/>
+        <person name="Hernandez J."/>
+        <person name="Hodgson A.V."/>
+        <person name="Hume J."/>
+        <person name="Jackson A."/>
+        <person name="Khan Z.M."/>
+        <person name="Kovar-Smith C."/>
+        <person name="Lewis L.R."/>
+        <person name="Lozado R.J."/>
+        <person name="Metzker M.L."/>
+        <person name="Milosavljevic A."/>
+        <person name="Miner G.R."/>
+        <person name="Morgan M.B."/>
+        <person name="Nazareth L.V."/>
+        <person name="Scott G."/>
+        <person name="Sodergren E."/>
+        <person name="Song X.-Z."/>
+        <person name="Steffen D."/>
+        <person name="Wei S."/>
+        <person name="Wheeler D.A."/>
+        <person name="Wright M.W."/>
+        <person name="Worley K.C."/>
+        <person name="Yuan Y."/>
+        <person name="Zhang Z."/>
+        <person name="Adams C.Q."/>
+        <person name="Ansari-Lari M.A."/>
+        <person name="Ayele M."/>
+        <person name="Brown M.J."/>
+        <person name="Chen G."/>
+        <person name="Chen Z."/>
+        <person name="Clendenning J."/>
+        <person name="Clerc-Blankenburg K.P."/>
+        <person name="Chen R."/>
+        <person name="Chen Z."/>
+        <person name="Davis C."/>
+        <person name="Delgado O."/>
+        <person name="Dinh H.H."/>
+        <person name="Dong W."/>
+        <person name="Draper H."/>
+        <person name="Ernst S."/>
+        <person name="Fu G."/>
+        <person name="Gonzalez-Garay M.L."/>
+        <person name="Garcia D.K."/>
+        <person name="Gillett W."/>
+        <person name="Gu J."/>
+        <person name="Hao B."/>
+        <person name="Haugen E."/>
+        <person name="Havlak P."/>
+        <person name="He X."/>
+        <person name="Hennig S."/>
+        <person name="Hu S."/>
+        <person name="Huang W."/>
+        <person name="Jackson L.R."/>
+        <person name="Jacob L.S."/>
+        <person name="Kelly S.H."/>
+        <person name="Kube M."/>
+        <person name="Levy R."/>
+        <person name="Li Z."/>
+        <person name="Liu B."/>
+        <person name="Liu J."/>
+        <person name="Liu W."/>
+        <person name="Lu J."/>
+        <person name="Maheshwari M."/>
+        <person name="Nguyen B.-V."/>
+        <person name="Okwuonu G.O."/>
+        <person name="Palmeiri A."/>
+        <person name="Pasternak S."/>
+        <person name="Perez L.M."/>
+        <person name="Phelps K.A."/>
+        <person name="Plopper F.J."/>
+        <person name="Qiang B."/>
+        <person name="Raymond C."/>
+        <person name="Rodriguez R."/>
+        <person name="Saenphimmachak C."/>
+        <person name="Santibanez J."/>
+        <person name="Shen H."/>
+        <person name="Shen Y."/>
+        <person name="Subramanian S."/>
+        <person name="Tabor P.E."/>
+        <person name="Verduzco D."/>
+        <person name="Waldron L."/>
+        <person name="Wang J."/>
+        <person name="Wang J."/>
+        <person name="Wang Q."/>
+        <person name="Williams G.A."/>
+        <person name="Wong G.K.-S."/>
+        <person name="Yao Z."/>
+        <person name="Zhang J."/>
+        <person name="Zhang X."/>
+        <person name="Zhao G."/>
+        <person name="Zhou J."/>
+        <person name="Zhou Y."/>
+        <person name="Nelson D."/>
+        <person name="Lehrach H."/>
+        <person name="Reinhardt R."/>
+        <person name="Naylor S.L."/>
+        <person name="Yang H."/>
+        <person name="Olson M."/>
+        <person name="Weinstock G."/>
+        <person name="Gibbs R.A."/>
+      </authorList>
+      <dbReference type="DOI" key="15" id="10.1038/nature04728"/>
+      <dbReference type="PubMed" key="16" id="16641997"/>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+  </reference>
+  <reference key="17">
+    <citation type="submission" db="EMBL/GenBank/DDBJ databases" date="2005-07">
+      <authorList>
+        <person name="Mural R.J."/>
+        <person name="Istrail S."/>
+        <person name="Sutton G.G."/>
+        <person name="Florea L."/>
+        <person name="Halpern A.L."/>
+        <person name="Mobarry C.M."/>
+        <person name="Lippert R."/>
+        <person name="Walenz B."/>
+        <person name="Shatkay H."/>
+        <person name="Dew I."/>
+        <person name="Miller J.R."/>
+        <person name="Flanigan M.J."/>
+        <person name="Edwards N.J."/>
+        <person name="Bolanos R."/>
+        <person name="Fasulo D."/>
+        <person name="Halldorsson B.V."/>
+        <person name="Hannenhalli S."/>
+        <person name="Turner R."/>
+        <person name="Yooseph S."/>
+        <person name="Lu F."/>
+        <person name="Nusskern D.R."/>
+        <person name="Shue B.C."/>
+        <person name="Zheng X.H."/>
+        <person name="Zhong F."/>
+        <person name="Delcher A.L."/>
+        <person name="Huson D.H."/>
+        <person name="Kravitz S.A."/>
+        <person name="Mouchard L."/>
+        <person name="Reinert K."/>
+        <person name="Remington K.A."/>
+        <person name="Clark A.G."/>
+        <person name="Waterman M.S."/>
+        <person name="Eichler E.E."/>
+        <person name="Adams M.D."/>
+        <person name="Hunkapiller M.W."/>
+        <person name="Myers E.W."/>
+        <person name="Venter J.C."/>
+      </authorList>
+    </citation>
+    <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+  </reference>
+  <reference key="18">
+    <citation volume="277" type="journal article" name="J. Biol. Chem." last="50509" first="50503" date="2002">
+      <title>The cystic fibrosis transmembrane conductance regulator interacts with and regulates the activity of the HCO3- salvage transporter human Na+-HCO3-cotransport isoform 3.</title>
+      <authorList>
+        <person name="Park M."/>
+        <person name="Ko S.B.H."/>
+        <person name="Choi J.Y."/>
+        <person name="Muallem G."/>
+        <person name="Thomas P.J."/>
+        <person name="Pushkin A."/>
+        <person name="Lee M.-S."/>
+        <person name="Kim J.Y."/>
+        <person name="Lee M.G."/>
+        <person name="Muallem S."/>
+        <person name="Kurtz I."/>
+      </authorList>
+      <dbReference type="DOI" key="19" id="10.1074/jbc.M201862200"/>
+      <dbReference type="PubMed" key="20" id="12403779"/>
+    </citation>
+    <scope>FUNCTION</scope>
+    <scope>INTERACTION WITH CFTR AND SLC9A3R1</scope>
+    <scope>DOMAIN</scope>
+  </reference>
+  <reference key="21">
+    <citation volume="284" type="journal article" name="Am. J. Physiol." last="C673" first="C667" date="2003">
+      <title>The COOH termini of NBC3 and the 56-kDa H+-ATPase subunit are PDZ motifs involved in their interaction.</title>
+      <authorList>
+        <person name="Pushkin A."/>
+        <person name="Abuladze N."/>
+        <person name="Newman D."/>
+        <person name="Muronets V."/>
+        <person name="Sassani P."/>
+        <person name="Tatishchev S."/>
+        <person name="Kurtz I."/>
+      </authorList>
+      <dbReference type="DOI" key="22" id="10.1152/ajpcell.00225.2002"/>
+      <dbReference type="PubMed" key="23" id="12444018"/>
+    </citation>
+    <scope>INTERACTION WITH ATP6V1B1 AND SLC9A3R1</scope>
+    <scope>MUTAGENESIS OF LEU-1214</scope>
+  </reference>
+  <reference key="24">
+    <citation volume="286" type="journal article" name="Am. J. Physiol." last="C1433" first="C1423" date="2004">
+      <title>Regulation of the human NBC3 Na+/HCO3- cotransporter by carbonic anhydrase II and PKA.</title>
+      <authorList>
+        <person name="Loiselle F.B."/>
+        <person name="Morgan P.E."/>
+        <person name="Alvarez B.V."/>
+        <person name="Casey J.R."/>
+      </authorList>
+      <dbReference type="DOI" key="25" id="10.1152/ajpcell.00382.2003"/>
+      <dbReference type="PubMed" key="26" id="14736710"/>
+    </citation>
+    <scope>INTERACTION WITH CA2</scope>
+    <scope>REGULATION</scope>
+    <scope>MUTAGENESIS OF 1135-ASP-ASP-1136 AND 1163-ASP--ASP-1165</scope>
+  </reference>
+  <reference key="27">
+    <citation volume="76" type="journal article" name="Anal. Chem." last="2772" first="2763" date="2004">
+      <title>Robust phosphoproteomic profiling of tyrosine phosphorylation sites from human T cells using immobilized metal affinity chromatography and tandem mass spectrometry.</title>
+      <authorList>
+        <person name="Brill L.M."/>
+        <person name="Salomon A.R."/>
+        <person name="Ficarro S.B."/>
+        <person name="Mukherji M."/>
+        <person name="Stettler-Gill M."/>
+        <person name="Peters E.C."/>
+      </authorList>
+      <dbReference type="DOI" key="28" id="10.1021/ac035352d"/>
+      <dbReference type="PubMed" key="29" id="15144186"/>
+    </citation>
+    <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT SER-1213</scope>
+    <scope>MASS SPECTROMETRY</scope>
+    <source>
+      <tissue>T-cell</tissue>
+    </source>
+  </reference>
+  <reference key="30">
+    <citation volume="14" type="journal article" name="Hum. Mol. Genet." last="3943" first="3933" date="2005">
+      <title>Scaffold protein harmonin (USH1C) provides molecular links between Usher syndrome type 1 and type 2.</title>
+      <authorList>
+        <person name="Reiners J."/>
+        <person name="van Wijk E."/>
+        <person name="Maerker T."/>
+        <person name="Zimmermann U."/>
+        <person name="Juergens K."/>
+        <person name="te Brinke H."/>
+        <person name="Overlack N."/>
+        <person name="Roepman R."/>
+        <person name="Knipper M."/>
+        <person name="Kremer H."/>
+        <person name="Wolfrum U."/>
+      </authorList>
+      <dbReference type="DOI" key="31" id="10.1093/hmg/ddi417"/>
+      <dbReference type="PubMed" key="32" id="16301216"/>
+    </citation>
+    <scope>INTERACTION WITH USH1C</scope>
+  </reference>
+  <reference key="33">
+    <citation volume="7" type="journal article" name="J. Proteome Res." last="1351" first="1346" date="2008">
+      <title>Combining protein-based IMAC, peptide-based IMAC, and MudPIT for efficient phosphoproteomic analysis.</title>
+      <authorList>
+        <person name="Cantin G.T."/>
+        <person name="Yi W."/>
+        <person name="Lu B."/>
+        <person name="Park S.K."/>
+        <person name="Xu T."/>
+        <person name="Lee J.-D."/>
+        <person name="Yates J.R. III"/>
+      </authorList>
+      <dbReference type="DOI" key="34" id="10.1021/pr0705441"/>
+      <dbReference type="PubMed" key="35" id="18220336"/>
+    </citation>
+    <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT THR-1167 AND SER-1176</scope>
+    <scope>MASS SPECTROMETRY</scope>
+  </reference>
+  <reference key="36">
+    <citation volume="105" type="journal article" name="Proc. Natl. Acad. Sci. U.S.A." last="10767" first="10762" date="2008">
+      <title>A quantitative atlas of mitotic phosphorylation.</title>
+      <authorList>
+        <person name="Dephoure N."/>
+        <person name="Zhou C."/>
+        <person name="Villen J."/>
+        <person name="Beausoleil S.A."/>
+        <person name="Bakalarski C.E."/>
+        <person name="Elledge S.J."/>
+        <person name="Gygi S.P."/>
+      </authorList>
+      <dbReference type="DOI" key="37" id="10.1073/pnas.0805139105"/>
+      <dbReference type="PubMed" key="38" id="18669648"/>
+    </citation>
+    <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT SER-382; SER-403; SER-407; THR-1167; SER-1176; SER-1188; SER-1194 AND SER-1213</scope>
+    <scope>MASS SPECTROMETRY</scope>
+  </reference>
+  <reference key="39">
+    <citation volume="27" type="journal article" name="Nat. Biotechnol." last="386" first="378" date="2009">
+      <title>Mass-spectrometric identification and relative quantification of N-linked cell surface glycoproteins.</title>
+      <authorList>
+        <person name="Wollscheid B."/>
+        <person name="Bausch-Fluck D."/>
+        <person name="Henderson C."/>
+        <person name="O'Brien R."/>
+        <person name="Bibel M."/>
+        <person name="Schiess R."/>
+        <person name="Aebersold R."/>
+        <person name="Watts J.D."/>
+      </authorList>
+      <dbReference type="DOI" key="40" id="10.1038/nbt.1532"/>
+      <dbReference type="PubMed" key="41" id="19349973"/>
+    </citation>
+    <scope>GLYCOSYLATION [LARGE SCALE ANALYSIS] AT ASN-776; ASN-786 AND ASN-791</scope>
+    <scope>MASS SPECTROMETRY</scope>
+  </reference>
+  <reference key="42">
+    <citation volume="2" type="journal article" name="Sci. Signal." last="RA46" first="RA46" date="2009">
+      <title>Quantitative phosphoproteomic analysis of T cell receptor signaling reveals system-wide modulation of protein-protein interactions.</title>
+      <authorList>
+        <person name="Mayya V."/>
+        <person name="Lundgren D.H."/>
+        <person name="Hwang S.-I."/>
+        <person name="Rezaul K."/>
+        <person name="Wu L."/>
+        <person name="Eng J.K."/>
+        <person name="Rodionov V."/>
+        <person name="Han D.K."/>
+      </authorList>
+      <dbReference type="DOI" key="43" id="10.1126/scisignal.2000007"/>
+      <dbReference type="PubMed" key="44" id="19690332"/>
+    </citation>
+    <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT THR-1167 AND SER-1176</scope>
+    <scope>MASS SPECTROMETRY</scope>
+    <source>
+      <tissue>T-cell</tissue>
+    </source>
+  </reference>
+  <comment type="function" evidence="EC1 EC2">
+    <text>Electroneutral sodium- and bicarbonate-dependent cotransporter with a Na(+):HCO3(-) 1:1 stoichiometry. Regulates intracellular pH and may play a role in bicarbonate salvage in secretory epithelia. May also have an associated sodium channel activity.</text>
+  </comment>
+  <comment type="enzyme regulation">
+    <text>Transporter activity is regulated by CA2/carbonic anhydrase 2, cAMP and PKA. Insensitive to stilbene derivatives. PubMed:10347222 states it is inhibited by 5-(N-ethyl-N-isopropyl)-amiloride (EIPA).</text>
+  </comment>
+  <comment type="biophysicochemical properties">
+    <kinetics>
+      <KM>24 mM for external sodium</KM>
+    </kinetics>
+  </comment>
+  <comment type="subunit" evidence="EC2 EC3 EC4 EC5">
+    <text>Interacts with CFTR through SLC9A3R1/EBP50. Interacts with USH1C. Forms a complex with ATP6V1B1 and SLC9A3R1/EBP50. Interacts in a pH dependent-manner with CA2/carbonic anhydrase 2.</text>
+  </comment>
+  <comment type="interaction">
+    <interactant intactId="EBI-1044546"/>
+    <interactant intactId="EBI-359815">
+      <id>P31946</id>
+      <label>YWHAB</label>
+    </interactant>
+    <organismsDiffer>false</organismsDiffer>
+    <experiments>1</experiments>
+  </comment>
+  <comment type="subcellular location">
+    <subcellularLocation>
+      <location>Basolateral cell membrane</location>
+      <topology>Multi-pass membrane protein</topology>
+    </subcellularLocation>
+    <subcellularLocation>
+      <location>Apical cell membrane</location>
+      <topology status="By similarity">Multi-pass membrane protein</topology>
+    </subcellularLocation>
+    <subcellularLocation>
+      <location status="By similarity">Cell projection, stereocilium</location>
+    </subcellularLocation>
+    <text status="By similarity">Also described at the apical cell membrane. Localizes to the stereocilia of cochlear outer hair cells and to the lateral membrane of cochlear inner hair cells.</text>
+  </comment>
+  <comment type="alternative products">
+    <event type="alternative splicing"/>
+    <isoform>
+      <id>Q9Y6M7-1</id>
+      <name>1</name>
+      <name>mNBC3,NBCn1-A</name>
+      <sequence type="displayed"/>
+    </isoform>
+    <isoform>
+      <id>Q9Y6M7-2</id>
+      <name>2</name>
+      <sequence type="described" ref="VSP_017162"/>
+    </isoform>
+    <isoform>
+      <id>Q9Y6M7-3</id>
+      <name>3</name>
+      <sequence type="described" ref="VSP_017160 VSP_017161 VSP_017162 VSP_017165"/>
+    </isoform>
+    <isoform>
+      <id>Q9Y6M7-4</id>
+      <name>4</name>
+      <sequence type="described" ref="VSP_017160 VSP_017161 VSP_017162"/>
+    </isoform>
+    <isoform>
+      <id>Q9Y6M7-5</id>
+      <name>5</name>
+      <sequence type="described" ref="VSP_017159 VSP_017163 VSP_017164"/>
+      <note>No experimental confirmation available</note>
+    </isoform>
+  </comment>
+  <comment type="tissue specificity" evidence="EC6">
+    <text>Highly expressed in testis and spleen. Also expressed in retina, colon, small intestine, ovary, thymus, prostate, muscle, heart and kidney. Isoform 1 is expressed in skeletal muscle and heart muscle.</text>
+  </comment>
+  <comment type="domain" evidence="EC2">
+    <text>The PDZ-binding motif mediates interaction with the CFTR, SLC9A3R1/EBP50 complex and probably with USH1C.</text>
+  </comment>
+  <comment type="similarity">
+    <text>Belongs to the anion exchanger (TC 2.A.31) family.</text>
+  </comment>
+  <dbReference type="EMBL" key="45" id="AB012130">
+    <property value="BAA25898.1" type="protein sequence ID"/>
+    <property value="mRNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="46" id="AF047033">
+    <property value="AAD38322.1" type="protein sequence ID"/>
+    <property value="mRNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="47" id="AF089726">
+    <property value="AAG16773.1" type="protein sequence ID"/>
+    <property value="mRNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="48" id="AF053755">
+    <property value="AAF21720.1" type="protein sequence ID"/>
+    <property value="mRNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="49" id="CR627428">
+    <property value="CAH10515.1" type="protein sequence ID"/>
+    <property value="mRNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="50" id="AC099535">
+    <property value="NOT_ANNOTATED_CDS" type="status"/>
+    <property value="Genomic_DNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="EMBL" key="51" id="CH471055">
+    <property value="EAW64382.1" type="protein sequence ID"/>
+    <property value="Genomic_DNA" type="molecule type"/>
+  </dbReference>
+  <dbReference type="IPI" key="52" id="IPI00021058"/>
+  <dbReference type="IPI" key="53" id="IPI00328342"/>
+  <dbReference type="IPI" key="54" id="IPI00387156"/>
+  <dbReference type="IPI" key="55" id="IPI00719704"/>
+  <dbReference type="IPI" key="56" id="IPI00719757"/>
+  <dbReference type="PIR" key="57" id="JE0160">
+    <property value="JE0160" type="entry name"/>
+  </dbReference>
+  <dbReference type="RefSeq" key="58" id="NP_003606.3"/>
+  <dbReference type="UniGene" key="59" id="Hs.250072"/>
+  <dbReference type="SMR" key="60" id="Q9Y6M7">
+    <property value="111-548, 592-633, 1052-1084" type="residue range"/>
+  </dbReference>
+  <dbReference type="IntAct" key="61" id="Q9Y6M7"/>
+  <dbReference type="String" key="62" id="Q9Y6M7"/>
+  <dbReference type="PhosphoSite" key="63" id="Q9Y6M7"/>
+  <dbReference type="PRIDE" key="64" id="Q9Y6M7"/>
+  <dbReference type="Ensembl" key="65" id="ENST00000295736">
+    <property value="ENSP00000295736" type="protein sequence ID"/>
+    <property value="ENSG00000033867" type="gene designation"/>
+    <property value="Homo sapiens" type="organism name"/>
+  </dbReference>
+  <dbReference type="GeneId" key="66" id="9497"/>
+  <dbReference type="KEGG" key="67" id="hsa:9497"/>
+  <dbReference type="Ucsc" key="68" id="uc003cdw.1"/>
+  <dbReference type="Ucsc" key="69" id="uc010hfl.1"/>
+  <dbReference type="Ctd" key="70" id="9497"/>
+  <dbReference type="GeneCards" key="71" id="GC03M027389"/>
+  <dbReference type="H-InvDB" key="72" id="HIX0003134"/>
+  <dbReference type="HGNC" key="73" id="HGNC:11033">
+    <property value="SLC4A7" type="gene designation"/>
+  </dbReference>
+  <dbReference type="HPA" key="74" id="CAB022494"/>
+  <dbReference type="MIM" key="75" id="603353">
+    <property value="gene" type="type"/>
+  </dbReference>
+  <dbReference type="PharmGKB" key="76" id="PA35899"/>
+  <dbReference type="eggNOG" key="77" id="prNOG12412"/>
+  <dbReference type="HOVERGEN" key="78" id="Q9Y6M7"/>
+  <dbReference type="InParanoid" key="79" id="Q9Y6M7"/>
+  <dbReference type="PhylomeDB" key="80" id="Q9Y6M7"/>
+  <dbReference type="Reactome" key="81" id="REACT_15518">
+    <property value="Transmembrane transport of small molecules" type="pathway name"/>
+  </dbReference>
+  <dbReference type="ArrayExpress" key="82" id="Q9Y6M7"/>
+  <dbReference type="Bgee" key="83" id="Q9Y6M7"/>
+  <dbReference type="CleanEx" key="84" id="HS_SLC4A7"/>
+  <dbReference type="Genevestigator" key="85" id="Q9Y6M7"/>
+  <dbReference type="GermOnline" key="86" id="ENSG00000033867">
+    <property value="Homo sapiens" type="organism name"/>
+  </dbReference>
+  <dbReference type="Go" key="87" id="GO:0016021">
+    <property value="C:integral to membrane" type="term"/>
+    <property value="NAS:UniProtKB" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="88" id="GO:0005886">
+    <property value="C:plasma membrane" type="term"/>
+    <property value="IEA:UniProtKB-KW" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="89" id="GO:0032420">
+    <property value="C:stereocilium" type="term"/>
+    <property value="IEA:UniProtKB-SubCell" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="90" id="GO:0005452">
+    <property value="F:inorganic anion exchanger activity" type="term"/>
+    <property value="IEA:InterPro" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="91" id="GO:0005515">
+    <property value="F:protein binding" type="term"/>
+    <property value="IPI:IntAct" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="92" id="GO:0031402">
+    <property value="F:sodium ion binding" type="term"/>
+    <property value="IEA:UniProtKB-KW" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="93" id="GO:0008510">
+    <property value="F:sodium:bicarbonate symporter activity" type="term"/>
+    <property value="NAS:UniProtKB" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="94" id="GO:0015701">
+    <property value="P:bicarbonate transport" type="term"/>
+    <property value="NAS:UniProtKB" type="evidence"/>
+  </dbReference>
+  <dbReference type="Go" key="95" id="GO:0006814">
+    <property value="P:sodium ion transport" type="term"/>
+    <property value="IEA:UniProtKB-KW" type="evidence"/>
+  </dbReference>
+  <dbReference type="InterPro" key="96" id="IPR011531">
+    <property value="HCO3_transpt_C" type="entry name"/>
+  </dbReference>
+  <dbReference type="InterPro" key="97" id="IPR013769">
+    <property value="HCO3_transpt_cyt" type="entry name"/>
+  </dbReference>
+  <dbReference type="InterPro" key="98" id="IPR003020">
+    <property value="HCO3_transpt_euk" type="entry name"/>
+  </dbReference>
+  <dbReference type="InterPro" key="99" id="IPR016152">
+    <property value="PTrfase/Anion_transptr" type="entry name"/>
+  </dbReference>
+  <dbReference type="Gene3D" key="100" id="G3DSA:3.40.1100.10">
+    <property value="HCO3_transpt_cyt" type="entry name"/>
+    <property value="1" type="match status"/>
+  </dbReference>
+  <dbReference type="PANTHER" key="101" id="PTHR11453">
+    <property value="HCO3_transpt_euk" type="entry name"/>
+    <property value="1" type="match status"/>
+  </dbReference>
+  <dbReference type="Pfam" key="102" id="PF07565">
+    <property value="Band_3_cyto" type="entry name"/>
+    <property value="1" type="match status"/>
+  </dbReference>
+  <dbReference type="Pfam" key="103" id="PF00955">
+    <property value="HCO3_cotransp" type="entry name"/>
+    <property value="1" type="match status"/>
+  </dbReference>
+  <dbReference type="PRINTS" key="104" id="PR01231">
+    <property value="HCO3TRNSPORT" type="entry name"/>
+  </dbReference>
+  <dbReference type="TIGRFAMs" key="105" id="TIGR00834">
+    <property value="ae" type="entry name"/>
+    <property value="1" type="match status"/>
+  </dbReference>
+  <dbReference type="PROSITE" key="106" id="PS00219">
+    <property value="ANION_EXCHANGER_1" type="entry name"/>
+    <property value="FALSE_NEG" type="match status"/>
+  </dbReference>
+  <dbReference type="PROSITE" key="107" id="PS00220">
+    <property value="ANION_EXCHANGER_2" type="entry name"/>
+    <property value="FALSE_NEG" type="match status"/>
+  </dbReference>
+  <proteinExistence type="Evidence at protein level"/>
+  <keyword id="KW-0025">Alternative splicing</keyword>
+  <keyword id="KW-1003">Cell membrane</keyword>
+  <keyword id="KW-0966">Cell projection</keyword>
+  <keyword id="KW-0181">Complete proteome</keyword>
+  <keyword id="KW-0325">Glycoprotein</keyword>
+  <keyword id="KW-0406">Ion transport</keyword>
+  <keyword id="KW-0472">Membrane</keyword>
+  <keyword id="KW-0597">Phosphoprotein</keyword>
+  <keyword id="KW-0621">Polymorphism</keyword>
+  <keyword id="KW-0915">Sodium</keyword>
+  <keyword id="KW-0739">Sodium transport</keyword>
+  <keyword id="KW-0769">Symport</keyword>
+  <keyword id="KW-0812">Transmembrane</keyword>
+  <keyword id="KW-0813">Transport</keyword>
+  <feature type="chain" id="PRO_0000079233" description="Sodium bicarbonate cotransporter 3">
+    <location>
+      <begin position="1"/>
+      <end position="1214"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="1"/>
+      <end position="608"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="609"/>
+      <end position="629"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="630"/>
+      <end position="637"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="638"/>
+      <end position="658"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="659"/>
+      <end position="695"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="696"/>
+      <end position="716"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="717"/>
+      <end position="725"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="726"/>
+      <end position="746"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="747"/>
+      <end position="817"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="818"/>
+      <end position="838"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="839"/>
+      <end position="861"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="862"/>
+      <end position="882"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="883"/>
+      <end position="908"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="909"/>
+      <end position="929"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="930"/>
+      <end position="954"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="955"/>
+      <end position="975"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="976"/>
+      <end position="1011"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="1012"/>
+      <end position="1032"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="1033"/>
+      <end position="1034"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="1035"/>
+      <end position="1055"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Extracellular">
+    <location>
+      <begin position="1056"/>
+      <end position="1092"/>
+    </location>
+  </feature>
+  <feature type="transmembrane region" status="Potential">
+    <location>
+      <begin position="1093"/>
+      <end position="1113"/>
+    </location>
+  </feature>
+  <feature type="topological domain" status="Potential" description="Cytoplasmic">
+    <location>
+      <begin position="1114"/>
+      <end position="1214"/>
+    </location>
+  </feature>
+  <feature type="region of interest" description="CA2-binding">
+    <location>
+      <begin position="1134"/>
+      <end position="1136"/>
+    </location>
+  </feature>
+  <feature type="short sequence motif" description="PDZ-binding">
+    <location>
+      <begin position="1211"/>
+      <end position="1214"/>
+    </location>
+  </feature>
+  <feature type="modified residue" status="By similarity" description="Phosphoserine">
+    <location>
+      <position position="233"/>
+    </location>
+  </feature>
+  <feature type="modified residue" status="By similarity" description="Phosphoserine">
+    <location>
+      <position position="379"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC8" description="Phosphoserine">
+    <location>
+      <position position="382"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC8" description="Phosphoserine">
+    <location>
+      <position position="403"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC8" description="Phosphoserine">
+    <location>
+      <position position="407"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC9 EC8 EC10" description="Phosphothreonine">
+    <location>
+      <position position="1167"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC9 EC8 EC10" description="Phosphoserine">
+    <location>
+      <position position="1176"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC8" description="Phosphoserine">
+    <location>
+      <position position="1188"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC8" description="Phosphoserine">
+    <location>
+      <position position="1194"/>
+    </location>
+  </feature>
+  <feature type="modified residue" evidence="EC11 EC8" description="Phosphoserine">
+    <location>
+      <position position="1213"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" status="Potential" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="171"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" status="Potential" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="269"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" status="Potential" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="398"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" status="Potential" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="406"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" evidence="EC7" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="776"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" evidence="EC7" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="786"/>
+    </location>
+  </feature>
+  <feature type="glycosylation site" evidence="EC7" description="N-linked (GlcNAc...)">
+    <location>
+      <position position="791"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017159" description="(in isoform 5)">
+    <location>
+      <begin position="1"/>
+      <end position="450"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017160" description="(in isoform 3, isoform 4)">
+    <location>
+      <begin position="1"/>
+      <end position="90"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017161" description="(in isoform 3, isoform 4)">
+    <original>SQRVQFILGTEDDDEEHIPHDLFTEMDE</original>
+    <variation>MAVTQFIHFREEIMGNMFFIIIFSTKDK</variation>
+    <location>
+      <begin position="91"/>
+      <end position="118"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017162" description="(in isoform 2, isoform 3, isoform 4)">
+    <location>
+      <begin position="251"/>
+      <end position="374"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017163" description="(in isoform 5)">
+    <original>PAVLLTGLTEVPVPT</original>
+    <variation>MEVVEAEKIVLLTSA</variation>
+    <location>
+      <begin position="451"/>
+      <end position="465"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017164" description="(in isoform 5)">
+    <original>S</original>
+    <variation>SVDPSIVNISDEMAKTAQWKALSMNSENAKVTRSNMS</variation>
+    <location>
+      <position position="1188"/>
+    </location>
+  </feature>
+  <feature type="splice variant" id="VSP_017165" description="(in isoform 3)">
+    <original>PDKPVSVKISFEDEPRKKYVDAETSL</original>
+    <variation>GDPSIGNISDEMAKTAQWKALSMNTENAKVTRSNMSPDKPVSVK</variation>
+    <location>
+      <begin position="1189"/>
+      <end position="1214"/>
+    </location>
+  </feature>
+  <feature type="sequence variant" id="VAR_055317" evidence="EC1" description="(in dbSNP:rs3755652)">
+    <original>E</original>
+    <variation>K</variation>
+    <location>
+      <position position="326"/>
+    </location>
+  </feature>
+  <feature type="mutagenesis site" description="Loss of interaction with CA2. Loss of regulation by CA2">
+    <original>DD</original>
+    <variation>NN</variation>
+    <location>
+      <begin position="1135"/>
+      <end position="1136"/>
+    </location>
+  </feature>
+  <feature type="mutagenesis site" evidence="EC4" description="No effect on interaction with CA2. No effect on regulation by CA2">
+    <original>DDD</original>
+    <variation>NNN</variation>
+    <location>
+      <begin position="1163"/>
+      <end position="1165"/>
+    </location>
+  </feature>
+  <feature type="mutagenesis site" evidence="EC3" description="Loss of interaction with ATP6V1B1">
+    <original>L</original>
+    <variation>G</variation>
+    <location>
+      <position position="1214"/>
+    </location>
+  </feature>
+  <evidence type="Literature" key="EC1" date="2009-09-01" category="curator" attribute="PubMed=10347222"/>
+  <evidence type="Literature" key="EC2" date="2009-09-01" category="curator" attribute="PubMed=12403779"/>
+  <evidence type="Literature" key="EC3" date="2009-09-01" category="curator" attribute="PubMed=12444018"/>
+  <evidence type="Literature" key="EC4" date="2009-09-01" category="curator" attribute="PubMed=14736710"/>
+  <evidence type="Literature" key="EC5" date="2009-09-01" category="curator" attribute="PubMed=16301216"/>
+  <evidence type="Literature" key="EC6" date="2009-09-01" category="curator" attribute="PubMed=9610397"/>
+  <evidence type="Literature" key="EC7" date="2009-09-01" category="curator" attribute="PubMed=19349973"/>
+  <evidence type="Literature" key="EC8" date="2009-09-01" category="curator" attribute="PubMed=18669648"/>
+  <evidence type="Literature" key="EC9" date="2009-09-01" category="curator" attribute="PubMed=18220336"/>
+  <evidence type="Literature" key="EC10" date="2009-09-01" category="curator" attribute="PubMed=19690332"/>
+  <evidence type="Literature" key="EC11" date="2009-09-01" category="curator" attribute="PubMed=15144186"/>
+  <sequence version="2" modified="2009-05-05" mass="136044" length="1214" checksum="7B4ADA1E3F26813C">MERFRLEKKLPGPDEEAVVDLGKTSSTVNTKFEKEELESHRAVYIGVHVPFSKESRRRHRHRGHKHHHRRRKDKESDKEDGRESPSYDTPSQRVQFILGTEDDDEEHIPHDLFTEMDELCYRDGEEYEWKETARWLKFEEDVEDGGDRWSKPYVATLSLHSLFELRSCILNGTVMLDMRASTLDEIADMVLDNMIASGQLDESIRENVREALLKRHHHQNEKRFTSRIPLVRSFADIGKKHSDPHLLERNGEGLSASRHSLRTGLSASNLSLRGESPLSLLLGHLLPSSRAGTPAGSRCTTPVPTPQNSPPSSPSISRLTSRSSQESQRQAPELLVSPASDDIPTVVIHPPEEDLEAALKGEEQKNEENVDLTPGILASPQSAPGNLDNSKSGEIKGNGSGGSRENSTVDFSKVDMNFMRKIPTGAEASNVLVGEVDFLERPIIAFVRLAPAVLLTGLTEVPVPTRFLFLLLGPAGKAPQYHEIGRSIATLMTDEIFHDVAYKAKDRNDLLSGIDEFLDQVTVLPPGEWDPSIRIEPPKSVPSQEKRKIPVFHNGSTPTLGETPKEAAHHAGPELQRTGRLFGGLILDIKRKAPFFLSDFKDALSLQCLASILFLYCACMSPVITFGGLLGEATEGRISAIESLFGASLTGIAYSLFAGQPLTILGSTGPVLVFEKILYKFCRDYQLSYLSLRTSIGLWTSFLCIVLVATDASSLVCYITRFTEEAFAALICIIFIYEALEKLFDLGETYAFNMHNNLDKLTSYSCVCTEPPNPSNETLAQWKKDNITAHNISWRNLTVSECKKLRGVFLGSACGHHGPYIPDVLFWCVILFFTTFFLSSFLKQFKTKRYFPTKVRSTISDFAVFLTIVIMVTIDYLVGVPSPKLHVPEKFEPTHPERGWIISPLGDNPWWTLLIAAIPALLCTILIFMDQQITAVIINRKEHKLKKGAGYHLDLLMVGVMLGVCSVMGLPWFVAATVLSISHVNSLKVESECSAPGEQPKFLGIREQRVTGLMIFILMGLSVFMTSVLKFIPMPVLYGVFLYMGVSSLKGIQLFDRIKLFGMPAKHQPDLIYLRYVPLWKVHIFTVIQLTCLVLLWVIKVSAAAVVFPMMVLALVFVRKLMDLCFTKRELSWLDDLMPESKKKKEDDKKKKEKEEAERMLQDDDDTVHLPFEGGSLLQIPVKALKYSPDKPVSVKISFEDEPRKKYVDAETSL</sequence>
+</entry>
+</uniprot>
+

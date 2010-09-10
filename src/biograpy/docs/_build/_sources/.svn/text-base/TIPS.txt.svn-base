@@ -1,0 +1,49 @@
+.. _tips:
+
+=======
+TIPS
+=======
+
+REQUIREMENTS
+-------------------------------------------
+MatPlotLib 0.99 or above.
+
+
+Installation tips
+-------------------------------------------
+1.
+When installing on debian lenny both python-matplotlib and python-numpy 
+must be installed from testing repository. installing just python-matplotlib ends in a segmentation fault.
+
+2.
+When deploying in web application  call:
+::
+
+	import os
+	os.environ['HOME'] = '/tmp'
+
+before import biograpy to make matplotlib work
+
+3. web2py module import
+TO LOAD MODULES USE:
+::
+
+    import os,sys
+    path=os.path.join(request.folder,'modules')
+    if not path in sys.path:
+        sys.path.append(path)
+    import SeqRecordHandler as SRH
+    os.environ['HOME'] = '/tmp'
+    
+AND NOT: 
+::
+
+	exec('import applications.%s.modules.SeqRecordHandler as SRH'% request.application) 
+	
+this avoid erratic behavior due to the slowness of the exec method
+
+some erratic behavior still remain if multiple, fast calls are made to the drawing controller
+
+add a 
+time.sleep(0.10)
+in drawer.py after matplotlib import to make it work (slowly)

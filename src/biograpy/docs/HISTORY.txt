@@ -1,0 +1,22 @@
+.. _history:
+
+Changelog
+=========
+
+0.3 (released)
+---------------------
+
+- changed namespace to biograpy
+- Public release
+
+0.2 (unreleased)
+---------------------
+
+- boxes and imagemap [mauro]
+
+0.1 (unreleased)
+---------------------
+
+- Initial draft
+
+

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/biograpy/!svn/ver/28/biograpy/trunk/src/plone4bio/graphics/tests
+END
+factor7.png
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/biograpy/!svn/ver/24/biograpy/trunk/src/plone4bio/graphics/tests/factor7.png
+END
+test_draft.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/biograpy/!svn/ver/24/biograpy/trunk/src/plone4bio/graphics/tests/test_draft.py
+END
+test_uniprot.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/biograpy/!svn/ver/28/biograpy/trunk/src/plone4bio/graphics/tests/test_uniprot.xml
+END
+test_seqrecord.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/biograpy/!svn/ver/20/biograpy/trunk/src/plone4bio/graphics/tests/test_seqrecord.py
+END
+test_uniprot.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/biograpy/!svn/ver/24/biograpy/trunk/src/plone4bio/graphics/tests/test_uniprot.png
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/biograpy/!svn/ver/6/biograpy/trunk/src/plone4bio/graphics/tests/__init__.py
+END
+test_remote_dbfetch.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/biograpy/!svn/ver/28/biograpy/trunk/src/plone4bio/graphics/tests/test_remote_dbfetch.py
+END
+factor7.embl
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/biograpy/!svn/ver/5/biograpy/trunk/src/plone4bio/graphics/tests/factor7.embl
+END
+test_drawer.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/biograpy/!svn/ver/21/biograpy/trunk/src/plone4bio/graphics/tests/test_drawer.py
+END
+test_doctest.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/biograpy/!svn/ver/6/biograpy/trunk/src/plone4bio/graphics/tests/test_doctest.py
+END
+test_tutorial.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/biograpy/!svn/ver/21/biograpy/trunk/src/plone4bio/graphics/tests/test_tutorial.py
+END
