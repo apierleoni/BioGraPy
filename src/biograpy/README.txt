@@ -1,4 +1,3 @@
-
 Simple test
 
     >>> import tempfile
@@ -6,7 +5,7 @@ Simple test
     >>> import Image
     >>> from Bio import SeqIO
 
-    >>> from plone4bio.graphics import Panel, tracks, features
+    >>> from biograpy import Panel, tracks, features
 
     >>> panel=Panel(2000,fig_width=1000,fig_dpi=100)#initialize a drawer
     >>> panel.draw_ref_obj(10,950,name='reference',height=0.02)#draw a reference object
@@ -46,8 +45,8 @@ Save the drawn image in PDF format::
 
 from SeqRecord ...
 
->>> from plone4bio.graphics import Panel, tracks, features
->>> from plone4bio.graphics.seqrecord import SeqRecordDrawer
+>>> from biograpy import Panel, tracks, features
+>>> from biograpy.seqrecord import SeqRecordDrawer
 >>> from Bio import SeqIO
 >>> seqrec = SeqIO.read(open('plone4bio/graphics/tests/test_uniprot.xml'),'uniprot')
 >>> grseqrec = SeqRecordDrawer(seqrec)
