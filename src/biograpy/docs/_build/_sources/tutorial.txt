@@ -65,7 +65,7 @@ Save image. This supports all format supported by matplotlib including:
 Complete basic example:
 ::
 
-	from plone4bio.graphics import Panel, tracks, features
+	from biograpy import Panel, tracks, features
 	panel=Panel(fig_width=800)#initialize a drawer
 	test_track = tracks.BaseTrack(features.Simple(name = 'feat1', start = 100, end = 356, ),
 								  features.Simple(name = 'feat2', start = 30, end = 856, ),
@@ -161,7 +161,7 @@ Domains
 
 ::
 
-	from plone4bio.graphics import Panel, tracks, features
+	from biograpy import Panel, tracks, features
 	from Bio import SeqFeature
 	
 	panel = Panel(fig_width=1000, fig_dpi=72, join_tracks = False, grid = 'both')
@@ -229,11 +229,6 @@ automatically draw a seqrecord
 =================
 Extending library
 =================
-
-Creating a custom Track
-_____________________________
-
-TODO
 
 Creating a custom GraphicFeature
 _________________________________

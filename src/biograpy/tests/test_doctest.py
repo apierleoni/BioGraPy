@@ -3,7 +3,7 @@ import doctest
 
 def test_suite():
     return unittest.TestSuite([
-        doctest.DocFileSuite('README.txt', package='plone4bio.graphics'),
+        doctest.DocFileSuite('README.txt', package='biograpy'),
         ])
 
 if __name__ == '__main__':

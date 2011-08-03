@@ -230,11 +230,6 @@ automatically draw a seqrecord
 Extending library
 =================
 
-Creating a custom Track
-_____________________________
-
-TODO
-
 Creating a custom GraphicFeature
 _________________________________
 

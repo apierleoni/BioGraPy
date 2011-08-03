@@ -45,7 +45,7 @@ class SeqRecordDrawer(object):
         self.feature_name_qualifier=feature_name_qualifier
 
         if draw_type=='simple':
-            ref_obj_track = tracks.BaseTrack(features.Simple(1,len(self.seqrecord),height= 1.5, name=seqrecord.name,fc='navy', color_by_cm = False, alpha =1,))
+            ref_obj_track = tracks.BaseTrack(features.Simple(1,len(self.seqrecord),height= 1.5, name=seqrecord.name,color_by_cm = True, track_lines = 3,  alpha =1,))
             self.panel.add_track(ref_obj_track)
             self.draw_features()
         elif draw_type=='gene structure':
@@ -183,22 +183,39 @@ class SeqRecordDrawer(object):
             if feat_group == 'transmembrane':
                 grfeat=features.TMFeature(fill_color = 'k',
                                          cyto_color = 'r',
-                                         cyto_label = 'in',
+                                         #cyto_label = 'in',
                                          non_cyto_color = 'g',
-                                         #non_cyto_linestyle = '-',
-                                         non_cyto_label = 'out',
-                                         TM_ec = 'k',
+                                         non_cyto_linestyle = '-',
+                                         #non_cyto_label = 'out',
+                                         TM_ec = 'orange',
                                          TM_fc = 'orange',
                                          TM_label = '',
                                          **feat_collector[feat_group])
             elif feat_group == 'secondary structure':
                 grfeat=features.SecStructFeature(**feat_collector[feat_group])
             tracks2draw[feat_group].add_feature(grfeat)
-            
-            
         '''add tracks to panel'''
         for key in sorted(tracks2draw.keys()):
             self.panel.add_track(tracks2draw[key])
+          
+        if self.seqrecord.letter_annotations:
+            per_letter_feats = []
+            ymax = ymin = 0
+            for quality in self.seqrecord.letter_annotations:
+                if isinstance(self.seqrecord.letter_annotations[quality][0], (int,float)):
+                    '''draw numeric per letter annotation as line plot feature '''
+                    feat = features.PlotFeature(self.seqrecord.letter_annotations[quality], range(1, len(self.seqrecord.letter_annotations[quality])+1), label = str(quality),) 
+                    per_letter_feats.append(feat)
+                    if min(self.seqrecord.letter_annotations[quality])<= ymin:
+                        ymin = min(self.seqrecord.letter_annotations[quality])
+                    if max(self.seqrecord.letter_annotations[quality])>= ymax:
+                        ymax = max(self.seqrecord.letter_annotations[quality])
+            
+            per_letter_track = tracks.PlotTrack(ymin = ymin, ymax = ymax)
+            for feat in per_letter_feats:
+                per_letter_track.append(feat)
+            self.panel.add_track(per_letter_track)        
+            
             
 
 
@@ -284,7 +301,7 @@ class SeqRecordDrawer(object):
                     DFeature2Draw['Feature not linked to gene'].append(feature)
 
         '''DRAW GENE'''
-        grfeat=feature.GeneSeqFeature(DFeature2Draw['Gene']['gene'][0],DFeature2Draw['Gene']['exons'],type='Gene',name=gene_name,height=0.02,cm_value=0.8,alpha=0.5,cm='Purples',linewidth=1)
+        grfeat=feature.GeneSeqFeature(DFeature2Draw['Gene']['gene'][0],DFeature2Draw['Gene']['exons'],type='Gene',name=gene_name,height=1,cm_value=0.8,alpha=0.5,cm='Purples',linewidth=1)
         self.panel.add_feature(grfeat,feature_class=1)
         '''DRAW CODING RNA'''
         c=0.

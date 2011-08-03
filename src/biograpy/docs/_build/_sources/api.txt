@@ -9,7 +9,7 @@ API
    :Release: |version|
    :Date: |today|
 
-.. automodule:: plone4bio.graphics
+.. automodule:: biograpy
     :members:
     :show-inheritance:
     :undoc-members:
@@ -21,7 +21,7 @@ Panel
 Panel
 ____________
 
-.. autoclass:: plone4bio.graphics.drawer.Panel
+.. autoclass:: biograpy.drawer.Panel
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -34,7 +34,7 @@ Tracks
 BaseTrack
 ________________
 
-.. autoclass:: plone4bio.graphics.tracks.BaseTrack
+.. autoclass:: biograpy.tracks.BaseTrack
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -43,7 +43,7 @@ ________________
 PlotTrack
 ________________
 
-.. autoclass:: plone4bio.graphics.tracks.PlotTrack
+.. autoclass:: biograpy.tracks.PlotTrack
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -56,7 +56,7 @@ Features
 BaseGraphicFeature
 ___________________________
 
-.. autoclass:: plone4bio.graphics.features.BaseGraphicFeature
+.. autoclass:: biograpy.features.BaseGraphicFeature
 	:members: 
 	:show-inheritance: 
 	:inherited-members:
@@ -65,7 +65,7 @@ ___________________________
 Simple
 _______________
 	
-.. autoclass:: plone4bio.graphics.features.Simple
+.. autoclass:: biograpy.features.Simple
 	:members: 
 	:show-inheritance: 
 	:inherited-members:
@@ -74,7 +74,7 @@ _______________
 GenericSeqFeature
 __________________________
 
-.. autoclass:: plone4bio.graphics.features.GenericSeqFeature
+.. autoclass:: biograpy.features.GenericSeqFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -83,7 +83,7 @@ __________________________
 GeneSeqFeature
 _______________________
 
-.. autoclass:: plone4bio.graphics.features.GeneSeqFeature
+.. autoclass:: biograpy.features.GeneSeqFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -92,16 +92,34 @@ _______________________
 PlotFeature
 ____________________
 
-.. autoclass:: plone4bio.graphics.features.PlotFeature
+.. autoclass:: biograpy.features.PlotFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
 	:undoc-members:
 	
+BarPlotFeature
+____________________
+
+.. autoclass:: biograpy.features.BarPlotFeature
+	:members:
+	:show-inheritance: 
+	:inherited-members:
+	:undoc-members:
+
+TextSequence
+____________________
+
+.. autoclass:: biograpy.features.TextSequence
+	:members:
+	:show-inheritance: 
+	:inherited-members:
+	:undoc-members:
+    
 SegmentedSeqFeature
 ____________________________
 
-.. autoclass:: plone4bio.graphics.features.SegmentedSeqFeature
+.. autoclass:: biograpy.features.SegmentedSeqFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -110,7 +128,7 @@ ____________________________
 CoupledmRNAandCDS
 __________________________
 
-.. autoclass:: plone4bio.graphics.features.CoupledmRNAandCDS
+.. autoclass:: biograpy.features.CoupledmRNAandCDS
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -119,7 +137,7 @@ __________________________
 SinglePositionFeature
 ______________________________
 
-.. autoclass:: plone4bio.graphics.features.SinglePositionFeature
+.. autoclass:: biograpy.features.SinglePositionFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -128,7 +146,7 @@ ______________________________
 TMFeature
 __________________
 
-.. autoclass:: plone4bio.graphics.features.TMFeature
+.. autoclass:: biograpy.features.TMFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -137,7 +155,7 @@ __________________
 SecStructFeature
 _________________________
 
-.. autoclass:: plone4bio.graphics.features.SecStructFeature
+.. autoclass:: biograpy.features.SecStructFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:
@@ -146,7 +164,7 @@ _________________________
 DomainFeature
 ______________
 
-.. autoclass:: plone4bio.graphics.features.DomainFeature
+.. autoclass:: biograpy.features.DomainFeature
 	:members:
 	:show-inheritance: 
 	:inherited-members:

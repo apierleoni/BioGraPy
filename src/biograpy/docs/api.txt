@@ -98,6 +98,24 @@ ____________________
 	:inherited-members:
 	:undoc-members:
 	
+BarPlotFeature
+____________________
+
+.. autoclass:: biograpy.features.BarPlotFeature
+	:members:
+	:show-inheritance: 
+	:inherited-members:
+	:undoc-members:
+
+TextSequence
+____________________
+
+.. autoclass:: biograpy.features.TextSequence
+	:members:
+	:show-inheritance: 
+	:inherited-members:
+	:undoc-members:
+    
 SegmentedSeqFeature
 ____________________________
 

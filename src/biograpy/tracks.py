@@ -1,14 +1,16 @@
+'''
+Created on 28/ott/2009
+
+@author: andrea pierleoni
+
+Handles a set of Graphic Representation for biological Entities.
+
+quote:
+That's what I like in matplotlib: no matter how hard you try,
+there's always a simpler solution you're not yet aware of...
 
 '''
-
-track = BaseTrack ()
-
-track.add_feature(GraphicFeature)
-
-
-
-'''
-import operator
+import operator, warnings
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import matplotlib.cm as cm
@@ -24,12 +26,16 @@ class BaseTrack(object):
     ''' 
 ::
     
-    base class for all tracs types'''
+    base class for all tracs types
+    
+    track = BaseTrack ()
+    track.add_feature(GraphicFeature)
+'''
     
     Ycord = 0.0
     _betw_feat_space = 2
     
-    default_cm='jet'#deafult matplotlib colormap to use
+    default_cm='Accent'#deafult matplotlib colormap to use
     
     def __init__(self, *args, **kwargs):
         '''track name will be displayed,
@@ -37,31 +43,52 @@ class BaseTrack(object):
         '''
         
         self.name = kwargs.get('name','')
-        if not self.name:
-            self.show_name = None
+        if self.name:
+            self.show_name = kwargs.get('show_name', 'top')#'top', 'bottom', None
         else:
-            self.show_name = kwargs.get('show_name', 'up')#'up', 'down', None
+            self.show_name = None
         self.max_score = kwargs.get('max_score', None)
         self.min_score = kwargs.get('min_score', None)
-        self.draw_axis = kwargs.get('draw_axis', ['bottom'] )# list containing witch spine to draw for the track. available spines are: ["right", "left", "top", "bottom", "force no axis"]
+        self.draw_axis = kwargs.get('draw_axis', ["bottom"] )# list containing witch spine to draw for the track. available spines are: ["right", "left", "top", "bottom", "force no axis"] 'force no axis' option will force the bottom axis not to be shown even itf it is the last track. only needed in when tracks are requested to be joined
+        self.xticks_major = kwargs.get('xticks_major', None )
+        self.xticks_minor = kwargs.get('xticks_minor', None )
+        self.xticklabels_major = kwargs.get('xticklabels_major', None )
+        self.xticklabels_minor = kwargs.get('xticklabels_minor', None )
+        self.yticks_major = kwargs.get('yticks_major', None )
+        self.yticks_minor = kwargs.get('yticks_minor', None )
+        self.yticklabels_major = kwargs.get('yticklabels_major', None )
+        self.yticklabels_minor = kwargs.get('yticklabels_minor', None )
+        self.x_use_sequence = kwargs.get('x_use_sequence', False )# if a sequence is passed it will be used to display ticklabels on X axis. must be an iterable
+        self.show_xticklabels = kwargs.get('show_xticklabels', False )# force showing ticklabels on tracks different from the bottom one
+        self.show_yticklabels = kwargs.get('show_yticklabels', False )
+        self.tickfontsize =  kwargs.get('tickfontsize', 'x-small' )
+        self.tickfontsize =  kwargs.get('tickfontsize_major', 'x-small' )
+        self.tickfontsize_minor =  kwargs.get('tickfontsize_minor', 'xx-small' )
+        self.ymax = 0
+        self.track_height = kwargs.get('track_height', 0)# used to specify the the axis heigth by pixel number
         
         self.norm = kwargs.get('norm', None)# normalizing function, if None build one. could be any function taking a value an returning a float between 0 and 1
         if not self.norm:
-                self.norm = colors.normalize(vmin = self.min_score, vmax = self.max_score)
+            self.norm = colors.normalize(vmin = self.min_score, vmax = self.max_score)
                 
         
         self.cm = cm.get_cmap(kwargs.get('cm', self.default_cm))
         #self.colormap = cm.get_cmap(self.cm)
         self.draw_cb = kwargs.get('draw_cb', False)
+        self.cb_alpha = kwargs.get('cb_alpha', 1)
+        self.cb_label = kwargs.get('cb_label', None)
         
         
+        self.name_font_size = kwargs.get('name_font_size', 'small' )
+        self.name_font_family = kwargs.get('name_font_size', 'serif' )
+        self.name_font_weight = kwargs.get('name_font_weight', 'semibold' )
         font_feat=FontProperties()
-        font_feat.set_size('small')
-        font_feat.set_family('serif')
+        font_feat.set_size(self.name_font_size)
+        font_feat.set_family(self.name_font_family)
         font_feat.set_weight('semibold')
-        self.font_feat = font_feat
+        self.name_font_feat = font_feat
         
-        self.drawn_lines = 0
+        self.drawn_lines = kwargs.get('track_lines', 0 )#number of features to be counted do determine track height
         if self.show_name:
             self.drawn_lines += 1
             
@@ -104,7 +131,7 @@ class BaseTrack(object):
     
 
       
-    def _collapse(self, dpi):
+    def _collapse(self, dpi,):
 
         plt.draw()
         # this is necessary to estimate the text dimensions and avoid collisions until draw
@@ -119,7 +146,11 @@ class BaseTrack(object):
                     xs_patches=[]
                     for patch in feat2draw.patches:
                         #for p in patch:
-                        bbox=patch.get_window_extent(None,)
+                        try:
+                            bbox=patch.get_window_extent(None,)
+                        except:
+                            warnings.warn('could not find box coordinated for patch: '+str(patch) )
+                            continue
                         xs_patches.append(bbox.xmax)
                         xs_patches.append(bbox.xmin)
                     for fname in feat2draw.feat_name:
@@ -156,8 +187,14 @@ class BaseTrack(object):
                                 for x, y in current_xy:
                                     new_xy.append([x, y + self.Ycord])
                                 patch.set_xy(new_xy)
+                            elif isinstance(patch, Annotation):
+                                current_x, current_y = patch.xytext
+                                patch.xytext = (current_x, current_y + self.Ycord)
                             else:
-                                current_y = patch.get_y()
+                                try:
+                                    current_y = patch.get_y()
+                                except AttributeError:
+                                    current_y = patch.get_position()[1]
                                 patch.set_y(current_y + self.Ycord)
                             
                         for iname, fname in enumerate(feat2draw.feat_name):
@@ -211,7 +248,7 @@ class BaseTrack(object):
         
         return [feat for (i,feat) in feat_list]
         
-    def _draw_ordered_features(self, feat_list = None):
+    def _draw_ordered_features(self, feat_list = None,):
         '''draws one feature per line in the track in the order they are passed'''
         if not feat_list:
             feat_list = self.features
@@ -227,58 +264,58 @@ class BaseTrack(object):
                     for x, y in current_xy:
                         new_xy.append([x, y + self.Ycord])
                     patch.set_xy(new_xy)
+                elif isinstance(patch, Annotation):
+                    current_x, current_y = patch.xytext
+                    patch.xytext = (current_x, current_y + self.Ycord)
                 else:
-                    current_y = patch.get_y()
+                    try: 
+                        current_y = patch.get_y()
+                    except AttributeError:
+                        current_y = patch.get_position()[1]
                     patch.set_y(current_y + self.Ycord)
             for iname, fname in enumerate(feat2draw.feat_name):
                 y=fname.get_position()[1]
                 feat2draw.feat_name[iname].set_y(y + self.Ycord)
                 current_x, current_y = fname.xytext
-                feat2draw.feat_name[iname].xytext = (current_x, current_y + self.Ycord)
+                feat2draw.feat_name[iname].xytext = (current_x , current_y + self.Ycord)
             self.Ycord-=self._betw_feat_space
             self.drawn_lines += 1
 
-    def _draw_features(self):
+    def _draw_features(self, **kwargs):
+        xoffset = kwargs.get('xoffset',0)
         for feat_numb, feat2draw in enumerate(self.features):
             if feat2draw.color_by_cm:
                 if feat2draw.use_score_for_color:
                     feat2draw.cm_value = feat2draw.score
+                    feat2draw.fc = self.cm(feat2draw.cm_value)
+                    if not feat2draw.ec:
+                        feat2draw.ec = feat2draw.fc
                 else:# color by feature number
                     if not feat2draw.cm_value:
                         self.norm = colors.normalize(1,len(self.features)+1,)
                         feat2draw.cm_value = feat_numb +1
-                feat2draw.fc = self.cm(self.norm(feat2draw.cm_value))
+                    feat2draw.fc = self.cm(self.norm(feat2draw.cm_value))
             feat2draw.draw_feature()
-            feat2draw.draw_feat_name()
+            feat2draw.draw_feat_name(xoffset = xoffset)
 
             
-    def sort_features(self, dpi = 80):
-        self._draw_features()
+    def sort_features(self, dpi = 80, **kwargs):
+        
+        self._draw_features(**kwargs)
         if self.sort_by =='collapse':
-            self._collapse(dpi)
+            self._collapse(dpi, )
         elif self.sort_by =='score':
             feat_list = self._order_by_score()
-            self._draw_ordered_features(feat_list)
+            self._draw_ordered_features(feat_list,)
         elif self.sort_by =='length':
             feat_list = self._order_by_length()
-            self._draw_ordered_features(feat_list)
+            self._draw_ordered_features(feat_list, )
         else:
             self._draw_ordered_features()
     
         
         
-class ReferenceTrack(BaseTrack):
-    '''
-::
-    
-    Track to be used for reference objects'''
-    
-    def __init__(self, **kwargs):
-        BaseTrack.__init__(self, **kwargs)
-        if self.name:
-            self.show_name = None
-            
-            
+ 
             
 class PlotTrack(BaseTrack):
     '''
@@ -287,7 +324,48 @@ class PlotTrack(BaseTrack):
     Track to be used for plotting  PlotFeatures
     multiple PlotFeatures in the same track shares the same axes'''
     
-    def __init__(self, **kwargs):
-        BaseTrack.__init__(self, **kwargs)
-        if self.name:
-            self.show_name = 'down'
+    def __init__(self,*args, **kwargs):
+        BaseTrack.__init__(self, *args, **kwargs)
+
+        self.Ycord = self.ymin = kwargs.get('ymin', -1)
+        self.draw_axis = kwargs.get('draw_axis', ['left', 'bottom'] )
+        self.ymax = kwargs.get('ymax', 1)
+        self.show_yticklabels = kwargs.get('show_yticklabels', True )# force showing ticklabels on y axis, default is True. will only be showed if ticks are defined
+        self.drawn_lines = kwargs.get('track_lines', 4 )#abs(self.ymax - self.ymin)  number of features to be counted do determine track height
+        
+                                
+    def _collapse(self, dpi):
+        plt.draw()
+        
+
+      
+    def _order_by_score(self,):
+        return self.features
+
+
+    
+    def _order_by_length(self,):
+        return self.features
+        
+                
+    def _draw_ordered_features(self, feat_list = None):
+        return
+
+    def _draw_features(self):
+        for feat_numb, feat2draw in enumerate(self.features):
+            if feat2draw.color_by_cm:
+                if feat2draw.use_score_for_color:
+                    feat2draw.cm_value = feat2draw.score
+                    feat2draw.fc = self.cm(feat2draw.cm_value)
+                else:# color by feature number
+                    if not feat2draw.cm_value:
+                        self.norm = colors.normalize(1,len(self.features)+1,)
+                        feat2draw.cm_value = feat_numb +1
+                    feat2draw.fc = self.cm(self.norm(feat2draw.cm_value))
+            feat2draw.draw_feature()
+            feat2draw.draw_feat_name()
+
+            
+    def sort_features(self, dpi = 80, **kwargs):
+        self._draw_features(**kwargs)
+                    

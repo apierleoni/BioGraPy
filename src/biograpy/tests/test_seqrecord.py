@@ -3,9 +3,7 @@ import os
 import tempfile
 import Image
 from Bio import SeqIO
-from plone4bio.graphics import drawer
-from plone4bio.graphics import features
-from plone4bio.graphics import seqrecord
+from biograpy import Panel, tracks, features, seqrecord
 
 class TestSeqrecord(unittest.TestCase):
     def setUp(self):

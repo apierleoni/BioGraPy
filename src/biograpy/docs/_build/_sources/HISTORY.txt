@@ -3,14 +3,35 @@
 Changelog
 =========
 
-0.1dev (unreleased)
+1.0 alpha 
+---------------------
+Major revision
+
+- Added novel feature type: PlotFeature, BarPlotFeature
+  TextSequence
+- Added colorbars
+- Can now use sequence as X tick labels
+- Improved track and figure positioning
+- Added per-letter annotation support
+- Added url in SVG as alternative to 
+  HTML maps
+- Added legend for tracks
+- Many bug fix and minor improvements
+
+0.3 (released)
+---------------------
+
+- changed namespace to biograpy
+- Public release
+
+0.2 (unreleased)
+---------------------
+
+- boxes and imagemap [mauro]
+
+0.1 (unreleased)
 ---------------------
 
 - Initial draft
-
-0.2 (released)
----------------------
-
-- Public release
 
 
