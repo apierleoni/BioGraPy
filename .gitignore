@@ -4,3 +4,4 @@ src/biograpy/tests/*.svg
 src/biograpy/tests/*.pdf
 src/biograpy/tests/*.jpg
 gh_pages.sh
+.DS_Store
