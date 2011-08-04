@@ -3,21 +3,61 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Biograpy's documentation!
-====================================
-
-Contents:
+============================================
+BioGraPy - Biological Graphic tool in Python
+============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
+   
+   
 
-Indices and tables
-==================
+
+License
+-------
+
+LGPL
+
+Authors
+-------
+
+* Andrea Pierleoni 
+* Mauro Amico 
+
+Contact
+-------
+
+Andrea Pierleoni (apierleoni dot dev at gmail dot com) 
+
+Dependencies
+------------
+* matplotlib 
+* biopython (recommended)
+
+
+Download
+--------
+You can download BioGraPy in either zip_ or tar_ formats.
+
+.. _zip: http://github.com/apierleoni/BioGraPy/zipball/master
+
+.. _tar: http://github.com/apierleoni/BioGraPy/tarball/master
+
+You can also clone BioGraPy with Git by running:
+
+::
+
+    $ git clone git://github.com/apierleoni/BioGraPy
+
+get the source code on GitHub : `apierleoni/BioGraPy 
+<http://github.com/apierleoni/BioGraPy>`_
+
+
+Documentation
+-------------
 
 * :ref:`installation`
 * :ref:`tutorial`
 * :ref:`api`
-* :ref:`search`
-* :ref:`authors`
 * :ref:`tips`
 * :ref:`history`
