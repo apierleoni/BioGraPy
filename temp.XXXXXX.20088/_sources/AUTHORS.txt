@@ -1,8 +1,0 @@
-.. _authors:
-
-=======
-AUTHORS
-=======
-
-* Andrea Pierleoni
-* Mauro Amico
