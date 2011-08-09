@@ -94,7 +94,7 @@
 <div class="section" id="basic-usage">
 <h1>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
 <p>Initialize panel</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">panel</span><span class="o">=</span><span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">800</span><span class="p">,)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">panel</span><span class="o">=</span><span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">900</span><span class="p">,)</span>
 </pre></div>
 </div>
 <p>Create a track</p>
@@ -109,12 +109,13 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="n">test_track</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feat1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">test_track</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">feat1</span><span class="p">,</span> <span class="n">feat2</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">test_track</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">feat1</span><span class="p">,</span> <span class="n">feat2</span><span class="p">,</span> <span class="n">feat3</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>or directly:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">test_track</span> <span class="o">=</span> <span class="n">tracks</span><span class="o">.</span><span class="n">BaseTrack</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat1&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">356</span><span class="p">,</span> <span class="p">),</span>
                           <span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat2&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">856</span><span class="p">,</span> <span class="p">),</span>
+                          <span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat3&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">700</span><span class="p">,</span> <span class="p">),</span>
                           <span class="n">sort_by</span> <span class="o">=</span> <span class="s">&#39;None&#39;</span><span class="p">,)</span>
 </pre></div>
 </div>
@@ -126,7 +127,6 @@
 <ul class="simple">
 <li>png</li>
 <li>jpeg</li>
-<li>gif</li>
 <li>pdf</li>
 <li>svg</li>
 </ul>
@@ -135,24 +135,25 @@
 </div>
 <p>Complete basic example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">tracks</span><span class="p">,</span> <span class="n">features</span>
-<span class="n">panel</span><span class="o">=</span><span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span><span class="c">#initialize a drawer</span>
+<span class="n">panel</span><span class="o">=</span><span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span><span class="c">#initialize a drawer</span>
 <span class="n">test_track</span> <span class="o">=</span> <span class="n">tracks</span><span class="o">.</span><span class="n">BaseTrack</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat1&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">356</span><span class="p">,</span> <span class="p">),</span>
-                                                          <span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat2&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">856</span><span class="p">,</span> <span class="p">),</span>
-                                                          <span class="n">sort_by</span> <span class="o">=</span> <span class="s">&#39;None&#39;</span><span class="p">,)</span>
+                              <span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat2&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">856</span><span class="p">,</span> <span class="p">),</span>
+                              <span class="n">features</span><span class="o">.</span><span class="n">Simple</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;feat3&#39;</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">700</span><span class="p">,</span> <span class="p">),</span>
+                              <span class="n">sort_by</span> <span class="o">=</span> <span class="s">&#39;None&#39;</span><span class="p">,)</span>
 <span class="n">panel</span><span class="o">.</span><span class="n">add_track</span><span class="p">(</span><span class="n">test_track</span><span class="p">)</span>
-<span class="n">panel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;test_image.png&#39;</span><span class="p">)</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;basic_test.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And this is the resulting figure:</p>
+<p>And this is the resulting image:</p>
 <img alt="../images/basic_test.png" src="../images/basic_test.png" />
 </div>
 <div class="section" id="the-panel">
 <h1>The Panel<a class="headerlink" href="#the-panel" title="Permalink to this headline">¶</a></h1>
 <p>The panel object is the &#8220;canvas&#8221; to which all the objects will be drawn.</p>
 <p><em>panel.fig</em> is the matplotlib Figure object</p>
-<p><em>panel.tracks</em> is the collector of all the tracks</p>
+<p><em>panel.tracks</em> is the collector of all the tracks. It is a Python list object</p>
 <p><em>panel.save(filepath)</em> calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed</p>
-<p><em>panel.htmlmap</em> after panel.save(filepath) has been called the image htmlmap is accessible as this panel property</p>
+<p><em>panel.htmlmap</em> after panel.save(filepath) has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.</p>
 </div>
 <div class="section" id="tracks">
 <h1>Tracks<a class="headerlink" href="#tracks" title="Permalink to this headline">¶</a></h1>
@@ -194,9 +195,9 @@
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">tracks</span><span class="p">,</span> <span class="n">features</span>
 <span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">SeqFeature</span>
 
-<span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fig_dpi</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">join_tracks</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="s">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
 
-<span class="n">test_track</span> <span class="o">=</span> <span class="n">tracks</span><span class="o">.</span><span class="n">BaseTrack</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">domains</span><span class="p">,</span> <span class="n">sort_by</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">cm</span> <span class="o">=</span> <span class="s">&#39;Set3&#39;</span><span class="p">)</span>
+<span class="n">test_track</span> <span class="o">=</span> <span class="n">tracks</span><span class="o">.</span><span class="n">BaseTrack</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;domains&#39;</span><span class="p">,</span> <span class="n">sort_by</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">cm</span> <span class="o">=</span> <span class="s">&#39;Set3&#39;</span><span class="p">)</span>
 
 <span class="n">feat</span> <span class="o">=</span> <span class="n">SeqFeature</span><span class="o">.</span><span class="n">SeqFeature</span><span class="p">()</span>
 <span class="n">feat</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">SeqFeature</span><span class="o">.</span><span class="n">FeatureLocation</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
@@ -242,7 +243,17 @@
 </div>
 <div class="section" id="draw-a-seqrecord">
 <h1>Draw a SeqRecord<a class="headerlink" href="#draw-a-seqrecord" title="Permalink to this headline">¶</a></h1>
-<p>automatically draw a seqrecord</p>
+<p>Starting from <a class="reference external" href="https://github.com/apierleoni/BioGraPy/blob/master/src/biograpy/tests/factor7.embl">this</a> annotated entry in EMBL format</p>
+<p>Generate a plot</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy.seqrecord</span> <span class="kn">import</span> <span class="n">SeqRecordDrawer</span>
+<span class="kn">from</span> <span class="nn">biograpy</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">tracks</span><span class="p">,</span> <span class="n">features</span>
+<span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">SeqIO</span>
+<span class="n">seqrecord</span> <span class="o">=</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&quot;factor7.embl&quot;</span><span class="p">),</span> <span class="s">&quot;embl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="n">SeqRecordDrawer</span><span class="p">(</span><span class="n">seqrecord</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;factor7.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../images/factor7.png" src="../images/factor7.png" />
+<p>Check out the similar plot done with BioPerl <a class="reference external" href="http://www.bioperl.org/wiki/HOWTO:Graphics#Rendering_Features_from_a_GenBank_or_EMBL_File">here</a>.</p>
 </div>
 <div class="section" id="draw-a-blast-output">
 <h1>Draw a Blast Output<a class="headerlink" href="#draw-a-blast-output" title="Permalink to this headline">¶</a></h1>
@@ -276,7 +287,7 @@
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Aug 04, 2011.
+      Last updated on Aug 09, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>

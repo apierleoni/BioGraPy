@@ -16,7 +16,7 @@ Initialize panel
 
 ::
 
-	panel=Panel(fig_width=800,)
+	panel=Panel(fig_width=900,)
 	
 Create a track
 ::
@@ -35,13 +35,14 @@ Add a features to a track
 	
 ::
 
-	test_track.extend([feat1, feat2])
+	test_track.extend([feat1, feat2, feat3])
 	
 or directly:
 ::
 
 	test_track = tracks.BaseTrack(features.Simple(name = 'feat1', start = 100, end = 356, ),
                                   features.Simple(name = 'feat2', start = 30, end = 856, ),
+                                  features.Simple(name = 'feat3', start = 400, end = 700, ),
                                   sort_by = 'None',)
                                   
 Add a track to the panel:
@@ -54,7 +55,6 @@ Save image. This supports all format supported by matplotlib including:
 
 * png
 * jpeg
-* gif
 * pdf
 * svg
 
@@ -65,15 +65,16 @@ Save image. This supports all format supported by matplotlib including:
 Complete basic example:
 ::
 
-	from biograpy import Panel, tracks, features
-	panel=Panel(fig_width=800)#initialize a drawer
-	test_track = tracks.BaseTrack(features.Simple(name = 'feat1', start = 100, end = 356, ),
-								  features.Simple(name = 'feat2', start = 30, end = 856, ),
-								  sort_by = 'None',)
-	panel.add_track(test_track)
-	panel.save('test_image.png')
+    from biograpy import Panel, tracks, features
+    panel=Panel(fig_width=900, padding = 20)#initialize a drawer
+    test_track = tracks.BaseTrack(features.Simple(name = 'feat1', start = 100, end = 356, ),
+                                  features.Simple(name = 'feat2', start = 30, end = 856, ),
+                                  features.Simple(name = 'feat3', start = 400, end = 700, ),
+                                  sort_by = 'None',)
+    panel.add_track(test_track)
+    panel.save('basic_test.png')
 
-And this is the resulting figure:
+And this is the resulting image:
 
 .. image:: ../images/basic_test.png
 
@@ -85,11 +86,11 @@ The panel object is the "canvas" to which all the objects will be drawn.
 
 *panel.fig* is the matplotlib Figure object
 
-*panel.tracks* is the collector of all the tracks
+*panel.tracks* is the collector of all the tracks. It is a Python list object
 
 *panel.save(filepath)* calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed
 
-*panel.htmlmap* after panel.save(filepath) has been called the image htmlmap is accessible as this panel property
+*panel.htmlmap* after panel.save(filepath) has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.
 
 
 =======
@@ -161,45 +162,45 @@ Domains
 
 ::
 
-	from biograpy import Panel, tracks, features
-	from Bio import SeqFeature
-	
-	panel = Panel(fig_width=1000, fig_dpi=72, join_tracks = False, grid = 'both')
-	
-	test_track = tracks.BaseTrack(name = domains, sort_by = None, cm = 'Set3')
-	
-	feat = SeqFeature.SeqFeature()
-	feat.location = SeqFeature.FeatureLocation(100, 300)
-	
-	dfeat = features.DomainFeature([feat], name = 'test domain 1', seq_line = (1, 766))
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat],name = 'test domain 1', height = 1.5, seq_line = (1, 766))
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat],name = 'test domain 1', height = 1.5, boxstyle = 'round4, rounding_size=1.4',  seq_line = (1, 766))
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat],name = 'test domain 1',height = 1.5, boxstyle = 'larrow, pad = 0',  seq_line = (1, 766))
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat], name = 'test domain 1',height = 1.5, boxstyle = 'round ',  seq_line = (1, 766))
-	test_track.append(dfeat)
-	
-	feat2 = SeqFeature.SeqFeature()
-	feat2.location = SeqFeature.FeatureLocation(500, 700)
-	
-	dfeat = features.DomainFeature([feat,feat2], name = 'test domain 1',height = 1.5, boxstyle = 'roundtooth, pad = 0.1, tooth_size=1.2',  seq_line = (1, 766), alpha = 0.7)
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat,feat2],name = ['test domain 1', 'test domain 2'], height = 1.5, boxstyle = ['sawtooth, tooth_size=1.4',  'rarrow, pad = 0.1'],  seq_line = (1, 766), ec = 'None')
-	test_track.append(dfeat)
-	
-	dfeat = features.DomainFeature([feat,feat2],name = ['', 'test domain 2'],height = 1.5, boxstyle = ['round4, rounding_size=1.4',  'larrow, pad = 0.1'],   ec = 'None', fc = ['y', 'c'], color_by_cm = False)
-	test_track.append(dfeat)
-	
-	panel.add_track(test_track)
-	panel.save('domain_test.png')
+    from biograpy import Panel, tracks, features
+    from Bio import SeqFeature
+
+    panel = Panel(fig_width=900)
+
+    test_track = tracks.BaseTrack(name = 'domains', sort_by = None, cm = 'Set3')
+
+    feat = SeqFeature.SeqFeature()
+    feat.location = SeqFeature.FeatureLocation(100, 300)
+
+    dfeat = features.DomainFeature([feat], name = 'test domain 1', seq_line = (1, 766))
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat],name = 'test domain 1', height = 1.5, seq_line = (1, 766))
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat],name = 'test domain 1', height = 1.5, boxstyle = 'round4, rounding_size=1.4',  seq_line = (1, 766))
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat],name = 'test domain 1',height = 1.5, boxstyle = 'larrow, pad = 0',  seq_line = (1, 766))
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat], name = 'test domain 1',height = 1.5, boxstyle = 'round ',  seq_line = (1, 766))
+    test_track.append(dfeat)
+
+    feat2 = SeqFeature.SeqFeature()
+    feat2.location = SeqFeature.FeatureLocation(500, 700)
+
+    dfeat = features.DomainFeature([feat,feat2], name = 'test domain 1',height = 1.5, boxstyle = 'roundtooth, pad = 0.1, tooth_size=1.2',  seq_line = (1, 766), alpha = 0.7)
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat,feat2],name = ['test domain 1', 'test domain 2'], height = 1.5, boxstyle = ['sawtooth, tooth_size=1.4',  'rarrow, pad = 0.1'],  seq_line = (1, 766), ec = 'None')
+    test_track.append(dfeat)
+
+    dfeat = features.DomainFeature([feat,feat2],name = ['', 'test domain 2'],height = 1.5, boxstyle = ['round4, rounding_size=1.4',  'larrow, pad = 0.1'],   ec = 'None', fc = ['y', 'c'], color_by_cm = False)
+    test_track.append(dfeat)
+
+    panel.add_track(test_track)
+    panel.save('domain_test.png')
 	
 
 resulting image:
@@ -217,7 +218,26 @@ Plot feature requires plto track
 Draw a SeqRecord
 =================
 
-automatically draw a seqrecord
+Starting from this_ annotated entry in EMBL format
+
+.. _this: https://github.com/apierleoni/BioGraPy/blob/master/src/biograpy/tests/factor7.embl
+
+
+Generate a plot
+:: 
+
+    from biograpy.seqrecord import SeqRecordDrawer
+    from biograpy import Panel, tracks, features
+    from Bio import SeqIO
+    seqrecord = SeqIO.parse(open("factor7.embl"), "embl").next()    
+    SeqRecordDrawer(seqrecord, fig_width=900).save("factor7.png")
+    
+.. image:: ../images/factor7.png
+
+Check out the similar plot done with BioPerl here_.
+
+.. _here: http://www.bioperl.org/wiki/HOWTO:Graphics#Rendering_Features_from_a_GenBank_or_EMBL_File
+
 
 ====================
 Draw a Blast Output

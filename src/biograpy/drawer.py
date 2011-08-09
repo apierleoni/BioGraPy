@@ -179,13 +179,8 @@ class Panel(object):
                     else:    
                         axis_height = (float(track.drawn_lines)/self.drawn_lines)  - self.vpadding/(2.*len(self.tracks)) - default_figure_bottom_space/len(self.tracks)
                         axis_scale = axis_height / float(track.drawn_lines)
-                '''if (track_num+1 == len(self.tracks)):
-                    print axis_bottom_pad, default_figure_bottom_space, axis_bottom_pad - default_figure_bottom_space
-                    axis_bottom_pad -= default_figure_bottom_space'''
                 axis_bottom_pad -= (axis_height + self.vtrack_padding/2.)
-                print axis_bottom_pad, self.vtrack_padding, axis_height
                 axis = matplotlib.pyplot.axes([axis_left_pad,axis_bottom_pad, axis_width, axis_height ],) 
-                print axis_left_pad,axis_bottom_pad, axis_width, axis_height
                 self.track_axes.append(axis)
                 
                 
@@ -239,8 +234,13 @@ class Panel(object):
                 '''handle X ticks and labels '''
                 step=int(round(self.xmax/10.,1-len(str(int(self.xmax / 10.)))))
                 auto_X_major_ticks = range(self.xmin, self.xmax + 1, step)
-                step_min = int(round(step / 4.))
-                auto_X_minor_ticks = range(self.xmin, self.xmax + 1, step_min)
+                step_min = step / 4.
+                tick = auto_X_major_ticks[0]
+                auto_X_minor_ticks =[]
+                while tick <= self.xmax:
+                    auto_X_minor_ticks.append(int(round(tick)))
+                    tick+= step_min
+
                 
 
                 '''use sequence as X ticks '''
@@ -304,10 +304,16 @@ class Panel(object):
                             if i in X_major_ticks:
                                 X_minor_ticks_labels.append('')
                             else:
+                                label = ''
                                 if isinstance(i, (float, int)):
-                                    X_minor_ticks_labels.append(i+ self.start_position)
+                                    label = str(i+ self.start_position)
                                 else:
-                                    X_minor_ticks_labels.append(i)
+                                    label = i
+                                if (len(str(i).split('.')[0])>=4) : #avoid too long minor ticks
+                                    label = ''
+                                    X_minor_ticks_labels = []
+                                    break#no minor ticks displayed
+                                X_minor_ticks_labels.append(label)
                     axis.set_xticklabels(X_minor_ticks_labels, fontsize=track.tickfontsize_minor, minor=True)
                 else:
                     axis.set_xticklabels([], minor=True)

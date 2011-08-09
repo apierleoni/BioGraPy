@@ -8,10 +8,18 @@ BioGraPy - Biological Graphic tool in Python
 ============================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    
    
+BioGraPy is a tool to draw biological diagrams. It makes use of the powerful
+matplotlib_ plotting library to draw any kind of information along a biological
+sequences. BioGraPy is tightly integrated with BioPython_, but BioPython is not 
+required if you want to draw very simple diagrams. 
+Take a look at the :ref:`tutorial` to have an idea of what you can do with BioGraPy.
 
+.. _BioPython: http://www.biopython.org
+
+.. _matplotlib: http://matplotlib.github.com
 
 License
 -------
@@ -49,7 +57,7 @@ You can also clone BioGraPy with Git by running:
 
     $ git clone git://github.com/apierleoni/BioGraPy
 
-get the source code on GitHub : `apierleoni/BioGraPy 
+Get the source code (or make your own fork) on GitHub : `apierleoni/BioGraPy 
 <http://github.com/apierleoni/BioGraPy>`_
 
 
