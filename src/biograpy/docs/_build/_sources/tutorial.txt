@@ -66,7 +66,7 @@ Complete basic example:
 ::
 
     from biograpy import Panel, tracks, features
-    panel=Panel(fig_width=900, padding = 20)#initialize a drawer
+    panel=Panel(fig_width=900, padding = 25)#initialize a drawer, and add some padding
     test_track = tracks.BaseTrack(features.Simple(name = 'feat1', start = 100, end = 356, ),
                                   features.Simple(name = 'feat2', start = 30, end = 856, ),
                                   features.Simple(name = 'feat3', start = 400, end = 700, ),
