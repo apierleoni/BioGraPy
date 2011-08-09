@@ -76,7 +76,7 @@ Complete basic example:
 
 And this is the resulting image:
 
-.. image:: ../images/basic_test.png
+.. image:: images/basic_test.png
 
 =========
 The Panel
@@ -205,7 +205,7 @@ Domains
 
 resulting image:
 
-.. image:: ../images/domain_test.png
+.. image:: images/domain_test.png
 
 
 
@@ -232,7 +232,7 @@ Generate a plot
     seqrecord = SeqIO.parse(open("factor7.embl"), "embl").next()    
     SeqRecordDrawer(seqrecord, fig_width=900).save("factor7.png")
     
-.. image:: ../images/factor7.png
+.. image:: images/factor7.png
 
 Check out the similar plot done with BioPerl here_.
 
@@ -322,7 +322,7 @@ Draw a Blast Output
 
 Generated image:
 
-.. image:: ../images/blast_output.png
+.. image:: images/blast_output.png
 
 to be coupled with the generated html map available calling 
 

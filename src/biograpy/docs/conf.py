@@ -108,10 +108,13 @@ html_last_updated_fmt = '%b %d, %Y'
 #html_use_modindex = True
 
 # If true, the reST sources are included in the HTML build as _sources/<name>.
-#html_copy_source = True
+html_copy_source = True
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'biograpy'
+
+
+#html_logo = "logo/pylit-bold-framed.png"
 
 
 # Options for LaTeX output
