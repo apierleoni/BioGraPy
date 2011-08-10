@@ -187,7 +187,7 @@ class GenericSeqFeature(BaseGraphicFeature):
     def draw_feature(self):
         feat_draw=FancyBboxPatch((self.start,self.Y), width=(self.end-self.start),
             height=self.height, boxstyle=self.boxstyle, lw=self.lw,
-            ec=self.ec, fc=self.fc,alpha=self.alpha, mutation_aspect = 0.3)
+            ec=self.ec, fc=self.fc,alpha=self.alpha, mutation_aspect = 0.3, url = self.url,)
         self.patches.append(feat_draw)
 
 
@@ -241,7 +241,7 @@ class GeneSeqFeature(BaseGraphicFeature):
             feat_draw=FancyBboxPatch((int(exon.location.start.position),self.Y),
                 width=(int(exon.location.end.position)-int(exon.location.start.position)),
                 height=body_width/2., boxstyle=self.boxstyle,lw=0, ec=self.ec,
-                fc=self.fc,alpha=self.alpha+0.1,)
+                fc=self.fc,alpha=self.alpha+0.1, url = self.url,)
             self.patches.append(feat_draw)
 
 
@@ -283,7 +283,8 @@ class TextSequence(BaseGraphicFeature):
                                      text = char, 
                                      fontproperties = self.font_feat, 
                                      horizontalalignment = self.ha, 
-                                     verticalalignment = self.va ))
+                                     verticalalignment = self.va,
+                                     url = self.url, ))
          
         
 
@@ -353,7 +354,8 @@ print "Done"
                                     ls =self.ls,
                                     #fc = self.fc,
                                     #ec = self.ec,
-                                    alpha = self.alpha)
+                                    alpha = self.alpha,
+                                    url = self.url,)
             self.patches.extend(plotted_data)
             
         
@@ -412,6 +414,7 @@ class BarPlotFeature(BaseGraphicFeature):
                            ecolor = self.ecolor,
                            capsize = self.capsize,
                            align = self.align,
+                           url = self.url,
                            )
                         
             if self.color_by_cm:
@@ -458,14 +461,14 @@ class SegmentedSeqFeature(BaseGraphicFeature):
                 self.feature.sub_features.reverse()
             for sub_feature in self.feature.sub_features:
                 if sub_feature.location_operator=='join':
-                    feat_draw=FancyBboxPatch((int(sub_feature.location.start.position),self.Y), width=(int(sub_feature.location.end.position)-int(sub_feature.location.start.position)), height=self.height, boxstyle=self.boxstyle,lw=self.lw, ec=self.ec, fc=self.fc, alpha=self.alpha,)
+                    feat_draw=FancyBboxPatch((int(sub_feature.location.start.position),self.Y), width=(int(sub_feature.location.end.position)-int(sub_feature.location.start.position)), height=self.height, boxstyle=self.boxstyle,lw=self.lw, ec=self.ec, fc=self.fc, alpha=self.alpha, url = self.url,)
                     self.patches.append(feat_draw)
                     if junction_start:
                         junction_end=float(sub_feature.location.start.position)
                         junction_middle=float((junction_start+junction_end)/2.)
                         Yends=self.Y+self.height/2.
                         Ymiddle=self.Y+self.height
-                        join=plt.plot([junction_start,junction_middle,junction_end],[Yends,Ymiddle,Yends], lw=1 ,ls='-', c=self.ec, alpha=0.5)
+                        join=plt.plot([junction_start,junction_middle,junction_end],[Yends,Ymiddle,Yends], lw=1 ,ls='-', c=self.ec, alpha=0.5, url = self.url,)
                         self.patches.extend(join)
                     junction_start=float(sub_feature.location.end.position)
         else:#if SegmentedSeqFeature is called whihout subfeatures returns a GenericSeqFeature
@@ -509,7 +512,7 @@ class CoupledmRNAandCDS(BaseGraphicFeature):
                 self.mRNA.sub_features.reverse()
             for sub_feature in self.mRNA.sub_features:
                 if sub_feature.location_operator=='join':
-                    feat_draw=FancyBboxPatch((int(sub_feature.location.start.position),self.Y), width=(int(sub_feature.location.end.position)-int(sub_feature.location.start.position)), height=self.height, boxstyle=self.boxstyle,lw=self.lw, ec=self.ec, fc=self.fc,alpha=self.alpha-0.5,)
+                    feat_draw=FancyBboxPatch((int(sub_feature.location.start.position),self.Y), width=(int(sub_feature.location.end.position)-int(sub_feature.location.start.position)), height=self.height, boxstyle=self.boxstyle,lw=self.lw, ec=self.ec, fc=self.fc,alpha=self.alpha-0.5, url = self.url,)
                     self.patches.append(feat_draw)
                     if junction_start:
                         junction_end=float(sub_feature.location.start.position)
@@ -520,7 +523,7 @@ class CoupledmRNAandCDS(BaseGraphicFeature):
                         self.patches.extend(join)
                     junction_start=float(sub_feature.location.end.position)
         else:#if SegmentedSeqFeature is called whihout subfeatures returns a GenericSeqFeature
-            feat_draw=FancyBboxPatch((self.mRNA_start,self.Y), width=(self.mRNA_end-self.mRNA_start), height=self.height, boxstyle=self.boxstyle, lw=self.lw, ec=self.ec, fc=self.fc,alpha=self.alpha,)
+            feat_draw=FancyBboxPatch((self.mRNA_start,self.Y), width=(self.mRNA_end-self.mRNA_start), height=self.height, boxstyle=self.boxstyle, lw=self.lw, ec=self.ec, fc=self.fc,alpha=self.alpha, url = self.url,)
             self.patches.append(feat_draw)
         #draw CDS
         if len(self.CDS.sub_features):
@@ -594,7 +597,7 @@ class SinglePositionFeature(BaseGraphicFeature):
 
         
     def draw_feature(self):
-        feat_draw=plt.plot(self.start, self.Y, marker=self.marker, markerfacecolor=self.fc, markeredgecolor='k', markersize=self.markersize, alpha=self.alpha,)
+        feat_draw=plt.plot(self.start, self.Y, marker=self.marker, markerfacecolor=self.fc, markeredgecolor='k', markersize=self.markersize, alpha=self.alpha, url = self.url,)
         self.patches=feat_draw
 
         
@@ -702,13 +705,13 @@ class TMFeature(BaseGraphicFeature):
             self.TM_starts.append((start,end))
             if 'score' in feature.qualifiers:#not used yet
                 score=kwargs.get('score',feature.qualifiers['score'])
-            feat_draw=FancyBboxPatch((start,self.Y), width=(end-start), height=self.height, boxstyle=self.boxstyle, lw=self.lw, ec=self.TM_ec, fc=self.TM_fc,alpha=self.alpha,)
+            feat_draw=FancyBboxPatch((start,self.Y), width=(end-start), height=self.height, boxstyle=self.boxstyle, lw=self.lw, ec=self.TM_ec, fc=self.TM_fc,alpha=self.alpha, url = self.url,)
             self.patches.append(feat_draw)
         if self.fill:
             start = 1
             for TM_start,TM_end in sorted(self.TM_starts):
                 end = TM_start# - 1
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.fill_linestyle, self.fill_color)
+                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.fill_linestyle, self.fill_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 start = TM_end #+ 1
         'draw cytplasmic regions'
@@ -716,14 +719,14 @@ class TMFeature(BaseGraphicFeature):
             start = min([feature.location.start.position,feature.location.end.position])
             end = max([feature.location.start.position,feature.location.end.position])
             self.cyto_starts.append((start,end))
-            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.cyto_linestyle, self.cyto_color)
+            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.cyto_linestyle, self.cyto_color, url = self.url,)
             self.patches.extend(feat_draw)
         'draw non cytplasmic regions'
         for feature in self.non_cyto:
             start = min([feature.location.start.position,feature.location.end.position])
             end = max([feature.location.start.position,feature.location.end.position])
             self.non_cyto_starts.append((start,end))
-            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.non_cyto_linestyle, self.non_cyto_color)
+            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.non_cyto_linestyle, self.non_cyto_color, url = self.url,)
             self.patches.extend(feat_draw)
                  
                 
@@ -831,7 +834,7 @@ class SecStructFeature(BaseGraphicFeature):
 
                 feat_draw = FancyArrow(start, self.Y+self.height/2., dx=end-start, dy=0, ec=self.betas_ec, fc=self.betas_fc, alpha=self.alpha, 
                                        width=self.height/2., head_length=(end-start)*.33, head_width=self.height, 
-                                       lw=self.lw, length_includes_head=True,  head_starts_at_zero=False)
+                                       lw=self.lw, length_includes_head=True,  head_starts_at_zero=False, url = self.url,)
                 self.patches.append(feat_draw)
 
 
@@ -846,14 +849,14 @@ class SecStructFeature(BaseGraphicFeature):
                     score=kwargs.get('score',feature.qualifiers['score'])
 
                 feat_draw = FancyBboxPatch((start,self.Y), width=(end-start), height=self.height, boxstyle=self.boxstyle, 
-                                           lw=self.lw, ec=self.alphah_ec, fc=self.alphah_fc,alpha=self.alpha,)
+                                           lw=self.lw, ec=self.alphah_ec, fc=self.alphah_fc,alpha=self.alpha, url = self.url,)
                 self.patches.append(feat_draw)
         
         if (not self.coil) or (self.filter_struct_length):
             start = 1
             for region_start,region_end in sorted(self.structured_regions):
                 end = region_start #- 1
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color)
+                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 start = region_end #+ 1
         else:
@@ -863,7 +866,7 @@ class SecStructFeature(BaseGraphicFeature):
                 type = feature.type
                 if 'score' in feature.qualifiers:#not used yet
                     score=kwargs.get('score',feature.qualifiers['score'])
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color)
+                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 
                 
@@ -937,7 +940,8 @@ class DomainFeature(BaseGraphicFeature):
                                  lw = 2,
                                  aa = False, 
                                  alpha = 1.0,
-                                 zorder = 1)
+                                 zorder = 1,
+                                 url = self.url,)
             self.patches.extend(feat_draw)
             
         for i,feature in enumerate(self.domains):
@@ -977,7 +981,8 @@ class DomainFeature(BaseGraphicFeature):
                                      fc=fc,
                                      alpha=alpha,
                                      mutation_aspect = 0.3,
-                                     zorder = zorder)
+                                     zorder = zorder,
+                                     url = self.url,)
             self.patches.append(feat_draw)
 
             

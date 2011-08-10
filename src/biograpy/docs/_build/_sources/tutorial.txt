@@ -437,6 +437,14 @@ to be coupled with the generated html map available calling
     <area shape="rect" coords="501,2296,709,2284" href="http://www.ncbi.nlm.nih.gov/protein/NP_001073285.1" target="_self" alt="insulin receptor isoform Short prepropro"  > 
     </map>
 
+or just save as an SVG file to get href attributes automatically added::
+
+    panel.save('blast_output.svg')
+
+
+.. image:: images/blast_output.svg
+    :height: 500px
+    :width: 1100 px
 
 =================
 Extending library
