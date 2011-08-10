@@ -1,16 +1,15 @@
 .. _tutorial:
 
-========
+########
 TUTORIAL
-========
+########
 
 
+To be completed...
 
-to be completed...
-
-===========
+***********
 Basic usage
-===========
+***********
 
 Initialize panel
 
@@ -78,34 +77,40 @@ And this is the resulting image:
 
 .. image:: images/basic_test.png
 
-=========
+*********
 The Panel
-=========
+*********
 
 The panel object is the "canvas" to which all the objects will be drawn.
 
-*panel.fig* is the matplotlib Figure object
+**panel.fig** is the matplotlib Figure object
 
-*panel.tracks* is the collector of all the tracks. It is a Python list object
+**panel.tracks** is the collector of all the tracks. It is a Python list object
 
-*panel.save(filepath)* calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed
+**panel.save(filepath)** calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed
 
-*panel.htmlmap* after panel.save(filepath) has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.
+**panel.htmlmap** after ``panel.save(filepath)`` has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.
+
+`TODO`
 
 
-=======
+******
 Tracks
-=======
+******
 
 Handling Tracks
-_________________
+---------------
 
 Tracks can be seen as ordered collection of features.
 
 For convenience *track.append()* and *track.extend* works as the common list methods.
 
+
+`TODO`
+
+
 Ordering features in track
-___________________________
+--------------------------
 
 collapse (default)
 
@@ -116,49 +121,81 @@ order by lenght
 order by score
 
 
+`TODO`
+
 
 Color scales
-_________________
+------------
  
 colormaps
+^^^^^^^^^
+
+`TODO`
 
 max and min
+^^^^^^^^^^^
+
+`TODO`
 
 colorbars
+^^^^^^^^^
+
+`TODO`
 
 
-
-=========
+********
 Features
-=========
-
+********
 
 Simple features
+---------------
+
+`TODO`
 
 
 Draw SeqFeatures
-_________________
+----------------
 
 Generic
+^^^^^^^
+
+`TODO`
 
 Gene
+^^^^
+
+`TODO`
 
 Segmented
+^^^^^^^^^
+
+`TODO`
 
 Single position
+^^^^^^^^^^^^^^^
 
-
+`TODO`
 
 Draw complex features
-_______________________
+---------------------
 
 mRNA and CDS
+^^^^^^^^^^^^
 
-TM regions
+`TODO`
+
+Transmembrane regions
+^^^^^^^^^^^^^^^^^^^^^
+
+`TODO`
 
 Secondary structures
+^^^^^^^^^^^^^^^^^^^^
+
+`TODO`
 
 Domains
+^^^^^^^
 
 ::
 
@@ -210,13 +247,15 @@ resulting image:
 
 
 Draw lineplots
-________________
+--------------
 
-Plot feature requires plto track
+Plot feature requires plot track
 
-=================
+`TODO`
+
+****************
 Draw a SeqRecord
-=================
+****************
 
 Starting from this_ annotated entry in EMBL format
 
@@ -239,9 +278,9 @@ Check out the similar plot done with BioPerl here_.
 .. _here: http://www.bioperl.org/wiki/HOWTO:Graphics#Rendering_Features_from_a_GenBank_or_EMBL_File
 
 
-====================
+*******************
 Draw a Blast Output
-====================
+*******************
 
 
 ::
@@ -446,11 +485,13 @@ or just save as an SVG file to get href attributes automatically added::
     :height: 500px
     :width: 1100 px
 
-=================
-Extending library
-=================
+*********************
+Extending the library
+*********************
 
 Creating a custom GraphicFeature
-_________________________________
+--------------------------------
 
-TODO
+Subclassing from  ``biograpy.features.BaseGraphicFeature``
+
+`TODO`

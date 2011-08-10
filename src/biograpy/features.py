@@ -54,6 +54,7 @@ class BaseGraphicFeature(object):
             lw ---> defines edge line width
             alpha ---> defines facecolor aplha value
             boxstyle ---> FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
+            url ---> set url fot the feature to be used in htmlmaps or SVG
     '''
     
     default_cm='winter'#deafult matplotlib colormap to use
@@ -114,7 +115,7 @@ class Simple(BaseGraphicFeature):
     Handle a feature not derived from a SeqFeature. Just need a Start and Stop position
     Minimum definition are start and end positions.
         Eg.
-        GraphicFeature.Simple(start,end,name='factor 7',**kwargs)
+        features.Simple(start,end,name='factor 7',**kwargs)
         Optional values:
         
             name --> text that will be drawn under the GraphicFeature
@@ -169,8 +170,8 @@ class GenericSeqFeature(BaseGraphicFeature):
     
     Draws any seqfeature as a simple rectangular
     
-    unlike GraphicFeature.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
-    GraphicFeature.Generic(feature,name='factor 7',start=10,end=143,score=0.2)
+    unlike features.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
+    features.Generic(feature,name='factor 7',start=10,end=143,score=0.2)
     '''
     def __init__(self,feature,**kwargs):
         '''
@@ -294,34 +295,13 @@ class PlotFeature(BaseGraphicFeature):
     
     Draws a plot of contnuous value for a feature such as an hydrophobicity scale
     must be used within a PlotTrak to have axix.
-    
-**TO DO**
-
-
-import pylab
-from Bio import SeqIO
-for subfigure in [1,2]:
-    filename = "SRR001666_%i.fastq" % subfigure
-    pylab.subplot(1, 2, subfigure)
-    for i,record in enumerate(SeqIO.parse(filename, "fastq")):
-        if i >= 50 : break #trick!
-        pylab.plot(record.letter_annotations["phred_quality"])
-    pylab.ylim(0,45)
-    pylab.ylabel("PHRED quality score")
-    pylab.xlabel("Position")
-pylab.savefig("SRR001666.png")
-print "Done"
-
-    from Bio.SeqUtils import ProtParamData, ProtParam
-    analysis = ProtParam.ProteinAnalysis('AKLSMCSKLAPERRALPRLALAPRALLRAPPAMMKMSKMKMKCVVCAAS')
-    KDdata = analysis.protein_scale(ProtParamData.kd, 9, 0.4)
-    
-    input data  needs to be:
-    [1,2,3], [1,2,3], 'go-', 
-      y          x     style     
+      
      
     y is necessary
     if no x is provided x will be created starting from position 1
+    
+    def __init__(self,  y , x = [], style = '-' , **kwargs):
+
 
     
     '''
@@ -606,7 +586,7 @@ class TMFeature(BaseGraphicFeature):
     '''  
 ::    
     
-    Draws TransMembrane helix with predicted cytoplasmic/non cytoplasmic sides
+    Draws Transmembrane helix with predicted cytoplasmic/non cytoplasmic sides
 
     TM = list of seqfeatures reporting Transmembrane regions 
         cyto =  list of seqfeatures reporting cytoplasmic regions

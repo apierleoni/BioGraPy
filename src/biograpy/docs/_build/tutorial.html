@@ -38,25 +38,45 @@
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
-<li><a class="reference external" href="">TUTORIAL</a></li>
+<li><a class="reference external" href="">TUTORIAL</a><ul>
 <li><a class="reference external" href="#basic-usage">Basic usage</a></li>
 <li><a class="reference external" href="#the-panel">The Panel</a></li>
 <li><a class="reference external" href="#tracks">Tracks</a><ul>
 <li><a class="reference external" href="#handling-tracks">Handling Tracks</a></li>
 <li><a class="reference external" href="#ordering-features-in-track">Ordering features in track</a></li>
-<li><a class="reference external" href="#color-scales">Color scales</a></li>
+<li><a class="reference external" href="#color-scales">Color scales</a><ul>
+<li><a class="reference external" href="#colormaps">colormaps</a></li>
+<li><a class="reference external" href="#max-and-min">max and min</a></li>
+<li><a class="reference external" href="#colorbars">colorbars</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference external" href="#features">Features</a><ul>
-<li><a class="reference external" href="#draw-seqfeatures">Draw SeqFeatures</a></li>
-<li><a class="reference external" href="#draw-complex-features">Draw complex features</a></li>
+<li><a class="reference external" href="#simple-features">Simple features</a></li>
+<li><a class="reference external" href="#draw-seqfeatures">Draw SeqFeatures</a><ul>
+<li><a class="reference external" href="#generic">Generic</a></li>
+<li><a class="reference external" href="#gene">Gene</a></li>
+<li><a class="reference external" href="#segmented">Segmented</a></li>
+<li><a class="reference external" href="#single-position">Single position</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#draw-complex-features">Draw complex features</a><ul>
+<li><a class="reference external" href="#mrna-and-cds">mRNA and CDS</a></li>
+<li><a class="reference external" href="#transmembrane-regions">Transmembrane regions</a></li>
+<li><a class="reference external" href="#secondary-structures">Secondary structures</a></li>
+<li><a class="reference external" href="#domains">Domains</a></li>
+</ul>
+</li>
 <li><a class="reference external" href="#draw-lineplots">Draw lineplots</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#draw-a-seqrecord">Draw a SeqRecord</a></li>
 <li><a class="reference external" href="#draw-a-blast-output">Draw a Blast Output</a></li>
-<li><a class="reference external" href="#extending-library">Extending library</a><ul>
+<li><a class="reference external" href="#extending-the-library">Extending the library</a><ul>
 <li><a class="reference external" href="#creating-a-custom-graphicfeature">Creating a custom GraphicFeature</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -89,10 +109,9 @@
             
   <div class="section" id="tutorial">
 <span id="id1"></span><h1>TUTORIAL<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>to be completed...</p>
-</div>
+<p>To be completed...</p>
 <div class="section" id="basic-usage">
-<h1>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
 <p>Initialize panel</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">panel</span><span class="o">=</span><span class="n">Panel</span><span class="p">(</span><span class="n">fig_width</span><span class="o">=</span><span class="mi">900</span><span class="p">,)</span>
 </pre></div>
@@ -148,50 +167,87 @@
 <img alt="_images/basic_test.png" src="_images/basic_test.png" />
 </div>
 <div class="section" id="the-panel">
-<h1>The Panel<a class="headerlink" href="#the-panel" title="Permalink to this headline">¶</a></h1>
+<h2>The Panel<a class="headerlink" href="#the-panel" title="Permalink to this headline">¶</a></h2>
 <p>The panel object is the &#8220;canvas&#8221; to which all the objects will be drawn.</p>
-<p><em>panel.fig</em> is the matplotlib Figure object</p>
-<p><em>panel.tracks</em> is the collector of all the tracks. It is a Python list object</p>
-<p><em>panel.save(filepath)</em> calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed</p>
-<p><em>panel.htmlmap</em> after panel.save(filepath) has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.</p>
+<p><strong>panel.fig</strong> is the matplotlib Figure object</p>
+<p><strong>panel.tracks</strong> is the collector of all the tracks. It is a Python list object</p>
+<p><strong>panel.save(filepath)</strong> calling this method will draw all the tracks and features  to the panel.fig object, and will save the figure to the filepath passed</p>
+<p><strong>panel.htmlmap</strong> after <tt class="docutils literal"><span class="pre">panel.save(filepath)</span></tt> has been called the image htmlmap is accessible as this panel property if the specified format was png or jpg.</p>
+<p><cite>TODO</cite></p>
 </div>
 <div class="section" id="tracks">
-<h1>Tracks<a class="headerlink" href="#tracks" title="Permalink to this headline">¶</a></h1>
+<h2>Tracks<a class="headerlink" href="#tracks" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="handling-tracks">
-<h2>Handling Tracks<a class="headerlink" href="#handling-tracks" title="Permalink to this headline">¶</a></h2>
+<h3>Handling Tracks<a class="headerlink" href="#handling-tracks" title="Permalink to this headline">¶</a></h3>
 <p>Tracks can be seen as ordered collection of features.</p>
 <p>For convenience <em>track.append()</em> and <em>track.extend</em> works as the common list methods.</p>
+<p><cite>TODO</cite></p>
 </div>
 <div class="section" id="ordering-features-in-track">
-<h2>Ordering features in track<a class="headerlink" href="#ordering-features-in-track" title="Permalink to this headline">¶</a></h2>
+<h3>Ordering features in track<a class="headerlink" href="#ordering-features-in-track" title="Permalink to this headline">¶</a></h3>
 <p>collapse (default)</p>
 <p>order as they come = user defined</p>
 <p>order by lenght</p>
 <p>order by score</p>
+<p><cite>TODO</cite></p>
 </div>
 <div class="section" id="color-scales">
-<h2>Color scales<a class="headerlink" href="#color-scales" title="Permalink to this headline">¶</a></h2>
-<p>colormaps</p>
-<p>max and min</p>
-<p>colorbars</p>
+<h3>Color scales<a class="headerlink" href="#color-scales" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="colormaps">
+<h4>colormaps<a class="headerlink" href="#colormaps" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="max-and-min">
+<h4>max and min<a class="headerlink" href="#max-and-min" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="colorbars">
+<h4>colorbars<a class="headerlink" href="#colorbars" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
 </div>
 </div>
 <div class="section" id="features">
-<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
-<p>Simple features</p>
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-features">
+<h3>Simple features<a class="headerlink" href="#simple-features" title="Permalink to this headline">¶</a></h3>
+<p><cite>TODO</cite></p>
+</div>
 <div class="section" id="draw-seqfeatures">
-<h2>Draw SeqFeatures<a class="headerlink" href="#draw-seqfeatures" title="Permalink to this headline">¶</a></h2>
-<p>Generic</p>
-<p>Gene</p>
-<p>Segmented</p>
-<p>Single position</p>
+<h3>Draw SeqFeatures<a class="headerlink" href="#draw-seqfeatures" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="generic">
+<h4>Generic<a class="headerlink" href="#generic" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="gene">
+<h4>Gene<a class="headerlink" href="#gene" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="segmented">
+<h4>Segmented<a class="headerlink" href="#segmented" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="single-position">
+<h4>Single position<a class="headerlink" href="#single-position" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
 </div>
 <div class="section" id="draw-complex-features">
-<h2>Draw complex features<a class="headerlink" href="#draw-complex-features" title="Permalink to this headline">¶</a></h2>
-<p>mRNA and CDS</p>
-<p>TM regions</p>
-<p>Secondary structures</p>
-<p>Domains</p>
+<h3>Draw complex features<a class="headerlink" href="#draw-complex-features" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mrna-and-cds">
+<h4>mRNA and CDS<a class="headerlink" href="#mrna-and-cds" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="transmembrane-regions">
+<h4>Transmembrane regions<a class="headerlink" href="#transmembrane-regions" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="secondary-structures">
+<h4>Secondary structures<a class="headerlink" href="#secondary-structures" title="Permalink to this headline">¶</a></h4>
+<p><cite>TODO</cite></p>
+</div>
+<div class="section" id="domains">
+<h4>Domains<a class="headerlink" href="#domains" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">tracks</span><span class="p">,</span> <span class="n">features</span>
 <span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">SeqFeature</span>
 
@@ -236,13 +292,15 @@
 <p>resulting image:</p>
 <img alt="_images/domain_test.png" src="_images/domain_test.png" />
 </div>
+</div>
 <div class="section" id="draw-lineplots">
-<h2>Draw lineplots<a class="headerlink" href="#draw-lineplots" title="Permalink to this headline">¶</a></h2>
-<p>Plot feature requires plto track</p>
+<h3>Draw lineplots<a class="headerlink" href="#draw-lineplots" title="Permalink to this headline">¶</a></h3>
+<p>Plot feature requires plot track</p>
+<p><cite>TODO</cite></p>
 </div>
 </div>
 <div class="section" id="draw-a-seqrecord">
-<h1>Draw a SeqRecord<a class="headerlink" href="#draw-a-seqrecord" title="Permalink to this headline">¶</a></h1>
+<h2>Draw a SeqRecord<a class="headerlink" href="#draw-a-seqrecord" title="Permalink to this headline">¶</a></h2>
 <p>Starting from <a class="reference external" href="https://github.com/apierleoni/BioGraPy/blob/master/src/biograpy/tests/factor7.embl">this</a> annotated entry in EMBL format</p>
 <p>Generate a plot</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy.seqrecord</span> <span class="kn">import</span> <span class="n">SeqRecordDrawer</span>
@@ -256,7 +314,7 @@
 <p>Check out the similar plot done with BioPerl <a class="reference external" href="http://www.bioperl.org/wiki/HOWTO:Graphics#Rendering_Features_from_a_GenBank_or_EMBL_File">here</a>.</p>
 </div>
 <div class="section" id="draw-a-blast-output">
-<h1>Draw a Blast Output<a class="headerlink" href="#draw-a-blast-output" title="Permalink to this headline">¶</a></h1>
+<h2>Draw a Blast Output<a class="headerlink" href="#draw-a-blast-output" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biograpy</span> <span class="kn">import</span> <span class="n">Panel</span><span class="p">,</span> <span class="n">tracks</span><span class="p">,</span> <span class="n">features</span>
 <span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">SeqIO</span><span class="p">,</span> <span class="n">AlignIO</span><span class="p">,</span> <span class="n">SeqFeature</span>
 <span class="kn">from</span> <span class="nn">Bio.Blast</span> <span class="kn">import</span> <span class="n">NCBIXML</span>
@@ -447,11 +505,13 @@
 </div>
 <object data="_images/blast_output.svg" height="500px" type="image/svg+xml" width="1100px"><embed height="500px" src="_images/blast_output.svg" type="image/svg+xml" width="1100px" /></object>
 </div>
-<div class="section" id="extending-library">
-<h1>Extending library<a class="headerlink" href="#extending-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extending-the-library">
+<h2>Extending the library<a class="headerlink" href="#extending-the-library" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="creating-a-custom-graphicfeature">
-<h2>Creating a custom GraphicFeature<a class="headerlink" href="#creating-a-custom-graphicfeature" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<h3>Creating a custom GraphicFeature<a class="headerlink" href="#creating-a-custom-graphicfeature" title="Permalink to this headline">¶</a></h3>
+<p>Subclassing from  <tt class="docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></p>
+<p><cite>TODO</cite></p>
+</div>
 </div>
 </div>
 

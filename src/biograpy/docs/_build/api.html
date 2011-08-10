@@ -282,7 +282,8 @@ Optional values:
         fc ---&gt; define facecolor,  overrides color_by_cm and use_score_for_color
         lw ---&gt; defines edge line width
         alpha ---&gt; defines facecolor aplha value
-        boxstyle ---&gt; FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch</pre>
+        boxstyle ---&gt; FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
+        url ---&gt; set url fot the feature to be used in htmlmaps or SVG</pre>
 </div>
 <dl class="method">
 <dt id="biograpy.features.BaseGraphicFeature.draw_feat_name">
@@ -301,7 +302,7 @@ Optional values:
 <div class="highlight-python"><pre>Handle a feature not derived from a SeqFeature. Just need a Start and Stop position
 Minimum definition are start and end positions.
     Eg.
-    GraphicFeature.Simple(start,end,name='factor 7',**kwargs)
+    features.Simple(start,end,name='factor 7',**kwargs)
     Optional values:
     
         name --&gt; text that will be drawn under the GraphicFeature
@@ -345,8 +346,8 @@ Minimum definition are start and end positions.
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
 <div class="highlight-python"><pre>Draws any seqfeature as a simple rectangular
 
-unlike GraphicFeature.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
-GraphicFeature.Generic(feature,name='factor 7',start=10,end=143,score=0.2)</pre>
+unlike features.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
+features.Generic(feature,name='factor 7',start=10,end=143,score=0.2)</pre>
 </div>
 <dl class="method">
 <dt id="biograpy.features.GenericSeqFeature.draw_feat_name">
@@ -390,36 +391,14 @@ requires a SeqFeature (type='gene') and optionally a list of exons SeqFeatures t
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">PlotFeature</tt><big>(</big><em>y</em>, <em>x=</em><span class="optional">[</span><span class="optional">]</span>, <em>style='-'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.PlotFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
 <div class="highlight-python"><pre>Draws a plot of contnuous value for a feature such as an hydrophobicity scale
-must be used within a PlotTrak to have axix.</pre>
+must be used within a PlotTrak to have axix.
+  
+ 
+y is necessary
+if no x is provided x will be created starting from position 1
+
+def __init__(self,  y , x = [], style = '-' , **kwargs):</pre>
 </div>
-<p><strong>TO DO</strong></p>
-<p>import pylab
-from Bio import SeqIO
-for subfigure in [1,2]:</p>
-<blockquote>
-<p>filename = &#8220;SRR001666_%i.fastq&#8221; % subfigure
-pylab.subplot(1, 2, subfigure)
-for i,record in enumerate(SeqIO.parse(filename, &#8220;fastq&#8221;)):</p>
-<blockquote>
-if i &gt;= 50 : break #trick!
-pylab.plot(record.letter_annotations[&#8220;phred_quality&#8221;])</blockquote>
-<p>pylab.ylim(0,45)
-pylab.ylabel(&#8220;PHRED quality score&#8221;)
-pylab.xlabel(&#8220;Position&#8221;)</p>
-</blockquote>
-<p>pylab.savefig(&#8220;SRR001666.png&#8221;)
-print &#8220;Done&#8221;</p>
-<blockquote>
-<p>from Bio.SeqUtils import ProtParamData, ProtParam
-analysis = ProtParam.ProteinAnalysis(&#8216;AKLSMCSKLAPERRALPRLALAPRALLRAPPAMMKMSKMKMKCVVCAAS&#8217;)
-KDdata = analysis.protein_scale(ProtParamData.kd, 9, 0.4)</p>
-<p>input data  needs to be:
-[1,2,3], [1,2,3], &#8216;go-&#8216;,</p>
-<blockquote>
-y          x     style</blockquote>
-<p>y is necessary
-if no x is provided x will be created starting from position 1</p>
-</blockquote>
 <dl class="method">
 <dt id="biograpy.features.PlotFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.PlotFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
@@ -580,7 +559,7 @@ requires an mRNA seqfeature object and a CDS seqfeature object</pre>
 <dt id="biograpy.features.TMFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">TMFeature</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.TMFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws TransMembrane helix with predicted cytoplasmic/non cytoplasmic sides
+<div class="highlight-python"><pre>Draws Transmembrane helix with predicted cytoplasmic/non cytoplasmic sides
 
 TM = list of seqfeatures reporting Transmembrane regions 
     cyto =  list of seqfeatures reporting cytoplasmic regions
