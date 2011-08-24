@@ -19,26 +19,46 @@ warnings.simplefilter("ignore")
 
 class Panel(object):
     '''
-::    
+ 
     
-    Act as a collector of Tracks objects, and accounts for their correct arrangement and  figure saving
-    Drawer MUST BE INITIALIZED before the tracks and features are created to link the drawn artists to the Panel
+    The :class:`Panel` acts as a collector of :class:`~biograpy.tracks` objects,
+    and accounts for their correct arrangement and  figure saving
+    A :class:`Panel` must be initialized before the tracks and features are 
+    created to link the drawn artists to the :class:`Panel`
 
-    self.add_track ---> add a track to the panel
-    self.save ---> saves the figure to the specified output
-    (self._create_html_map ---> returns an HTML map of the image and its features.)
-    
 
-    Kwargs:
-        fig_width (int): (default 800)
-        fig_height (int): (default None)
-        fig_dpi (int): (default 80)
+    ``panel = Panel(fig_width=800, fig_height=600, fig_dpi=80)``
 
-    >>> Panel(fig_width=800, fig_height=600, fig_dpi=300)
+    gives a Panel object with a 800x600 pixel canvas at 80 dpi resolution
 
-    gives a Panel object with a 800x600 pixel canvas at 300 dpi resolution
+    Valid keyword arguments for :class:`Panel` are:
 
-    
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        fig_height            figure height in pixel, default is ``1500``
+        fig_width             figure width in pixel, default is ``None`` and \
+                              will be autodetermined
+        fig_dpi               default is ``80``
+        grid                  ``'major`` | ``'minor'`` | ``'both'`` | ``None`` \
+                              default is ``'major'``
+        join_tracks           ``True`` | ``False`` default is ``False``.\
+                              Will join all tracks showing just the last bottom\
+                              axis
+        track_padding         track padding in pixel default is ``0``
+        start_position        start int number for axis tick labels default is ``0``
+        padding               padding of all the axis with respect to the figure\
+                              border  default is ``fig_width*.02``
+        figure_bottom_space   define the distance of the last bottom axis from \
+                              the figure bottom in pixel. Default is ``0`` . Use\
+                              to correct too long figure width coming from \
+                              autodetermined `fig_width` 
+        xmin                  int minimum value of the X axes, use to plot just \
+                              a part of the drawing, default is ``None``
+        xmax                  int maximum value of the X axes, use to plot just \
+                              a part of the drawing, default is ``None``  
+        ===================== ==================================================
+        
     '''
 
 
@@ -79,21 +99,21 @@ class Panel(object):
 
     def add_track(self, track):
         """
-        Accepts any track object of the 
+        Accepts any :class:`~biograpy.tracks` object.
         the track should already contains its features
         """
         self.tracks.append(track)
         
     def append(self, *args, **kwargs):
         """
-        Accepts any track object of the 
+        Accepts any :class:`~biograpy.tracks` object.
         the track should already contains its features
         """
         self.add_track(*args, **kwargs)
         
     def extend(self, tracks):
         """
-        Accepts a sequence of track objects
+        Accepts a sequence of :class:`~biograpy.tracks` objects
         """
         for track in tracks:
             self.add_track(track)
@@ -420,7 +440,7 @@ class Panel(object):
         self.fig.set_figheight(self.fig_height)
         self.fig.set_figwidth(self.fig_width)
 
-    def boxes(self):
+    def _boxes(self):
         '''must be called after Drawer.save(output)
         '''
         if not getattr(self, 'Drawn_objects', None):
@@ -465,11 +485,10 @@ class Panel(object):
     def _create_html_map(self, map_name = 'biograpy-map', map_id = 'biograpy-map', target = '_self', **kwargs):
         """
         returns the corresponding html map from self.Drawn_objects in self.htmlmap
-
         target ---> set target="_blank" on area links if needed
         """
         areas =[]
-        for box in self.boxes():
+        for box in self._boxes():
             if box['proceed']:
                 obj = box['feature']
                 area_dict = dict(shape = 'rect', # shape: rect, circle, poly
@@ -487,11 +506,27 @@ class Panel(object):
 
     def save(self, output, html_target='_self', xmin = None, xmax = None, **kwargs):
         '''
-        output ---> a string containing the file path or a file-like handler.
-        format ---> a format MUST be specified if a file handler is passed
-                    supported formats are: emf, eps, pdf, png, ps, raw, rgba, svg, svgz
-        xmin
-        xmax
+        
+        input parameters are:
+    
+        =========== ============================================================
+        Property    Description
+        =========== ============================================================
+        output      a string containing the file path or a file-like handler
+        format      a format must be specified if a file handler is passed \
+                    supported formats are: emf, eps, pdf, png, ps, raw, rgba, \
+                    svg, svgz 
+        html_target ``'_self'`` | ``'_blank'`` | ``'_parent'`` | ``'_top'`` \
+                    default is ``'_self'`` . The html target value for \
+                    generated hyperlinks. set to  ``'_blank'`` to open in a new\
+                    browser windows
+        xmin        int minimum value of the X axes, use to plot just \
+                    a part of the drawing, default is ``None``
+        xmax        int maximum value of the X axes, use to plot just \
+                    a part of the drawing, default is ``None``
+        =========== ============================================================
+
+
         '''
         self._draw_tracks(xmin = xmin, xmax = xmax)
         create_html_map = False
@@ -505,17 +540,10 @@ class Panel(object):
         
         matplotlib.pyplot.savefig(output, dpi=self.fig.get_dpi(), **kwargs)
         
-    def save_slice(self, output, html_target='_self', xmin = None, xmax = None, **kwargs):
-        '''
-        save a second image, in a different format or a different portion
-        TODO
-        '''
-        self._draw_tracks(xmin = xmin, xmax = xmax)
-        self._create_html_map(target = html_target, **kwargs)
-        matplotlib.pyplot.savefig(output, dpi=self.fig.get_dpi(), **kwargs)
     
     def close(self):
-        '''close to free the panel. Use it before starting a new drawing in the same process'''
+        '''Close to free the panel. Use it before starting a new drawing in the \
+        same process. Typical usage scenario is a web server.'''
         
         matplotlib.pyplot.close()
         

@@ -116,7 +116,7 @@
 <tbody valign="top">
 <tr class="field"><th class="field-name">Release:</th><td class="field-body">1.0a</td>
 </tr>
-<tr class="field"><th class="field-name">Date:</th><td class="field-body">August 18, 2011</td>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">August 24, 2011</td>
 </tr>
 </tbody>
 </table>
@@ -130,66 +130,116 @@
 <dt id="biograpy.drawer.Panel">
 <em class="property">class </em><tt class="descclassname">biograpy.drawer.</tt><tt class="descname">Panel</tt><big>(</big><em>fig_width=1500</em>, <em>fig_height=None</em>, <em>fig_dpi=80</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
-<div class="highlight-python"><pre>Act as a collector of Tracks objects, and accounts for their correct arrangement and  figure saving
-Drawer MUST BE INITIALIZED before the tracks and features are created to link the drawn artists to the Panel
-
-self.add_track ---&gt; add a track to the panel
-self.save ---&gt; saves the figure to the specified output
-(self._create_html_map ---&gt; returns an HTML map of the image and its features.)
-
-
-Kwargs:
-    fig_width (int): (default 800)
-    fig_height (int): (default None)
-    fig_dpi (int): (default 80)
-
-&gt;&gt;&gt; Panel(fig_width=800, fig_height=600, fig_dpi=300)
-
-gives a Panel object with a 800x600 pixel canvas at 300 dpi resolution</pre>
-</div>
+<p>The <tt class="xref docutils literal"><span class="pre">Panel</span></tt> acts as a collector of <tt class="xref docutils literal"><span class="pre">tracks</span></tt> objects,
+and accounts for their correct arrangement and  figure saving
+A <tt class="xref docutils literal"><span class="pre">Panel</span></tt> must be initialized before the tracks and features are 
+created to link the drawn artists to the <tt class="xref docutils literal"><span class="pre">Panel</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">panel</span> <span class="pre">=</span> <span class="pre">Panel(fig_width=800,</span> <span class="pre">fig_height=600,</span> <span class="pre">fig_dpi=80)</span></tt></p>
+<p>gives a Panel object with a 800x600 pixel canvas at 80 dpi resolution</p>
+<p>Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">Panel</span></tt> are:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>fig_height</td>
+<td>figure height in pixel, default is <tt class="docutils literal"><span class="pre">1500</span></tt></td>
+</tr>
+<tr><td>fig_width</td>
+<td>figure width in pixel, default is <tt class="xref docutils literal"><span class="pre">None</span></tt> and                               will be autodetermined</td>
+</tr>
+<tr><td>fig_dpi</td>
+<td>default is <tt class="docutils literal"><span class="pre">80</span></tt></td>
+</tr>
+<tr><td>grid</td>
+<td><tt class="docutils literal"><span class="pre">'major</span></tt> | <tt class="docutils literal"><span class="pre">'minor'</span></tt> | <tt class="docutils literal"><span class="pre">'both'</span></tt> | <tt class="xref docutils literal"><span class="pre">None</span></tt>                               default is <tt class="docutils literal"><span class="pre">'major'</span></tt></td>
+</tr>
+<tr><td>join_tracks</td>
+<td><tt class="xref docutils literal"><span class="pre">True</span></tt> | <tt class="xref docutils literal"><span class="pre">False</span></tt> default is <tt class="xref docutils literal"><span class="pre">False</span></tt>.                              Will join all tracks showing just the last bottom                              axis</td>
+</tr>
+<tr><td>track_padding</td>
+<td>track padding in pixel default is <tt class="docutils literal"><span class="pre">0</span></tt></td>
+</tr>
+<tr><td>start_position</td>
+<td>start int number for axis tick labels default is <tt class="docutils literal"><span class="pre">0</span></tt></td>
+</tr>
+<tr><td>padding</td>
+<td>padding of all the axis with respect to the figure                              border  default is <tt class="docutils literal"><span class="pre">fig_width*.02</span></tt></td>
+</tr>
+<tr><td>figure_bottom_space</td>
+<td>define the distance of the last bottom axis from                               the figure bottom in pixel. Default is <tt class="docutils literal"><span class="pre">0</span></tt> . Use                              to correct too long figure width coming from                               autodetermined <cite>fig_width</cite></td>
+</tr>
+<tr><td>xmin</td>
+<td>int minimum value of the X axes, use to plot just                               a part of the drawing, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr><td>xmax</td>
+<td>int maximum value of the X axes, use to plot just                               a part of the drawing, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
 <dl class="method">
 <dt id="biograpy.drawer.Panel.add_track">
 <tt class="descname">add_track</tt><big>(</big><em>track</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.add_track" title="Permalink to this definition">¶</a></dt>
-<dd>Accepts any track object of the 
+<dd>Accepts any <tt class="xref docutils literal"><span class="pre">tracks</span></tt> object.
 the track should already contains its features</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.drawer.Panel.append">
 <tt class="descname">append</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.append" title="Permalink to this definition">¶</a></dt>
-<dd>Accepts any track object of the 
+<dd>Accepts any <tt class="xref docutils literal"><span class="pre">tracks</span></tt> object.
 the track should already contains its features</dd></dl>
-
-<dl class="method">
-<dt id="biograpy.drawer.Panel.boxes">
-<tt class="descname">boxes</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.boxes" title="Permalink to this definition">¶</a></dt>
-<dd>must be called after Drawer.save(output)</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.drawer.Panel.close">
 <tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.close" title="Permalink to this definition">¶</a></dt>
-<dd>close to free the panel. Use it before starting a new drawing in the same process</dd></dl>
+<dd>Close to free the panel. Use it before starting a new drawing in the         same process. Typical usage scenario is a web server.</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.drawer.Panel.extend">
 <tt class="descname">extend</tt><big>(</big><em>tracks</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.extend" title="Permalink to this definition">¶</a></dt>
-<dd>Accepts a sequence of track objects</dd></dl>
+<dd>Accepts a sequence of <tt class="xref docutils literal"><span class="pre">tracks</span></tt> objects</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.drawer.Panel.save">
 <tt class="descname">save</tt><big>(</big><em>output</em>, <em>html_target='_self'</em>, <em>xmin=None</em>, <em>xmax=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>output &#8212;&gt; a string containing the file path or a file-like handler.
-format &#8212;&gt; a format MUST be specified if a file handler is passed</p>
-<blockquote>
-supported formats are: emf, eps, pdf, png, ps, raw, rgba, svg, svgz</blockquote>
-<p>xmin
-xmax</p>
+<dd><p>input parameters are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="96%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Property</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>output</td>
+<td>a string containing the file path or a file-like handler</td>
+</tr>
+<tr><td>format</td>
+<td>a format must be specified if a file handler is passed                     supported formats are: emf, eps, pdf, png, ps, raw, rgba,                     svg, svgz</td>
+</tr>
+<tr><td>html_target</td>
+<td><tt class="docutils literal"><span class="pre">'_self'</span></tt> | <tt class="docutils literal"><span class="pre">'_blank'</span></tt> | <tt class="docutils literal"><span class="pre">'_parent'</span></tt> | <tt class="docutils literal"><span class="pre">'_top'</span></tt>                     default is <tt class="docutils literal"><span class="pre">'_self'</span></tt> . The html target value for                     generated hyperlinks. set to  <tt class="docutils literal"><span class="pre">'_blank'</span></tt> to open in a new                    browser windows</td>
+</tr>
+<tr><td>xmin</td>
+<td>int minimum value of the X axes, use to plot just                     a part of the drawing, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr><td>xmax</td>
+<td>int maximum value of the X axes, use to plot just                     a part of the drawing, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
-
-<dl class="method">
-<dt id="biograpy.drawer.Panel.save_slice">
-<tt class="descname">save_slice</tt><big>(</big><em>output</em>, <em>html_target='_self'</em>, <em>xmin=None</em>, <em>xmax=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.drawer.Panel.save_slice" title="Permalink to this definition">¶</a></dt>
-<dd>save a second image, in a different format or a different portion
-TODO</dd></dl>
 
 </dd></dl>
 
@@ -720,7 +770,7 @@ use zorder to display overlapping domains</pre>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Aug 19, 2011.
+      Last updated on Aug 24, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>
