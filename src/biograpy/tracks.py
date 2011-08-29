@@ -23,13 +23,95 @@ from matplotlib.text import Annotation
 
 
 class BaseTrack(object):
-    ''' 
-::
-    
-    base class for all tracs types
-    
-    track = BaseTrack ()
-    track.add_feature(GraphicFeature)
+    '''
+    The :class:`BaseTrack` acts as a collector of :class:`~biograpy.features` \
+    objects, and accounts for their ordering and color.
+    The :class:`BaseTrack` is a functiona baseclass to use in order to generate\ 
+    additional tracks.
+    Track object have to be added to a :class:`~biograpy.drawer.Panel` instance\
+    once they are filled with features
+
+
+    ``track = BaseTrack(name = 'test')``
+
+    gives a empty track with default values named ``'test'``
+
+    Valid keyword arguments for :class:`BaseTrack` are:
+
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        name                  Define the track `name`
+        show_name             ``'top'`` | ``'bottom'`` |  ``None`` , default is
+                              ``'top'`` . If a track `name` is specified  set 
+                              where the name wil be displayed
+        name_font_size        default ``'small'``, accepts font size parameter 
+                              as in matplotlib
+        name_font_family      default ``'serif'``, accepts font family 
+                              parameter as in matplotlib
+        name_font_weight      default ``'semibold'``, accepts font weight 
+                              parameter as in matplotlib
+        draw_axis             a list contanining this possible values: 
+                              ``'right'`` | ``'left'`` | ``'top'`` | 
+                              ``'bottom'`` | ``'force no axis'`` . default is 
+                              ``['bottom']``. each specified axis position will
+                              be drawn. if ``'force no axis'`` is specified no 
+                              axis will be shown, this is only needed if tracks
+                              are requested to be joined.
+        x_use_sequence        if a string iterable is passed it will be used as
+                              X tick labels  
+        xticks_major          set X major ticks as in matplotlib
+        xticks_minor          set X minor ticks as in matplotlib
+        xticklabels_major     set X major tick labels as in matplotlib      
+        xticklabels_minor     set X minor tick labels as in matplotlib                
+        yticks_major          set Y major ticks as in matplotlib
+        yticks_minor          set Y minor ticks as in matplotlib  
+        yticklabels_major     set Y major tick labels as in matplotlib          
+        yticklabels_minor     set Y minor tick labels as in matplotlib                
+        show_xticklabels      ``True`` | ``False``. default is ``True``
+        show_yticklabels      ``True`` | ``False``. default is ``False``
+        tickfontsize_major    default ``'x-small'``, accepts font size parameter 
+                              as in matplotlib
+        tickfontsize_minor    default ``'xx-small'``, accepts font size 
+                              parameter as in matplotlib    
+        track_height          specify the the axis heigth by pixel number. 
+                              default is ``0`` and will be set automatically        
+        max_score             default is ``None``, if not specified will be 
+                              dynamically computed basing on feature scores
+        min_score             default is ``None``, if not specified will be 
+                              dynamically computed basing on feature scores
+        norm                  score normalizing function. default is ``None`` 
+                              and will be created using maximum and minimum 
+                              feature scores. could be any function taking a 
+                              int or float value an returning a float between 
+                              ``0.`` and ``1.``
+        cm                    matplotlib colormap name to use for score-based 
+                              feature color. default is ``'Accent'``
+        draw_cb               ``True`` | ``False``. default is ``False``. draws
+                              a colorbar inside the track to explain score-based
+                              feature color
+        cb_alpha              colorbar alpha value, a float between ``0.`` and 
+                              ``1.``
+        cb_label              colorbar label, a string
+        track_lines           internal parameter used to defin track heigth in 
+                              automatic mode. default is 
+                              ``1*number_of feature_lines``. if forced can 
+                              results in wrong feature proportions
+        sort_by               ``'score'`` | ``'length'`` | ``'collapse'`` | 
+                              ``None``. 
+                              default is ``'collapse'`` 
+                              
+                              * ``'collapse'`` will arrange features in the \
+                              minimum vertical space possible. 
+                              * ``'score'`` will arrange features basing \
+                              on score values.  
+                              * ``'length'`` will arrange features basing \
+                              on feature length.
+                              * ``None`` will arrange features basing \
+                              in the order they are passed to the track.
+        sort_order            ``'top'`` | ``'bottom'``, default is ``'top'``.
+                              use to reverse order
+        ===================== ==================================================
 '''
     
     Ycord = 0.0
@@ -38,18 +120,17 @@ class BaseTrack(object):
     default_cm='Accent'#deafult matplotlib colormap to use
     
     def __init__(self, *args, **kwargs):
-        '''track name will be displayed,
-        show_name = 'up', 'down', None
+        '''
         '''
         
         self.name = kwargs.get('name','')
         if self.name:
-            self.show_name = kwargs.get('show_name', 'top')#'top', 'bottom', None
+            self.show_name = kwargs.get('show_name', 'top')
         else:
             self.show_name = None
         self.max_score = kwargs.get('max_score', None)
         self.min_score = kwargs.get('min_score', None)
-        self.draw_axis = kwargs.get('draw_axis', ["bottom"] )# list containing witch spine to draw for the track. available spines are: ["right", "left", "top", "bottom", "force no axis"] 'force no axis' option will force the bottom axis not to be shown even itf it is the last track. only needed in when tracks are requested to be joined
+        self.draw_axis = kwargs.get('draw_axis', ["bottom"] )
         self.xticks_major = kwargs.get('xticks_major', None )
         self.xticks_minor = kwargs.get('xticks_minor', None )
         self.xticklabels_major = kwargs.get('xticklabels_major', None )
@@ -58,14 +139,14 @@ class BaseTrack(object):
         self.yticks_minor = kwargs.get('yticks_minor', None )
         self.yticklabels_major = kwargs.get('yticklabels_major', None )
         self.yticklabels_minor = kwargs.get('yticklabels_minor', None )
-        self.x_use_sequence = kwargs.get('x_use_sequence', False )# if a sequence is passed it will be used to display ticklabels on X axis. must be an iterable
-        self.show_xticklabels = kwargs.get('show_xticklabels', False )# force showing ticklabels on tracks different from the bottom one
+        self.x_use_sequence = kwargs.get('x_use_sequence', False )
+        self.show_xticklabels = kwargs.get('show_xticklabels', False )
         self.show_yticklabels = kwargs.get('show_yticklabels', False )
         self.tickfontsize =  kwargs.get('tickfontsize', 'x-small' )
         self.tickfontsize =  kwargs.get('tickfontsize_major', 'x-small' )
         self.tickfontsize_minor =  kwargs.get('tickfontsize_minor', 'xx-small' )
         self.ymax = 0
-        self.track_height = kwargs.get('track_height', 0)# used to specify the the axis heigth by pixel number
+        self.track_height = kwargs.get('track_height', 0)
         
         self.norm = kwargs.get('norm', None)# normalizing function, if None build one. could be any function taking a value an returning a float between 0 and 1
         if not self.norm:
@@ -80,7 +161,7 @@ class BaseTrack(object):
         
         
         self.name_font_size = kwargs.get('name_font_size', 'small' )
-        self.name_font_family = kwargs.get('name_font_size', 'serif' )
+        self.name_font_family = kwargs.get('name_font_family', 'serif' )
         self.name_font_weight = kwargs.get('name_font_weight', 'semibold' )
         font_feat=FontProperties()
         font_feat.set_size(self.name_font_size)
@@ -88,7 +169,7 @@ class BaseTrack(object):
         font_feat.set_weight('semibold')
         self.name_font_feat = font_feat
         
-        self.drawn_lines = kwargs.get('track_lines', 0 )#number of features to be counted do determine track height
+        self.drawn_lines = kwargs.get('track_lines', 0 )
         if self.show_name:
             self.drawn_lines += 1
             
@@ -102,7 +183,7 @@ class BaseTrack(object):
             self.add_feature(feature)
         
     def add_feature(self, feature):
-        
+        '''add  :class:`~biograpy.features` object to track.'''
         def add(feature):
             self.features.append(feature)
             if self.xmin == None:
@@ -121,10 +202,13 @@ class BaseTrack(object):
             add(feature)
             
     def append(self, feature):
+        '''add  :class:`~biograpy.features` object to track.
+        same as :func:`~biograpy.tracks.BaseTrack.add_feature`'''
         #check for graphicfeature istance?
         self.add_feature(feature)
         
     def extend(self, features):
+        '''add a sequence of features to track'''
         #check for graphicfeature istance?
         for feature in features:
             self.add_feature(feature)
@@ -132,7 +216,7 @@ class BaseTrack(object):
 
       
     def _collapse(self, dpi,):
-
+        '''collapse features '''
         plt.draw()
         # this is necessary to estimate the text dimensions and avoid collisions until draw
         # is not called the text object do not know its renderer and cannot call get_window_extent method.
@@ -211,7 +295,7 @@ class BaseTrack(object):
 
       
     def _order_by_score(self,):
-        
+        '''order features by score '''
         feat_list = []
         for feat in self.features:
             feat_list.append([feat.score, feat])
@@ -227,8 +311,7 @@ class BaseTrack(object):
 
     
     def _order_by_length(self,):
-        '''this order basing on the actual length of the feature patches in the panel '''
-        
+        ''' order basing on the actual length of the feature patches in the figure '''
         
         feat_list = []
         for feat in self.features:
@@ -282,6 +365,7 @@ class BaseTrack(object):
             self.drawn_lines += 1
 
     def _draw_features(self, **kwargs):
+        '''draw features '''
         xoffset = kwargs.get('xoffset',0)
         for feat_numb, feat2draw in enumerate(self.features):
             if feat2draw.color_by_cm:
@@ -299,8 +383,8 @@ class BaseTrack(object):
             feat2draw.draw_feat_name(xoffset = xoffset)
 
             
-    def sort_features(self, dpi = 80, **kwargs):
-        
+    def _sort_features(self, dpi = 80, **kwargs):
+        ''' sort features basing on the chosen mode '''
         self._draw_features(**kwargs)
         if self.sort_by =='collapse':
             self._collapse(dpi, )
@@ -319,10 +403,82 @@ class BaseTrack(object):
             
 class PlotTrack(BaseTrack):
     '''
-::    
+
+    The :class:`PlotTrack` acts as a collector of :class:`~biograpy.features` \
+    objects that encodes for plots. 
+    Track object have to be added to a :class:`~biograpy.drawer.Panel` instance\
+    once they are filled with features
+
+
+    ``track = PlotTrack(name = 'test', ymin= 0, ymax = 10)``
+
+    gives a empty plot track  named ``'test'`` with y axis ranging from 0 to 10.
+
+    Valid keyword arguments for :class:`PlotTrack` are:
+
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        name                  Define the track `name`
+        show_name             ``'top'`` | ``'bottom'`` |  ``None`` , default is
+                              ``'top'`` . If a track `name` is specified  set 
+                              where the name wil be displayed
+        name_font_size        default ``'small'``, accepts font size parameter 
+                              as in matplotlib
+        name_font_family      default ``'serif'``, accepts font family 
+                              parameter as in matplotlib
+        name_font_weight      default ``'semibold'``, accepts font weight 
+                              parameter as in matplotlib
+        draw_axis             a list contanining this possible values: 
+                              ``'right'`` | ``'left'`` | ``'top'`` | 
+                              ``'bottom'`` | ``'force no axis'`` . default is 
+                              ``['left', 'bottom']``. each specified axis 
+                              position will be drawn. 
+                              if ``'force no axis'`` is specified no 
+                              axis will be shown, this is only needed if tracks
+                              are requested to be joined.
+        ymin                  default is ``-1``. define minimum Y value to plot.
+        ymax                  default is ``1``. define maximum Y value to plot.
+        x_use_sequence        if a string iterable is passed it will be used as
+                              X tick labels  
+        xticks_major          set X major ticks as in matplotlib
+        xticks_minor          set X minor ticks as in matplotlib
+        xticklabels_major     set X major tick labels as in matplotlib      
+        xticklabels_minor     set X minor tick labels as in matplotlib                
+        yticks_major          set Y major ticks as in matplotlib
+        yticks_minor          set Y minor ticks as in matplotlib  
+        yticklabels_major     set Y major tick labels as in matplotlib          
+        yticklabels_minor     set Y minor tick labels as in matplotlib                
+        show_xticklabels      ``True`` | ``False``. default is ``True``
+        show_yticklabels      ``True`` | ``False``. default is ``True``
+        tickfontsize_major    default ``'x-small'``, accepts font size parameter 
+                              as in matplotlib
+        tickfontsize_minor    default ``'xx-small'``, accepts font size 
+                              parameter as in matplotlib    
+        track_height          specify the the axis heigth by pixel number. 
+                              default is ``0`` and will be set automatically        
+        max_score             default is ``None``, if not specified will be 
+                              dynamically computed basing on feature scores
+        min_score             default is ``None``, if not specified will be 
+                              dynamically computed basing on feature scores
+        norm                  score normalizing function. default is ``None`` 
+                              and will be created using maximum and minimum 
+                              feature scores. could be any function taking a 
+                              int or float value an returning a float between 
+                              ``0.`` and ``1.``
+        cm                    matplotlib colormap name to use for score-based 
+                              feature color. default is ``'Accent'``
+        draw_cb               ``True`` | ``False``. default is ``False``. draws
+                              a colorbar inside the track to explain score-based
+                              feature color
+        cb_alpha              colorbar alpha value, a float between ``0.`` and 
+                              ``1.``
+        cb_label              colorbar label, a string
+        track_lines           default is ``4``. increase or decrease to make 
+                              the track bigger or smaller
+        ===================== ==================================================
     
-    Track to be used for plotting  PlotFeatures
-    multiple PlotFeatures in the same track shares the same axes'''
+    '''
     
     def __init__(self,*args, **kwargs):
         BaseTrack.__init__(self, *args, **kwargs)
@@ -330,8 +486,8 @@ class PlotTrack(BaseTrack):
         self.Ycord = self.ymin = kwargs.get('ymin', -1)
         self.draw_axis = kwargs.get('draw_axis', ['left', 'bottom'] )
         self.ymax = kwargs.get('ymax', 1)
-        self.show_yticklabels = kwargs.get('show_yticklabels', True )# force showing ticklabels on y axis, default is True. will only be showed if ticks are defined
-        self.drawn_lines = kwargs.get('track_lines', 4 )#abs(self.ymax - self.ymin)  number of features to be counted do determine track height
+        self.show_yticklabels = kwargs.get('show_yticklabels', True )
+        self.drawn_lines = kwargs.get('track_lines', 4 )#  number of features to be counted do determine track height
         
                                 
     def _collapse(self, dpi):
@@ -366,6 +522,6 @@ class PlotTrack(BaseTrack):
             feat2draw.draw_feat_name()
 
             
-    def sort_features(self, dpi = 80, **kwargs):
+    def _sort_features(self, dpi = 80, **kwargs):
         self._draw_features(**kwargs)
                     

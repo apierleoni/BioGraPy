@@ -37,25 +37,26 @@ class Panel(object):
         Key                   Description
         ===================== ==================================================
         fig_height            figure height in pixel, default is ``1500``
-        fig_width             figure width in pixel, default is ``None`` and \
+        fig_width             figure width in pixel, default is ``None`` and 
                               will be autodetermined
         fig_dpi               default is ``80``
-        grid                  ``'major`` | ``'minor'`` | ``'both'`` | ``None`` \
+        grid                  ``'major`` | ``'minor'`` | ``'both'`` | ``None`` 
                               default is ``'major'``
-        join_tracks           ``True`` | ``False`` default is ``False``.\
-                              Will join all tracks showing just the last bottom\
+        join_tracks           ``True`` | ``False`` default is ``False``.
+                              Will join all tracks showing just the last bottom
                               axis
         track_padding         track padding in pixel default is ``0``
-        start_position        start int number for axis tick labels default is ``0``
-        padding               padding of all the axis with respect to the figure\
+        start_position        start int number for axis tick labels default is 
+                              ``0``
+        padding               padding of all the axis with respect to the figure
                               border  default is ``fig_width*.02``
-        figure_bottom_space   define the distance of the last bottom axis from \
-                              the figure bottom in pixel. Default is ``0`` . Use\
-                              to correct too long figure width coming from \
+        figure_bottom_space   define the distance of the last bottom axis from 
+                              the figure bottom in pixel. Default is ``0`` . Use
+                              to correct too long figure width coming from 
                               autodetermined `fig_width` 
-        xmin                  int minimum value of the X axes, use to plot just \
+        xmin                  int minimum value of the X axes, use to plot just 
                               a part of the drawing, default is ``None``
-        xmax                  int maximum value of the X axes, use to plot just \
+        xmax                  int maximum value of the X axes, use to plot just 
                               a part of the drawing, default is ``None``  
         ===================== ==================================================
         
@@ -148,7 +149,7 @@ class Panel(object):
                 if track_height_user_specified and not track.track_height:
                     track_height_user_specified = False #disable if some track has not a specified heigth
                     warnings.warn('All tracks need to have a specified track_height, reverting to automatic track height')
-                track.sort_features(dpi = self.dpi, xoffset = self.xmin)#THIS WILL DRAW ALL THE FEATURES
+                track._sort_features(dpi = self.dpi, xoffset = self.xmin)#THIS WILL DRAW ALL THE FEATURES
                 if track.draw_cb:
                     if cbars != 'label':
                         cbars = 'simple'
@@ -513,16 +514,16 @@ class Panel(object):
         Property    Description
         =========== ============================================================
         output      a string containing the file path or a file-like handler
-        format      a format must be specified if a file handler is passed \
-                    supported formats are: emf, eps, pdf, png, ps, raw, rgba, \
+        format      a format must be specified if a file handler is passed 
+                    supported formats are: emf, eps, pdf, png, ps, raw, rgba, 
                     svg, svgz 
-        html_target ``'_self'`` | ``'_blank'`` | ``'_parent'`` | ``'_top'`` \
-                    default is ``'_self'`` . The html target value for \
-                    generated hyperlinks. set to  ``'_blank'`` to open in a new\
+        html_target ``'_self'`` | ``'_blank'`` | ``'_parent'`` | ``'_top'`` 
+                    default is ``'_self'`` . The html target value for 
+                    generated hyperlinks. set to  ``'_blank'`` to open in a new
                     browser windows
-        xmin        int minimum value of the X axes, use to plot just \
+        xmin        int minimum value of the X axes, use to plot just 
                     a part of the drawing, default is ``None``
-        xmax        int maximum value of the X axes, use to plot just \
+        xmax        int maximum value of the X axes, use to plot just 
                     a part of the drawing, default is ``None``
         =========== ============================================================
 

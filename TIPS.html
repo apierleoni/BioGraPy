@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>INSTALLATION &mdash; BioGraPy v1.0 alpha documentation</title>
+    <title>TIPS &mdash; BioGraPy v1.0 alpha documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -53,16 +53,16 @@
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
-<li><a class="reference external" href="">INSTALLATION</a><ul>
-<li><a class="reference external" href="#download">Download</a></li>
-<li><a class="reference external" href="#install">Install</a></li>
+<li><a class="reference external" href="">TIPS</a><ul>
+<li><a class="reference external" href="#requirements">REQUIREMENTS</a></li>
+<li><a class="reference external" href="#webserver-installation-tips">WebServer Installation tips</a></li>
 </ul>
 </li>
 </ul>
 
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="_sources/installation.txt"
+              <li><a href="_sources/TIPS.txt"
                      rel="nofollow">Show Source</a></li>
             </ul>
           <div id="searchbox" style="display: none">
@@ -86,21 +86,32 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="installation">
-<span id="id1"></span><h1>INSTALLATION<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="download">
-<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
-<p>You can download BioGraPy in either <a class="reference external" href="http://github.com/apierleoni/BioGraPy/zipball/v1.0a">zip</a> or <a class="reference external" href="http://github.com/apierleoni/BioGraPy/tarball/v1.0a">tar</a> formats.</p>
-<p>You can also clone BioGraPy with Git by running:</p>
-<div class="highlight-python"><pre>$ git clone git://github.com/apierleoni/BioGraPy</pre>
+  <div class="section" id="tips">
+<span id="id1"></span><h1>TIPS<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>REQUIREMENTS<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MatPlotLib 1.0 or above</li>
+<li>BioPython</li>
+</ul>
 </div>
-<p>Get the source code (or make your own fork) on GitHub : <a class="reference external" href="http://github.com/apierleoni/BioGraPy">apierleoni/BioGraPy</a></p>
+<div class="section" id="webserver-installation-tips">
+<h2>WebServer Installation tips<a class="headerlink" href="#webserver-installation-tips" title="Permalink to this headline">¶</a></h2>
+<p>1.
+When deploying in web application  call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;/tmp&#39;</span>
+</pre></div>
 </div>
-<div class="section" id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>python setup.py build
-python setup.py install</pre>
+<p>before import biograpy to make matplotlib work</p>
+<ol class="arabic simple" start="2">
+<li></li>
+</ol>
+<p>After saving the image call</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">panel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
 </div>
+<p>to free matplotlib data from memory</p>
 </div>
 </div>
 
@@ -124,7 +135,7 @@ python setup.py install</pre>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Aug 29, 2011.
+      Last updated on Aug 19, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>
