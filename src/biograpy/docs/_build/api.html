@@ -116,7 +116,7 @@
 <tbody valign="top">
 <tr class="field"><th class="field-name">Release:</th><td class="field-body">1.0a</td>
 </tr>
-<tr class="field"><th class="field-name">Date:</th><td class="field-body">August 29, 2011</td>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">August 30, 2011</td>
 </tr>
 </tbody>
 </table>
@@ -557,7 +557,7 @@ dynamically computed basing on feature scores</td>
 <td>score normalizing function. default is <tt class="xref docutils literal"><span class="pre">None</span></tt>
 and will be created using maximum and minimum
 feature scores. could be any function taking a
-int or float value an returning a float between
+int or float value and returning a float between
 <tt class="docutils literal"><span class="pre">0.</span></tt> and <tt class="docutils literal"><span class="pre">1.</span></tt></td>
 </tr>
 <tr><td>cm</td>
@@ -611,38 +611,146 @@ same as <a title="biograpy.tracks.BaseTrack.add_feature" class="reference intern
 <dt id="biograpy.features.BaseGraphicFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">BaseGraphicFeature</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.BaseGraphicFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
-<div class="highlight-python"><pre>base class for all GraphicFeature types
-this class template misses the "draw_feature" method that has to be
-implemented in the full functional classes
-
-self.draw_feature() must return one or more matplotlib patches
-self.start  must return the lower extent of the feature in the coordinate system
-self.end must return the higher extent of the feature in the coordinate system
-
-"__init__" method must be expanded accordingly to GraphicFeature input
-"draw_feat_name" method can be overridden, but must set a list of
-                 plt.text object in self.feat_name
-                 
-Optional values:
-        name --&gt; text that will be drawn under the GraphicFeature
-        type --&gt; define the GrafhFeature type, is needed by Drawer for feature grouping
-        score --&gt; this value can be used to color the feature accordingly
-        height ---&gt; GraphicFeature y axis extension
-        cm ---&gt; matplotlib colormap to use, custom colormap can be easily created but ar not supported right now. a list of default colormaps can be found at: http://www.astro.princeton.edu/~msshin/science/code/matplotlib_cm/
-        color_by_cm ---&gt; if True set the color by using the colormap (True by default)
-        cm_value ---&gt; value between 0 and 1 to use for chosing the color from the colormap (default random)
-        use_score_for_color ---&gt; if True use the score value to pick a color from the colormap. if scores are not between 0 and 1 they can be normalized by using Normalize and LogNorm from matplotlib.colors 
-        ec ---&gt; define edgecolor,  overrides color_by_cm and use_score_for_color
-        fc ---&gt; define facecolor,  overrides color_by_cm and use_score_for_color
-        lw ---&gt; defines edge line width
-        alpha ---&gt; defines facecolor aplha value
-        boxstyle ---&gt; FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
-        url ---&gt; set url fot the feature to be used in htmlmaps or SVG</pre>
-</div>
+<blockquote>
+<p>Base class for all <cite>GraphicFeature</cite> types and is not functional.
+This class template misses the <cite>draw_feature()</cite> method that has to be
+implemented in the full functional classes.
+To create a new functional <cite>GraphicFeature</cite> class this conditions 
+must me met:</p>
+<ul class="simple">
+<li><cite>self.draw_feature()</cite> must return one or a list of matplotlib Artists in       <cite>self.patches</cite></li>
+<li><cite>self.start</cite> must return the lower extent of the feature in the 
+coordinate system</li>
+<li><cite>self.end</cite> must return the higher extent of the feature in the       coordinate system</li>
+<li><cite>self.__init__</cite> method must be expanded accordingly to the new input</li>
+<li><cite>self.draw_feat_name()</cite> method can be overridden, but must set a list of       matplotlib Annotate objects in <cite>self.feat_name</cite></li>
+</ul>
+<p>Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>name</td>
+<td>a string text that will be drawn under the                               feature.</td>
+</tr>
+<tr><td>type</td>
+<td>define the GrafhFeature type, is needed by
+<cite>Drawer</cite> for feature grouping, default is <tt class="docutils literal"><span class="pre">''</span></tt>
+can be <tt class="docutils literal"><span class="pre">'plot'</span></tt> for plot-like features.</td>
+</tr>
+<tr><td>score</td>
+<td>a float value that can be used to color the
+feature accordingly using a colormap</td>
+</tr>
+<tr><td>height</td>
+<td>feature y axis extension. default is <tt class="docutils literal"><span class="pre">1</span></tt></td>
+</tr>
+<tr><td>cm</td>
+<td>matplotlib colormap to use, custom colormap can be
+easily created but ar not supported right now.
+A list of default colormaps can be found at:
+<a class="reference external" href="http://www.scipy.org/Cookbook/Matplotlib/Show_colormaps">www.scipy.org</a></td>
+</tr>
+<tr><td>color_by_cm</td>
+<td><tt class="xref docutils literal"><span class="pre">True</span></tt> | <tt class="xref docutils literal"><span class="pre">False</span></tt>, if <tt class="xref docutils literal"><span class="pre">True</span></tt> set the color by
+using the colormap. default is <tt class="xref docutils literal"><span class="pre">True</span></tt></td>
+</tr>
+<tr><td>cm_value</td>
+<td>float value between <tt class="docutils literal"><span class="pre">0.</span></tt> and <tt class="docutils literal"><span class="pre">1.</span></tt> to use for
+chosing the color from the colormap. default is
+<tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr><td>use_score_for_color</td>
+<td><tt class="xref docutils literal"><span class="pre">True</span></tt> | <tt class="xref docutils literal"><span class="pre">False</span></tt>. if <tt class="xref docutils literal"><span class="pre">True</span></tt> use the score
+value to pick a color from the colormap and will
+ovverride <tt class="docutils literal"><span class="pre">color_by_cm</span></tt> as <tt class="xref docutils literal"><span class="pre">True</span></tt>.
+if scores are not between 0 and 1 they can be
+normalized by using Normalize and LogNorm from
+<tt class="docutils literal"><span class="pre">matplotlib.colors</span></tt>.</td>
+</tr>
+<tr><td>ec</td>
+<td>define edgecolor as in matplotlib,  overrides
+settings from  color_by_cm and use_score_for_color</td>
+</tr>
+<tr><td>fc</td>
+<td>define facecolor as in matplotlib,  overrides
+settings from  color_by_cm and use_score_for_color</td>
+</tr>
+<tr><td>lw</td>
+<td>defines edge line width, as in matplotlib</td>
+</tr>
+<tr><td>alpha</td>
+<td>defines facecolor aplha value as in matplotlib</td>
+</tr>
+<tr><td>boxstyle</td>
+<td>default is <tt class="docutils literal"><span class="pre">'square,</span> <span class="pre">pad=0.'</span></tt>, accepts any
+matplotlib <tt class="docutils literal"><span class="pre">FancyBboxPatch</span></tt> input string.
+take a look at <a class="reference external" href="http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch">matplotlib</a> docs.</td>
+</tr>
+<tr><td>norm</td>
+<td>normalization function to be used for in feature
+colormap based coloring. tipically used in plot
+like features.default is <tt class="xref docutils literal"><span class="pre">None</span></tt>
+could be any function taking a  int or float value
+and returning a float between  <tt class="docutils literal"><span class="pre">0.</span></tt> and <tt class="docutils literal"><span class="pre">1.</span></tt></td>
+</tr>
+<tr><td>url</td>
+<td>set url fot the feature to be used in htmlmaps                               or SVG &lt;a&gt; elements.</td>
+</tr>
+<tr><td>html_map_extend</td>
+<td>included text will be added in html area tab,
+use to add onmouseover events, etc...
+must be a valid html attrib.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</blockquote>
 <dl class="method">
 <dt id="biograpy.features.BaseGraphicFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.BaseGraphicFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -653,36 +761,48 @@ Optional values:
 <dt id="biograpy.features.Simple">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">Simple</tt><big>(</big><em>start</em>, <em>end</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.Simple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Handle a feature not derived from a SeqFeature. Just need a Start and Stop position
+<p>Handle a feature not derived from a SeqFeature. 
+Just need a <cite>start</cite> and <cite>end</cite> position.
 Minimum definition are start and end positions.
-    Eg.
-    features.Simple(start,end,name='factor 7',**kwargs)
-    Optional values:
-    
-        name --&gt; text that will be drawn under the GraphicFeature
-        type --&gt; define the GrafhFeature type, is needed by Drawer for feature grouping
-        score --&gt; this value can be used to color the feature accordingly
-        height ---&gt; GraphicFeature y axis extension
-        cm ---&gt; matplotlib colormap to use, custom colormap can be easily created but ar not supported right now. a list of default colormaps can be found at: http://www.astro.princeton.edu/~msshin/science/code/matplotlib_cm/
-        color_by_cm ---&gt; if True set the color by using the colormap (True by default)
-        cm_value ---&gt; value between 0 and 1 to use for chosing the color from the colormap (default random)
-        use_score_for_color ---&gt; if True use the score value to pick a color from the colormap. if scores are not between 0 and 1 they can be normalized by using Normalize and LogNorm from matplotlib.colors 
-        ec ---&gt; define edgecolor,  overrides color_by_cm and use_score_for_color
-        ec ---&gt; define facecolor,  overrides color_by_cm and use_score_for_color
-        lw ---&gt; defines edge line width
-        alpha ---&gt; defines facecolor aplha value
-        boxstyle ---&gt; FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
-    
-    returns
-    
-        self.patches ---&gt; list of drawn patches
-        self.feat_name ---&gt; matplotlib Text object reporting feature name, drawn under the patches
-        self.type ---&gt; feature type used by Drawer</pre>
-</div>
+Usage eg.</p>
+<p><tt class="docutils literal"><span class="pre">features.Simple(start,end,name='factor</span> <span class="pre">7',**kwargs)</span></tt></p>
 <dl class="method">
 <dt id="biograpy.features.Simple.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.Simple.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.Simple.draw_feature">
@@ -698,15 +818,51 @@ Minimum definition are start and end positions.
 <dt id="biograpy.features.GenericSeqFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">GenericSeqFeature</tt><big>(</big><em>feature</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.GenericSeqFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws any seqfeature as a simple rectangular
-
-unlike features.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
-features.Generic(feature,name='factor 7',start=10,end=143,score=0.2)</pre>
+<p>Handle a feature  derived from a <cite>Biopython.SeqFeature.SeqFeature</cite> as a     simple rectangle.</p>
+<p>Requires a <cite>SeqFeature</cite> object in input, <cite>start</cite> and <cite>end</cite> will be     automatically detected from seqfeature.</p>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">Bio.SeqFeature</span> <span class="kn">import</span> <span class="n">SeqFeature</span><span class="p">,</span> <span class="n">FeatureLocation</span> 
+<span class="n">feat</span> <span class="o">=</span> <span class="n">SeqFeature</span> <span class="p">(</span><span class="n">FeatureLocation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">124</span><span class="p">))</span>
+<span class="n">features</span><span class="o">.</span><span class="n">GenericSeqFeature</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;factor 7&#39;</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.GenericSeqFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.GenericSeqFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.GenericSeqFeature.draw_feature">
@@ -722,13 +878,73 @@ features.Generic(feature,name='factor 7',start=10,end=143,score=0.2)</pre>
 <dt id="biograpy.features.GeneSeqFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">GeneSeqFeature</tt><big>(</big><em>feature</em>, <em>exons=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.GeneSeqFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws a Gene Feature
-requires a SeqFeature (type='gene') and optionally a list of exons SeqFeatures that can be drawn over the gene patch</pre>
+<p>Draws a Gene Feature as an arrow.
+Requires a SeqFeature with <tt class="docutils literal"><span class="pre">SeqFeature.type</span> <span class="pre">=</span> <span class="pre">'gene'</span></tt> and optionally a 
+list of exons SeqFeatures that can be drawn over the gene patch.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>head_length</td>
+<td>defines matplotlib  FancyArrow head_length keyword
+argument to set up gene arrow head length</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">Bio.SeqFeature</span> <span class="kn">import</span> <span class="n">SeqFeature</span><span class="p">,</span> <span class="n">FeatureLocation</span> 
+<span class="n">genefeat</span> <span class="o">=</span> <span class="n">SeqFeature</span> <span class="p">(</span><span class="n">FeatureLocation</span><span class="p">(</span><span class="mi">103</span><span class="p">,</span><span class="mi">1053</span><span class="p">),</span> <span class="nb">type</span> <span class="o">=</span> <span class="s">&#39;gene&#39;</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="mi">1</span><span class="p">,)</span>
+<span class="n">features</span><span class="o">.</span><span class="n">GeneSeqFeature</span><span class="p">(</span><span class="n">genefeat</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;factor 7&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.GeneSeqFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.GeneSeqFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.GeneSeqFeature.draw_feature">
@@ -756,7 +972,40 @@ def __init__(self,  y , x = [], style = '-' , **kwargs):</pre>
 <dl class="method">
 <dt id="biograpy.features.PlotFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.PlotFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.PlotFeature.draw_feature">
@@ -778,7 +1027,40 @@ must be used within a PlotTrak to have axix.</pre>
 <dl class="method">
 <dt id="biograpy.features.BarPlotFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.BarPlotFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.BarPlotFeature.draw_feature">
@@ -794,12 +1076,88 @@ must be used within a PlotTrak to have axix.</pre>
 <dt id="biograpy.features.TextSequence">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">TextSequence</tt><big>(</big><em>sequence</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.TextSequence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws a text biological sequence    </pre>
+<p>Draws a biological sequence as text at the given positions</p>
+<p>Requires a <cite>sequence</cite> iterable tipically a string.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>start</td>
+<td>feature start position. default is <tt class="docutils literal"><span class="pre">0</span></tt></td>
+</tr>
+<tr><td>end</td>
+<td>feature end position. default is
+<tt class="docutils literal"><span class="pre">self.start</span> <span class="pre">+</span>&nbsp; <span class="pre">len(self.sequence)</span></tt></td>
+</tr>
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'xx-small'</span></tt></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'monospace'</span></tt></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'normal'</span></tt></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'bottom'</span></tt></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'left'</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">features</span><span class="o">.</span><span class="n">TextSequence</span><span class="p">(</span><span class="s">&#39;ATCATGATACTGNCAT&#39;</span><span class="p">,</span><span class="n">start</span> <span class="o">=</span> <span class="mi">103</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.TextSequence.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.TextSequence.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.TextSequence.draw_feature">
@@ -824,7 +1182,40 @@ SegmentedSeqFeature(feature,name='factor 7',s)</pre>
 <dl class="method">
 <dt id="biograpy.features.SegmentedSeqFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SegmentedSeqFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.SegmentedSeqFeature.draw_feature">
@@ -846,7 +1237,40 @@ requires an mRNA seqfeature object and a CDS seqfeature object</pre>
 <dl class="method">
 <dt id="biograpy.features.CoupledmRNAandCDS.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.CoupledmRNAandCDS.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.CoupledmRNAandCDS.draw_feature">
@@ -897,7 +1321,40 @@ requires an mRNA seqfeature object and a CDS seqfeature object</pre>
 <dl class="method">
 <dt id="biograpy.features.SinglePositionFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SinglePositionFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.SinglePositionFeature.draw_feature">
@@ -981,7 +1438,40 @@ TM = list of seqfeatures reporting Transmembrane regions
 <dl class="method">
 <dt id="biograpy.features.SecStructFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SecStructFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd><p>calling self.draw_feat_name() agailn will overwrite the previous         feature name stored in self.feat_name 
+Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>set_size</td>
+<td>as in matplotlib, default is <cite>&#8216;x-small&#8217;</cite></td>
+</tr>
+<tr><td>set_family</td>
+<td>as in matplotlib, default is <cite>&#8216;serif&#8217;</cite></td>
+</tr>
+<tr><td>set_weight</td>
+<td>as in matplotlib, default is <cite>&#8216;normal&#8217;</cite></td>
+</tr>
+<tr><td>va</td>
+<td>as in matplotlib, default is <cite>&#8216;top&#8217;</cite></td>
+</tr>
+<tr><td>ha</td>
+<td>as in matplotlib, default is <cite>&#8216;left&#8217;</cite></td>
+</tr>
+<tr><td>xoffset</td>
+<td>to be used to move the text annotation along x axis</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.SecStructFeature.draw_feature">
@@ -1059,7 +1549,7 @@ use zorder to display overlapping domains</pre>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Aug 29, 2011.
+      Last updated on Aug 30, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>

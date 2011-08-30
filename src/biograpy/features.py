@@ -26,36 +26,78 @@ from matplotlib.colors import Normalize,LogNorm,ListedColormap,LinearSegmentedCo
 
 class BaseGraphicFeature(object):
     ''' 
-::
 
-    base class for all GraphicFeature types
-    this class template misses the "draw_feature" method that has to be
-    implemented in the full functional classes
+    Base class for all `GraphicFeature` types and is not functional.
+    This class template misses the `draw_feature()` method that has to be
+    implemented in the full functional classes.
+    To create a new functional `GraphicFeature` class this conditions 
+    must me met:
 
-    self.draw_feature() must return one or more matplotlib patches
-    self.start  must return the lower extent of the feature in the coordinate system
-    self.end must return the higher extent of the feature in the coordinate system
-
-    "__init__" method must be expanded accordingly to GraphicFeature input
-    "draw_feat_name" method can be overridden, but must set a list of
-                     plt.text object in self.feat_name
+    * `self.draw_feature()` must return one or a list of matplotlib Artists in \
+      `self.patches`
+    * `self.start` must return the lower extent of the feature in the \ 
+      coordinate system
+    * `self.end` must return the higher extent of the feature in the \
+      coordinate system
+    * `self.__init__` method must be expanded accordingly to the new input
+    * `self.draw_feat_name()` method can be overridden, but must set a list of \
+      matplotlib Annotate objects in `self.feat_name`
                      
-    Optional values:
-            name --> text that will be drawn under the GraphicFeature
-            type --> define the GrafhFeature type, is needed by Drawer for feature grouping
-            score --> this value can be used to color the feature accordingly
-            height ---> GraphicFeature y axis extension
-            cm ---> matplotlib colormap to use, custom colormap can be easily created but ar not supported right now. a list of default colormaps can be found at: http://www.astro.princeton.edu/~msshin/science/code/matplotlib_cm/
-            color_by_cm ---> if True set the color by using the colormap (True by default)
-            cm_value ---> value between 0 and 1 to use for chosing the color from the colormap (default random)
-            use_score_for_color ---> if True use the score value to pick a color from the colormap. if scores are not between 0 and 1 they can be normalized by using Normalize and LogNorm from matplotlib.colors 
-            ec ---> define edgecolor,  overrides color_by_cm and use_score_for_color
-            fc ---> define facecolor,  overrides color_by_cm and use_score_for_color
-            lw ---> defines edge line width
-            alpha ---> defines facecolor aplha value
-            boxstyle ---> FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
-            url ---> set url fot the feature to be used in htmlmaps or SVG
-    '''
+    Valid keyword arguments for :class:`BaseTrack` are:
+
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        name                  a string text that will be drawn under the \
+                              feature.
+        type                  define the GrafhFeature type, is needed by  
+                              `Drawer` for feature grouping, default is ``''``
+                              can be ``'plot'`` for plot-like features.
+        score                 a float value that can be used to color the 
+                              feature accordingly using a colormap
+        height                feature y axis extension. default is ``1``
+        cm                    matplotlib colormap to use, custom colormap can be
+                              easily created but ar not supported right now. 
+                              A list of default colormaps can be found at: 
+                              www.scipy.org_
+        color_by_cm           ``True`` | ``False``, if ``True`` set the color by
+                              using the colormap. default is ``True``
+        cm_value              float value between ``0.`` and ``1.`` to use for 
+                              chosing the color from the colormap. default is 
+                              ``None``
+        use_score_for_color   ``True`` | ``False``. if ``True`` use the score 
+                              value to pick a color from the colormap and will 
+                              ovverride ``color_by_cm`` as ``True``.
+                              if scores are not between 0 and 1 they can be 
+                              normalized by using Normalize and LogNorm from 
+                              ``matplotlib.colors``. 
+        ec                    define edgecolor as in matplotlib,  overrides 
+                              settings from  color_by_cm and use_score_for_color
+        fc                    define facecolor as in matplotlib,  overrides 
+                              settings from  color_by_cm and use_score_for_color
+        lw                    defines edge line width, as in matplotlib
+        alpha                 defines facecolor aplha value as in matplotlib
+        boxstyle              default is ``'square, pad=0.'``, accepts any 
+                              matplotlib ``FancyBboxPatch`` input string. 
+                              take a look at matplotlib_ docs.
+        norm                  normalization function to be used for in feature
+                              colormap based coloring. tipically used in plot 
+                              like features.default is ``None`` 
+                              could be any function taking a  int or float value
+                              and returning a float between  ``0.`` and ``1.``
+        url                   set url fot the feature to be used in htmlmaps \
+                              or SVG <a> elements.
+        html_map_extend       included text will be added in html area tab, 
+                              use to add onmouseover events, etc... 
+                              must be a valid html attrib.
+        ===================== ==================================================
+
+.. _www.scipy.org: http://www.scipy.org/Cookbook/Matplotlib/Show_colormaps
+
+.. _matplotlib: http://matplotlib.sourceforge.net/api/artist_api.html?highlight\
+=fancybboxpatch#matplotlib.patches.FancyBboxPatch
+
+            '''
     
     default_cm='winter'#deafult matplotlib colormap to use
     
@@ -69,7 +111,7 @@ class BaseGraphicFeature(object):
         self.height=kwargs.get('height',1.)
         # html map options
         self.url =  kwargs.get('url','')
-        self.html_map_extend = kwargs.get('html_map_extend','') #included text will be added in html area tab, use onmouseover, etc... must be valid html attrib
+        self.html_map_extend = kwargs.get('html_map_extend','') 
         #feature style options
         self.cm = cm.get_cmap(kwargs.get('cm', self.default_cm))
         self.color_by_cm = kwargs.get('color_by_cm',True)
@@ -90,7 +132,22 @@ class BaseGraphicFeature(object):
         
 
     def draw_feat_name(self,**kwargs):
-        '''recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name '''
+        '''calling self.draw_feat_name() agailn will overwrite the previous \
+        feature name stored in self.feat_name 
+        Valid keyword arguments for :class:`BaseTrack` are:
+
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        set_size              as in matplotlib, default is `'x-small'`
+        set_family            as in matplotlib, default is `'serif'`
+        set_weight            as in matplotlib, default is `'normal'`
+        va                    as in matplotlib, default is `'top'`
+        ha                    as in matplotlib, default is `'left'`  
+        xoffset               to be used to move the text annotation along x axis
+        ===================== ==================================================
+
+        '''
         self.feat_name = []
         font_feat = FontProperties()
         set_size = kwargs.get('set_size','x-small')
@@ -98,7 +155,7 @@ class BaseGraphicFeature(object):
         set_weight = kwargs.get('set_weight','normal')
         va=kwargs.get('va','top')
         ha=kwargs.get('ha','left')
-        xoffset = kwargs.get('xoffset',0)# to be used to move the text annotation along x axis
+        xoffset = kwargs.get('xoffset',0)# 
         font_feat.set_size(set_size)
         font_feat.set_family(set_family)
         font_feat.set_weight(set_weight)
@@ -110,45 +167,19 @@ class BaseGraphicFeature(object):
         
 class Simple(BaseGraphicFeature):
     '''
-::    
-    
-    Handle a feature not derived from a SeqFeature. Just need a Start and Stop position
+    Handle a feature not derived from a SeqFeature. 
+    Just need a `start` and `end` position.
     Minimum definition are start and end positions.
-        Eg.
-        features.Simple(start,end,name='factor 7',**kwargs)
-        Optional values:
-        
-            name --> text that will be drawn under the GraphicFeature
-            type --> define the GrafhFeature type, is needed by Drawer for feature grouping
-            score --> this value can be used to color the feature accordingly
-            height ---> GraphicFeature y axis extension
-            cm ---> matplotlib colormap to use, custom colormap can be easily created but ar not supported right now. a list of default colormaps can be found at: http://www.astro.princeton.edu/~msshin/science/code/matplotlib_cm/
-            color_by_cm ---> if True set the color by using the colormap (True by default)
-            cm_value ---> value between 0 and 1 to use for chosing the color from the colormap (default random)
-            use_score_for_color ---> if True use the score value to pick a color from the colormap. if scores are not between 0 and 1 they can be normalized by using Normalize and LogNorm from matplotlib.colors 
-            ec ---> define edgecolor,  overrides color_by_cm and use_score_for_color
-            ec ---> define facecolor,  overrides color_by_cm and use_score_for_color
-            lw ---> defines edge line width
-            alpha ---> defines facecolor aplha value
-            boxstyle ---> FancyBboxPatch input string. take a look at http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch
-        
-        returns
-        
-            self.patches ---> list of drawn patches
-            self.feat_name ---> matplotlib Text object reporting feature name, drawn under the patches
-            self.type ---> feature type used by Drawer
-        
+    Usage eg.
+    
+    ``features.Simple(start,end,name='factor 7',**kwargs)``
 
     '''
     def __init__(self,start,end,**kwargs):
-        '''
-        init
-        '''
+    
         BaseGraphicFeature.__init__(self, **kwargs)
         self.start = start
         self.end = end
-
-
 
     def draw_feature(self):        
         feat_draw=FancyBboxPatch((self.start,self.Y), 
@@ -166,12 +197,21 @@ class Simple(BaseGraphicFeature):
 
 class GenericSeqFeature(BaseGraphicFeature):
     '''
-::    
+
+    Handle a feature  derived from a `Biopython.SeqFeature.SeqFeature` as a \
+    simple rectangle.
     
-    Draws any seqfeature as a simple rectangular
+    Requires a `SeqFeature` object in input, `start` and `end` will be \
+    automatically detected from seqfeature.
     
-    unlike features.Simple requires a SeqFeature object in input, while start and end can be automatically detected from seqfeature.
-    features.Generic(feature,name='factor 7',start=10,end=143,score=0.2)
+    Usage eg.
+
+    ::
+    
+        from Bio.SeqFeature import SeqFeature, FeatureLocation 
+        feat = SeqFeature (FeatureLocation(10,124))
+        features.GenericSeqFeature(feat,name='factor 7', score=0.2, **kwargs)
+    
     '''
     def __init__(self,feature,**kwargs):
         '''
@@ -194,10 +234,27 @@ class GenericSeqFeature(BaseGraphicFeature):
 
 class GeneSeqFeature(BaseGraphicFeature):
     '''
-::    
     
-    Draws a Gene Feature
-    requires a SeqFeature (type='gene') and optionally a list of exons SeqFeatures that can be drawn over the gene patch
+    Draws a Gene Feature as an arrow.
+    Requires a SeqFeature with ``SeqFeature.type = 'gene'`` and optionally a 
+    list of exons SeqFeatures that can be drawn over the gene patch.
+    
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        head_length           defines matplotlib  FancyArrow head_length keyword
+                              argument to set up gene arrow head length
+        ===================== ==================================================
+    
+    Usage eg.
+    
+    ::
+    
+        from Bio.SeqFeature import SeqFeature, FeatureLocation 
+        genefeat = SeqFeature (FeatureLocation(103,1053), type = 'gene', strand=1,)
+        features.GeneSeqFeature(genefeat,name='factor 7', **kwargs)
+    
     
     '''
     def __init__(self,feature,exons=[],**kwargs):
@@ -212,7 +269,7 @@ class GeneSeqFeature(BaseGraphicFeature):
         if abs(self.end -  self.start<= 50):
             default_head_length = (self.end-self.start)/10.
         self.head_length=kwargs.get('head_length',default_head_length)
-        self.type=kwargs.get('type','Gene')
+        self.type=kwargs.get('type','gene')
         self.feature=feature
         self.exons=exons
 
@@ -248,9 +305,32 @@ class GeneSeqFeature(BaseGraphicFeature):
 
 class TextSequence(BaseGraphicFeature):
     '''
-::    
     
-    Draws a text biological sequence    
+    Draws a biological sequence as text at the given positions   
+    
+    Requires a `sequence` iterable tipically a string.
+    
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        start                 feature start position. default is ``0``
+        end                   feature end position. default is 
+                              ``self.start +  len(self.sequence)``
+        set_size              as in matplotlib, default is ``'xx-small'``
+        set_family            as in matplotlib, default is ``'monospace'``     
+        set_weight            as in matplotlib, default is ``'normal'``     
+        va                    as in matplotlib, default is ``'bottom'`` 
+        ha                    as in matplotlib, default is ``'left'``
+        ===================== ==================================================
+    
+    Usage eg.
+    
+    ::
+    
+        features.TextSequence('ATCATGATACTGNCAT',start = 103, **kwargs)
+    
+    
     '''
     def __init__(self,sequence,**kwargs):
         '''
@@ -259,7 +339,7 @@ class TextSequence(BaseGraphicFeature):
         BaseGraphicFeature.__init__(self,**kwargs)
         self.sequence = sequence
         self.start = kwargs.get('start',0)
-        self.end = kwargs.get('end',len(self.sequence))
+        self.end = kwargs.get('end', self.start + len(self.sequence))
         self.set_size = kwargs.get('set_size','xx-small')
         self.set_family = kwargs.get('set_family','monospace')
         self.set_weight = kwargs.get('set_weight','normal')

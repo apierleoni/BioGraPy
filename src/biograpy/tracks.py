@@ -464,7 +464,7 @@ class PlotTrack(BaseTrack):
         norm                  score normalizing function. default is ``None`` 
                               and will be created using maximum and minimum 
                               feature scores. could be any function taking a 
-                              int or float value an returning a float between 
+                              int or float value and returning a float between 
                               ``0.`` and ``1.``
         cm                    matplotlib colormap name to use for score-based 
                               feature color. default is ``'Accent'``
