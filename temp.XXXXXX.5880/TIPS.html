@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; BioGraPy v1.0 alpha documentation</title>
+    <title>TIPS &mdash; BioGraPy v1.0 alpha documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -19,7 +19,6 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <link rel="top" title="BioGraPy v1.0 alpha documentation" href="index.html" />
  
 <script type="text/javascript">
@@ -52,6 +51,33 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">TIPS</a><ul>
+<li><a class="reference external" href="#requirements">REQUIREMENTS</a></li>
+<li><a class="reference external" href="#webserver-installation-tips">WebServer Installation tips</a></li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/TIPS.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -60,29 +86,35 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
-  <form action="" method="get">
-    <input type="text" name="q" value="" />
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  <div id="search-results">
-  
-  </div>
+  <div class="section" id="tips">
+<span id="id1"></span><h1>TIPS<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>REQUIREMENTS<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MatPlotLib 1.0 or above</li>
+<li>BioPython</li>
+</ul>
+</div>
+<div class="section" id="webserver-installation-tips">
+<h2>WebServer Installation tips<a class="headerlink" href="#webserver-installation-tips" title="Permalink to this headline">¶</a></h2>
+<p>1.
+When deploying in web application  call:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;/tmp&#39;</span>
+</pre></div>
+</div>
+<p>before import biograpy to make matplotlib work</p>
+<ol class="arabic simple" start="2">
+<li></li>
+</ol>
+<p>After saving the image call</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">panel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to free matplotlib data from memory</p>
+</div>
+</div>
+
 
           </div>
         </div>
@@ -101,13 +133,10 @@
         <li><a href="index.html">BioGraPy v1.0 alpha documentation</a> &raquo;</li> 
       </ul>
     </div>
-  
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Sep 05, 2011.
+      Last updated on Aug 19, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
-  <script type="text/javascript" src="searchindex.js"></script>
-
   </body>
 </html>
