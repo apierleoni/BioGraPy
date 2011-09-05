@@ -116,7 +116,7 @@
 <tbody valign="top">
 <tr class="field"><th class="field-name">Release:</th><td class="field-body">1.0a</td>
 </tr>
-<tr class="field"><th class="field-name">Date:</th><td class="field-body">August 30, 2011</td>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">September 05, 2011</td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +625,7 @@ coordinate system</li>
 <li><cite>self.__init__</cite> method must be expanded accordingly to the new input</li>
 <li><cite>self.draw_feat_name()</cite> method can be overridden, but must set a list of       matplotlib Annotate objects in <cite>self.feat_name</cite></li>
 </ul>
-<p>Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseTrack</span></tt> are:</p>
+<p>Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt> are:</p>
 <blockquote>
 <table border="1" class="docutils">
 <colgroup>
@@ -643,7 +643,7 @@ coordinate system</li>
 </tr>
 <tr><td>type</td>
 <td>define the GrafhFeature type, is needed by
-<cite>Drawer</cite> for feature grouping, default is <tt class="docutils literal"><span class="pre">''</span></tt>
+<cite>Panel</cite> for feature grouping, default is <tt class="docutils literal"><span class="pre">''</span></tt>
 can be <tt class="docutils literal"><span class="pre">'plot'</span></tt> for plot-like features.</td>
 </tr>
 <tr><td>score</td>
@@ -960,14 +960,47 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.PlotFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">PlotFeature</tt><big>(</big><em>y</em>, <em>x=</em><span class="optional">[</span><span class="optional">]</span>, <em>style='-'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.PlotFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws a plot of contnuous value for a feature such as an hydrophobicity scale
-must be used within a PlotTrak to have axix.
-  
- 
-y is necessary
-if no x is provided x will be created starting from position 1
-
-def __init__(self,  y , x = [], style = '-' , **kwargs):</pre>
+<p>Draws a lineplot of continuous values for a feature such as an 
+hydrophobicity plot, or prediction confidency values
+must be used within a <a title="biograpy.tracks.PlotTrack" class="reference internal" href="#biograpy.tracks.PlotTrack"><tt class="xref docutils literal"><span class="pre">PlotTrack</span></tt></a>.</p>
+<p>Y values are necessary
+If no X values are provided they will be created starting from position 1 
+for each Y value provided</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>y</td>
+<td>list of Y numerical values</td>
+</tr>
+<tr><td>x</td>
+<td>list of X numerical values</td>
+</tr>
+<tr><td>style</td>
+<td>line plotting style as in matplotlib. default is
+<tt class="docutils literal"><span class="pre">'-'</span></tt></td>
+</tr>
+<tr><td>label</td>
+<td>set label to be used in <cite>PlotTrack</cite> legend. if no
+label is defined for all the features the legend
+will not be drawn.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">features</span><span class="o">.</span><span class="n">PlotFeature</span><span class="p">([</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.PlotFeature.draw_feat_name">
@@ -1021,8 +1054,75 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.BarPlotFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">BarPlotFeature</tt><big>(</big><em>y</em>, <em>x=</em><span class="optional">[</span><span class="optional">]</span>, <em>style='-'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.BarPlotFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws a bar plot values for a feature such as prediction confidence values
-must be used within a PlotTrak to have axix.</pre>
+<p>Draws a bar plot values for a feature such as prediction confidence values
+must be used within a PlotTrak to have axix.</p>
+<p>Draws a barplot of continuous values for a feature such as 
+prediction confidency values must be used within a 
+<a title="biograpy.tracks.PlotTrack" class="reference internal" href="#biograpy.tracks.PlotTrack"><tt class="xref docutils literal"><span class="pre">PlotTrack</span></tt></a>.</p>
+<p>Y values are necessary
+If no X values are provided they will be created starting from position 1 
+for each Y value provided</p>
+<p><tt class="docutils literal"><span class="pre">color_by_cm</span> <span class="pre">=</span> <span class="pre">True</span></tt> will color each point based on the y values using
+the supplied colormap <tt class="docutils literal"><span class="pre">cm</span></tt>.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>y</td>
+<td>list of Y numerical values</td>
+</tr>
+<tr><td>x</td>
+<td>list of X numerical values</td>
+</tr>
+<tr><td>style</td>
+<td>line plotting style as in matplotlib. default is
+<tt class="docutils literal"><span class="pre">'-'</span></tt></td>
+</tr>
+<tr><td>label</td>
+<td>set label to be used in <cite>PlotTrack</cite> legend. if no
+label is defined for all the features the legend
+will not be drawn.</td>
+</tr>
+<tr><td>width</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">.8</span></tt></td>
+</tr>
+<tr><td>bottom</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">0</span></tt></td>
+</tr>
+<tr><td>align</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'center'</span></tt></td>
+</tr>
+<tr><td>xerr</td>
+<td>as in matplotlib, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr><td>yerr</td>
+<td>as in matplotlib, default is <tt class="xref docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr><td>ecolor</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'k'</span></tt></td>
+</tr>
+<tr><td>capsize</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">1</span></tt></td>
+</tr>
+<tr><td>ls</td>
+<td>as in matplotlib, default is <tt class="docutils literal"><span class="pre">'solid'</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">PlotFeature</span><span class="p">([</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.BarPlotFeature.draw_feat_name">
@@ -1173,11 +1273,43 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.SegmentedSeqFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">SegmentedSeqFeature</tt><big>(</big><em>feature</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SegmentedSeqFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws a SeqFeature carrying 'join' subfeatures
-
-requires a SeqFeature object carryng 'joins' in SeqFeature.subfeatures, 
-start and end can be automatically detected from seqfeature.
-SegmentedSeqFeature(feature,name='factor 7',s)</pre>
+<p>Draws a SeqFeature carrying <tt class="docutils literal"><span class="pre">'join'</span></tt> subfeatures</p>
+<p>requires a SeqFeature object carryng <tt class="docutils literal"><span class="pre">'joins'</span></tt> in SeqFeature.subfeatures, 
+<cite>start</cite> and <cite>end</cite> can be supplied or automatically detected from SeqFeature.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>start</td>
+<td>feature start position. default is the minimum
+value of all SubFeature.location postions</td>
+</tr>
+<tr><td>end</td>
+<td>feature end position. default is the maximum
+value of all SubFeature.location postions</td>
+</tr>
+<tr><td>type</td>
+<td>feature type</td>
+</tr>
+<tr><td>ec</td>
+<td>default is set to <tt class="docutils literal"><span class="pre">'k'</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">SegmentedSeqFeature</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;factor 7&#39;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.SegmentedSeqFeature.draw_feat_name">
@@ -1231,8 +1363,52 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.CoupledmRNAandCDS">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">CoupledmRNAandCDS</tt><big>(</big><em>mRNA</em>, <em>CDS</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.CoupledmRNAandCDS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws mRNA with joins at a lower alpha and the corresponding CDS on top of it
-requires an mRNA seqfeature object and a CDS seqfeature object</pre>
+<p>Draws an mRNa at a small alpha value, and the corresponding CDS on top of 
+it at <cite>alpha = 1.</cite>
+Requires an mRNA SeqFeature object and a CDS seqfeature object. &#8216;joins&#8217; will 
+be threated as in <a title="biograpy.features.SegmentedSeqFeature" class="reference internal" href="#biograpy.features.SegmentedSeqFeature"><tt class="xref docutils literal"><span class="pre">SegmentedSeqFeature</span></tt></a></p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>mRNA_start</td>
+<td>mRNA feature start position. default is the
+minimum value of all SubFeature.location postions</td>
+</tr>
+<tr><td>mRNA_end</td>
+<td>mRNA feature end position. default is the maximum
+value of all SubFeature.location postions</td>
+</tr>
+<tr><td>CDS_start</td>
+<td>CDS feature start position. default is the
+minimum value of all SubFeature.location postions</td>
+</tr>
+<tr><td>CDS_end</td>
+<td>CDS feature end position. default is the maximum
+value of all SubFeature.location postions</td>
+</tr>
+<tr><td>type</td>
+<td>feature type</td>
+</tr>
+<tr><td>ec</td>
+<td>default is set to <tt class="docutils literal"><span class="pre">'k'</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">CoupledmRNAandCDS</span><span class="p">(</span><span class="n">mRNA_feature</span><span class="p">,</span> <span class="n">CDS_feature</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;factor 7&#39;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.CoupledmRNAandCDS.draw_feat_name">
@@ -1286,37 +1462,61 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.SinglePositionFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">SinglePositionFeature</tt><big>(</big><em>feature</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SinglePositionFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws features spanning just one position
-
-    marker = 'o'
-    markersize = 4
-    
-    
-    available marker types:
-    
-        
-    '.'     point marker
-    ','     pixel marker
-    'o'     circle marker
-    'v'     triangle_down marker
-    '^'     triangle_up marker
-    '&lt;'     triangle_left marker
-    '&gt;'     triangle_right marker
-    '1'     tri_down marker
-    '2'     tri_up marker
-    '3'     tri_left marker
-    '4'     tri_right marker
-    's'     square marker
-    'p'     pentagon marker
-    '*'     star marker
-    'h'     hexagon1 marker
-    'H'     hexagon2 marker
-    '+'     plus marker
-    'x'     x marker
-    'D'     diamond marker
-    'd'     thin_diamond marker
-    '|'     vline marker
-    '_'     hline marker</pre>
+<p>Draws features localized just to one position</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>marker</td>
+<td>marker symbol, accepts all matplotlib marker types
+default is circle marker <tt class="docutils literal"><span class="pre">'o'</span></tt></td>
+</tr>
+<tr><td>markersize</td>
+<td>marker size as in matplotlib. default  is <tt class="docutils literal"><span class="pre">4</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Available matplotlib marker types:</p>
+<blockquote>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'.'</span></tt>     point marker</li>
+<li><tt class="docutils literal"><span class="pre">','</span></tt>     pixel marker</li>
+<li><tt class="docutils literal"><span class="pre">'o'</span></tt>     circle marker</li>
+<li><tt class="docutils literal"><span class="pre">'v'</span></tt>     triangle_down marker</li>
+<li><tt class="docutils literal"><span class="pre">'^'</span></tt>     triangle_up marker</li>
+<li><tt class="docutils literal"><span class="pre">'&lt;'</span></tt>     triangle_left marker</li>
+<li><tt class="docutils literal"><span class="pre">'&gt;'</span></tt>     triangle_right marker</li>
+<li><tt class="docutils literal"><span class="pre">'1'</span></tt>     tri_down marker</li>
+<li><tt class="docutils literal"><span class="pre">'2'</span></tt>     tri_up marker</li>
+<li><tt class="docutils literal"><span class="pre">'3'</span></tt>     tri_left marker</li>
+<li><tt class="docutils literal"><span class="pre">'4'</span></tt>     tri_right marker</li>
+<li><tt class="docutils literal"><span class="pre">'s'</span></tt>     square marker</li>
+<li><tt class="docutils literal"><span class="pre">'p'</span></tt>     pentagon marker</li>
+<li><tt class="docutils literal"><span class="pre">'*'</span></tt>     star marker</li>
+<li><tt class="docutils literal"><span class="pre">'h'</span></tt>     hexagon1 marker</li>
+<li><tt class="docutils literal"><span class="pre">'H'</span></tt>     hexagon2 marker</li>
+<li><tt class="docutils literal"><span class="pre">'+'</span></tt>     plus marker</li>
+<li><tt class="docutils literal"><span class="pre">'x'</span></tt>     x marker</li>
+<li><tt class="docutils literal"><span class="pre">'D'</span></tt>     diamond marker</li>
+<li><tt class="docutils literal"><span class="pre">'d'</span></tt>     thin_diamond marker</li>
+<li><tt class="docutils literal"><span class="pre">'|'</span></tt>     vline marker</li>
+<li><tt class="docutils literal"><span class="pre">'_'</span></tt>     hline marker</li>
+</ul>
+</blockquote>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">SinglePositionFeature</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;N-glycosilation&#39;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.SinglePositionFeature.draw_feat_name">
@@ -1370,44 +1570,112 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.TMFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">TMFeature</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.TMFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws Transmembrane helix with predicted cytoplasmic/non cytoplasmic sides
-
-TM = list of seqfeatures reporting Transmembrane regions 
-    cyto =  list of seqfeatures reporting cytoplasmic regions
-    non_cyto = list of seqfeatures reporting non cytoplasmic regions
-    
-    self.TM = kwargs.get('TM',[])
-    self.cyto = kwargs.get('cyto',[])
-    self.non_cyto = kwargs.get('non_cyto',[])
-    self.type=kwargs.get('type',self.TM[0].type)
-    self.TM_ec = kwargs.get('TM_ec',self.ec)
-    self.TM_fc = kwargs.get('TM_fc',self.fc)
-    self.TM_label = kwargs.get('TM_label','TM')
-    self.cyto_color = kwargs.get('cyto_color',self.ec)
-    self.cyto_linestyle = kwargs.get('cyto_linestyle','-')
-    self.cyto_label = kwargs.get('cyto_label','cyto')
-    self.non_cyto_color = kwargs.get('non_cyto_color',self.ec)
-    self.non_cyto_linestyle = kwargs.get('non_cyto_linestyle',':')
-    self.non_cyto_label = kwargs.get('non_cyto_label','not cyto')
-    self.fill_color = kwargs.get('fill_color',self.cyto_color)
-    self.fill_linestyle = kwargs.get('fill_linestyle',self.cyto_linestyle)
-    
-    available linestyles:
-    
-    '-'     solid line style
-    '--'     dashed line style
-    '-.'     dash-dot line style
-    ':'     dotted line style</pre>
+<p>Draws  a line plot of proteins contaning transmembrane regions with 
+cytoplasmic/non cytoplasmic sides.</p>
+<p>A list of <cite>transmembrane</cite> SeqFeatures is required. additional <cite>cytoplasmic</cite>
+and <cite>non cytoplasmic</cite> SeqFeatures can be passed. If only <cite>transmembrane</cite> 
+SeqFeatures are given, the remaining space is filled with an horizontal 
+line.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TM</td>
+<td>list of SeqFeatures reporting Transmembrane
+regions. required to draw something.</td>
+</tr>
+<tr><td>cyto</td>
+<td>list of SeqFeatures reporting cytoplasmic regions.</td>
+</tr>
+<tr><td>non_cyto</td>
+<td>list of SeqFeatures reporting non cytoplasmic
+regions.</td>
+</tr>
+<tr><td>type</td>
+<td>feature type</td>
+</tr>
+<tr><td>TM_ec</td>
+<td>transmembrane region edgecolor, as in matplotlib.</td>
+</tr>
+<tr><td>TM_fc</td>
+<td>transmembrane region facecolor, as in matplotlib.</td>
+</tr>
+<tr><td>TM_label</td>
+<td>text that will appear under the transmembrane
+regions. default is <tt class="docutils literal"><span class="pre">'TM'</span></tt></td>
+</tr>
+<tr><td>cyto_color</td>
+<td>cytoplasmic line color default is <tt class="docutils literal"><span class="pre">self.ec</span></tt></td>
+</tr>
+<tr><td>cyto_linestyle</td>
+<td>cytoplasmic line style default is solid <tt class="docutils literal"><span class="pre">'-'</span></tt></td>
+</tr>
+<tr><td>cyto_label</td>
+<td>text that will appear under the cytoplasmic
+regions. default is <tt class="docutils literal"><span class="pre">'cyto'</span></tt></td>
+</tr>
+<tr><td>non_cyto_color</td>
+<td>non cytoplasmic line color default is <tt class="docutils literal"><span class="pre">self.ec</span></tt></td>
+</tr>
+<tr><td>non_cyto_linestyle</td>
+<td>non cytoplasmic line style default is solid
+<tt class="docutils literal"><span class="pre">'-'</span></tt></td>
+</tr>
+<tr><td>non_cyto_label</td>
+<td>text that will appear under the non cytoplasmic
+regions. default is <tt class="docutils literal"><span class="pre">'non</span> <span class="pre">cyto'</span></tt></td>
+</tr>
+<tr><td>fill_color</td>
+<td>automatic fill line color default is <tt class="docutils literal"><span class="pre">self.ec</span></tt></td>
+</tr>
+<tr><td>fill_linestyle</td>
+<td>automatic fill line style default is solid <tt class="docutils literal"><span class="pre">'-'</span></tt></td>
+</tr>
+<tr><td>connection_lw</td>
+<td>linewidth for cytoplasmic, non cytoplasming and
+automatic filled lines. default is <tt class="docutils literal"><span class="pre">'2</span></tt></td>
+</tr>
+<tr><td>do_not_fill</td>
+<td><tt class="xref docutils literal"><span class="pre">True</span></tt> | <tt class="xref docutils literal"><span class="pre">False</span></tt>. if <tt class="xref docutils literal"><span class="pre">True</span></tt> will not
+automatically fill the space between transmembrane
+regions with a line. default is <tt class="xref docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>Available linestyles for lines:</p>
+<blockquote class="last">
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'-'</span></tt>     solid line style</li>
+<li><tt class="docutils literal"><span class="pre">'--'</span></tt>    dashed line style</li>
+<li><tt class="docutils literal"><span class="pre">'-.'</span></tt>    dash-dot line style</li>
+<li><tt class="docutils literal"><span class="pre">':'</span></tt>     dotted line style</li>
+</ul>
+</blockquote>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">TMFeature</span><span class="p">(</span><span class="n">TM_features</span><span class="p">,</span> <span class="n">cyto_features</span><span class="p">,</span> <span class="n">non_features</span><span class="p">,</span> 
+                 <span class="n">non_cyto_label</span><span class="o">=</span> <span class="s">&#39;extracellular&#39;</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.TMFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.TMFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd>draws the feature name and all the TM, cyto a non cyto labels</dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.TMFeature.draw_feature">
 <tt class="descname">draw_feature</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.features.TMFeature.draw_feature" title="Permalink to this definition">¶</a></dt>
-<dd>draw TM regions</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1416,24 +1684,73 @@ TM = list of seqfeatures reporting Transmembrane regions
 <h2>SecStructFeature<a class="headerlink" href="#secstructfeature" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="biograpy.features.SecStructFeature">
-<em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">SecStructFeature</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SecStructFeature" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">SecStructFeature</tt><big>(</big><em>betas=</em><span class="optional">[</span><span class="optional">]</span>, <em>alphah=</em><span class="optional">[</span><span class="optional">]</span>, <em>coil=</em><span class="optional">[</span><span class="optional">]</span>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.SecStructFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws secondary structures
-
-    self.betas = kwargs.get('betas',[])
-    self.alphah = kwargs.get('alphah',[])
-    self.coil = kwargs.get('coil',[])
-    self.type=kwargs.get('type','')
-    
-    self.betas_ec = kwargs.get('betas_ec','k')
-    self.betas_fc = kwargs.get('betas_fc','yellow')
-    self.alphah_ec = kwargs.get('alphah_ec','k')
-    self.alphah_fc = kwargs.get('alphah_fc','magenta')
-    self.coil_color = kwargs.get('coil_color','k')
-    self.coil_linestyle = kwargs.get('coil_linestyle','-')
-    self.lw = kwargs.get('lw',0.5)
-    
-    self.filter_struct_length = kwargs.get('filter_struct_length',3)#if != 0 smooths secondary structures, by displaying only those longher than the given value. self.filter_struct_length force coil geneation, and ignore supplied coils regions</pre>
+<p>Draws secondary structures. requires at least a list of SeqFeatures 
+indicating beta strands (<cite>betas</cite>), alpha helices (<cite>alphah</cite>), and random
+coil (<cite>coil</cite>).</p>
+<p>Beta strands are drawn as arrows, alpha helices as rectangles and coils as
+horizontal lines.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>betas_ec</td>
+<td>beta strands edgecolor, as in matplotlib.</td>
+</tr>
+<tr><td>betas_fc</td>
+<td>beta strands facecolor, as in matplotlib.</td>
+</tr>
+<tr><td>alphah_ec</td>
+<td>alpha helices edgecolor, as in matplotlib.</td>
+</tr>
+<tr><td>alphah_fc</td>
+<td>alpha helices facecolor, as in matplotlib.</td>
+</tr>
+<tr><td>coil_color</td>
+<td>random coil line color default is <tt class="docutils literal"><span class="pre">self.ec</span></tt></td>
+</tr>
+<tr><td>coil_linestyle</td>
+<td>random coil line style default is solid</td>
+</tr>
+<tr><td>lw</td>
+<td>linewidth for coil lines . default is <tt class="docutils literal"><span class="pre">'0.5'</span></tt></td>
+</tr>
+<tr><td>type</td>
+<td>feature type. default is <tt class="docutils literal"><span class="pre">''</span></tt></td>
+</tr>
+<tr><td>filter_struct_length</td>
+<td>if != 0 smooths secondary structures, by
+displaying only those longher than the given
+value. Force coil generation, and ignore supplied
+coil regions. default is <tt class="docutils literal"><span class="pre">'0'</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>Available linestyles for random coils:</p>
+<blockquote class="last">
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'-'</span></tt>     solid line style</li>
+<li><tt class="docutils literal"><span class="pre">'--'</span></tt>    dashed line style</li>
+<li><tt class="docutils literal"><span class="pre">'-.'</span></tt>    dash-dot line style</li>
+<li><tt class="docutils literal"><span class="pre">':'</span></tt>     dotted line style</li>
+</ul>
+</blockquote>
+</dd>
+</dl>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">SecStructFeature</span><span class="p">(</span><span class="n">betas</span> <span class="o">=</span> <span class="n">betas_features</span><span class="p">,</span> 
+                        <span class="n">alphah</span> <span class="o">=</span> <span class="n">alphah_features</span><span class="p">)</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="biograpy.features.SecStructFeature.draw_feat_name">
@@ -1487,42 +1804,89 @@ Valid keyword arguments for <tt class="xref docutils literal"><span class="pre">
 <dt id="biograpy.features.DomainFeature">
 <em class="property">class </em><tt class="descclassname">biograpy.features.</tt><tt class="descname">DomainFeature</tt><big>(</big><em>domains</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.DomainFeature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">biograpy.features.BaseGraphicFeature</span></tt></a></p>
-<div class="highlight-python"><pre>Draws domains(encoded as seqfeatures) with FancyBboxPatch
-can optionally drow a a line representing the complete sequence
-
-domains = accepts a list of SeqFeature objects
-self.boxstyle is inherited by  BaseGraphicFeature ---&gt; in this class accepts one or a list of matplotlib FancyBboxPatch boxstyle
-
-available boxstyle: (http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch)
-larrow 
-rarrow 
-round 
-round4 
-roundtooth 
-sawtooth
-square
-
-
-style examples at:
-http://matplotlib.sourceforge.net/examples/pylab_examples/fancybox_demo2.html
-
-self.seq_line_start, self.seq_line_end = kwargs.get('self.seq_line',(0,0))
-
-self.boxstyle, self.ec, self.fc, self.alpha, self.zorder can be a single value (applied to all domain features) 
-or a list of values (each one corresponding to a  domain features)
-
-use zorder to display overlapping domains</pre>
+<blockquote>
+<p>Draws one ore more domains (encoded as seqfeatures) with <cite>FancyBboxPatch</cite>.
+Can optionally draw a line representing the complete sequence.
+Accepts a list of SeqFeature objects.</p>
+<dl class="docutils">
+<dt>Additional valid attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>seq_line</td>
+<td>sequence line start and end positions tuple.
+default is (0,0)</td>
+</tr>
+<tr><td>name</td>
+<td>inherited by
+<a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt></a>,
+accepts multiple values</td>
+</tr>
+<tr><td>boxstyle</td>
+<td>inherited by
+<a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt></a>,
+accepts multiple values</td>
+</tr>
+<tr><td>ec</td>
+<td>inherited by
+<a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt></a>,
+accepts multiple values</td>
+</tr>
+<tr><td>fc</td>
+<td>inherited by
+<a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt></a>,
+accepts multiple values</td>
+</tr>
+<tr><td>alpha</td>
+<td>inherited by
+<a title="biograpy.features.BaseGraphicFeature" class="reference internal" href="#biograpy.features.BaseGraphicFeature"><tt class="xref docutils literal"><span class="pre">BaseGraphicFeature</span></tt></a>,
+accepts multiple values</td>
+</tr>
+<tr><td>zorder</td>
+<td>use zorder to display overlapping domains. default
+is <tt class="docutils literal"><span class="pre">2</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Available <a class="reference external" href="http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch">boxstyles</a>:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'larrow'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'rarrow'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'round'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'round4'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'roundtooth'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'sawtooth'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'square'</span></tt></li>
+</ul>
+<p>with <a class="reference external" href="http://matplotlib.sourceforge.net/examples/pylab_examples/fancybox_demo2.html">examples</a>.</p>
+<p>Usage eg.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">feat</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DomainFeature</span><span class="p">([</span><span class="n">seqfeature</span><span class="p">,</span><span class="n">seqfeature2</span><span class="p">],</span> 
+       <span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test domain 1&#39;</span><span class="p">,</span> <span class="s">&#39;test domain 2&#39;</span><span class="p">],</span> 
+       <span class="n">boxstyle</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;sawtooth, tooth_size=1.4&#39;</span><span class="p">,</span>  
+                   <span class="s">&#39;rarrow, pad = 0.1&#39;</span><span class="p">],</span>  
+       <span class="n">seq_line</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">766</span><span class="p">),)</span>
+</pre></div>
 </div>
-<p><strong>DRAFT</strong></p>
+</blockquote>
 <dl class="method">
 <dt id="biograpy.features.DomainFeature.draw_feat_name">
 <tt class="descname">draw_feat_name</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.features.DomainFeature.draw_feat_name" title="Permalink to this definition">¶</a></dt>
-<dd>recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="biograpy.features.DomainFeature.draw_feature">
 <tt class="descname">draw_feature</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.features.DomainFeature.draw_feature" title="Permalink to this definition">¶</a></dt>
-<dd>draw domains</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1549,7 +1913,7 @@ use zorder to display overlapping domains</pre>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Aug 30, 2011.
+      Last updated on Sep 05, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>
