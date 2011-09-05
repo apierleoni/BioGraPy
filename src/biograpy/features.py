@@ -43,7 +43,7 @@ class BaseGraphicFeature(object):
     * `self.draw_feat_name()` method can be overridden, but must set a list of \
       matplotlib Annotate objects in `self.feat_name`
                      
-    Valid keyword arguments for :class:`BaseTrack` are:
+    Valid keyword arguments for :class:`BaseGraphicFeature` are:
 
         ===================== ==================================================
         Key                   Description
@@ -51,7 +51,7 @@ class BaseGraphicFeature(object):
         name                  a string text that will be drawn under the \
                               feature.
         type                  define the GrafhFeature type, is needed by  
-                              `Drawer` for feature grouping, default is ``''``
+                              `Panel` for feature grouping, default is ``''``
                               can be ``'plot'`` for plot-like features.
         score                 a float value that can be used to color the 
                               feature accordingly using a colormap
@@ -258,9 +258,7 @@ class GeneSeqFeature(BaseGraphicFeature):
     
     '''
     def __init__(self,feature,exons=[],**kwargs):
-        '''
-        
-        '''
+
         BaseGraphicFeature.__init__(self,**kwargs)
         self.height=kwargs.get('height',2.)
         self.start=kwargs.get('start',min([feature.location.start.position,feature.location.end.position]))
@@ -333,9 +331,7 @@ class TextSequence(BaseGraphicFeature):
     
     '''
     def __init__(self,sequence,**kwargs):
-        '''
-        
-        '''
+
         BaseGraphicFeature.__init__(self,**kwargs)
         self.sequence = sequence
         self.start = kwargs.get('start',0)
@@ -370,25 +366,38 @@ class TextSequence(BaseGraphicFeature):
         
 
 class PlotFeature(BaseGraphicFeature):
+    ''' 
+    
+    Draws a lineplot of continuous values for a feature such as an 
+    hydrophobicity plot, or prediction confidency values
+    must be used within a :class:`~biograpy.tracks.PlotTrack`.
+
+    Y values are necessary
+    If no X values are provided they will be created starting from position 1 
+    for each Y value provided
+    
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        y                     list of Y numerical values  
+        x                     list of X numerical values  
+        style                 line plotting style as in matplotlib. default is
+                              ``'-'``
+        label                 set label to be used in `PlotTrack` legend. if no
+                              label is defined for all the features the legend
+                              will not be drawn. 
+        ===================== ==================================================
+
+    Usage eg.
+    
+    ::
+    
+        features.PlotFeature([1.3, 2.4, -1,2],  **kwargs)
+    
     '''
-::    
-    
-    Draws a plot of contnuous value for a feature such as an hydrophobicity scale
-    must be used within a PlotTrak to have axix.
-      
-     
-    y is necessary
-    if no x is provided x will be created starting from position 1
-    
     def __init__(self,  y , x = [], style = '-' , **kwargs):
 
-
-    
-    '''
-    def __init__(self,  y , x = [], style = '-' , **kwargs):
-        '''
-        TO DO
-        '''
         BaseGraphicFeature.__init__(self,**kwargs)
         self.feat_type = 'plot' #to be checked in plot track
         self.label = kwargs.get('label', '')
@@ -422,19 +431,55 @@ class PlotFeature(BaseGraphicFeature):
 
 class BarPlotFeature(BaseGraphicFeature):
     '''
-::    
+    
     
     Draws a bar plot values for a feature such as prediction confidence values
     must be used within a PlotTrak to have axix.
+   
     
+   
+    Draws a barplot of continuous values for a feature such as 
+    prediction confidency values must be used within a 
+    :class:`~biograpy.tracks.PlotTrack`.
+
+    Y values are necessary
+    If no X values are provided they will be created starting from position 1 
+    for each Y value provided
+    
+    ``color_by_cm = True`` will color each point based on the y values using
+    the supplied colormap ``cm``.
+    
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        y                     list of Y numerical values  
+        x                     list of X numerical values  
+        style                 line plotting style as in matplotlib. default is
+                              ``'-'``
+        label                 set label to be used in `PlotTrack` legend. if no
+                              label is defined for all the features the legend
+                              will not be drawn. 
+        width                 as in matplotlib, default is ``.8``
+        bottom                as in matplotlib, default is ``0``
+        align                 as in matplotlib, default is ``'center'``
+        xerr                  as in matplotlib, default is ``None``
+        yerr                  as in matplotlib, default is ``None``
+        ecolor                as in matplotlib, default is ``'k'``
+        capsize               as in matplotlib, default is ``1``
+        ls                    as in matplotlib, default is ``'solid'``
+        ===================== ==================================================
+
+    Usage eg.
+    
+    ::
+    
+        feat = features.PlotFeature([1.3, 2.4, -1,2],  **kwargs)
+
 
     '''
     def __init__(self,  y , x = [], style = '-' , **kwargs):
-        '''
-        TO DO
-        
-        color_by_cm will color based on the y values
-        '''
+
         BaseGraphicFeature.__init__(self,**kwargs)
         self.feat_type = 'plot' #to be checked in plot track
         self.label = kwargs.get('label', '')
@@ -491,13 +536,29 @@ class BarPlotFeature(BaseGraphicFeature):
 
 class SegmentedSeqFeature(BaseGraphicFeature):
     '''
-::    
     
-    Draws a SeqFeature carrying 'join' subfeatures
+    Draws a SeqFeature carrying ``'join'`` subfeatures
     
-    requires a SeqFeature object carryng 'joins' in SeqFeature.subfeatures, 
-    start and end can be automatically detected from seqfeature.
-    SegmentedSeqFeature(feature,name='factor 7',s)
+    requires a SeqFeature object carryng ``'joins'`` in SeqFeature.subfeatures, 
+    `start` and `end` can be supplied or automatically detected from SeqFeature.
+    
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        start                 feature start position. default is the minimum 
+                              value of all SubFeature.location postions
+        end                   feature end position. default is the maximum 
+                              value of all SubFeature.location postions  
+        type                  feature type
+        ec                    default is set to ``'k'``
+        ===================== ==================================================
+    
+    Usage eg.
+    
+    ::
+    
+        feat = SegmentedSeqFeature(feature,name='factor 7',s)
     '''
 
     def __init__(self,feature,**kwargs):
@@ -538,11 +599,35 @@ class SegmentedSeqFeature(BaseGraphicFeature):
 
 class CoupledmRNAandCDS(BaseGraphicFeature):
     '''
-::
 
-    Draws mRNA with joins at a lower alpha and the corresponding CDS on top of it
-    requires an mRNA seqfeature object and a CDS seqfeature object
+    Draws an mRNa at a small alpha value, and the corresponding CDS on top of 
+    it at `alpha = 1.`
+    Requires an mRNA SeqFeature object and a CDS seqfeature object. 'joins' will 
+    be threated as in :class:`~biograpy.features.SegmentedSeqFeature`
+
     
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        mRNA_start            mRNA feature start position. default is the 
+                              minimum value of all SubFeature.location postions
+        mRNA_end              mRNA feature end position. default is the maximum 
+                              value of all SubFeature.location postions  
+        CDS_start             CDS feature start position. default is the 
+                              minimum value of all SubFeature.location postions
+        CDS_end               CDS feature end position. default is the maximum 
+                              value of all SubFeature.location postions  
+        type                  feature type
+        ec                    default is set to ``'k'``
+        ===================== ==================================================
+    
+    Usage eg.
+    
+    ::
+    
+        feat = CoupledmRNAandCDS(mRNA_feature, CDS_feature, name='factor 7',s)
+
     
     '''
     def __init__(self,mRNA,CDS,**kwargs):
@@ -604,40 +689,52 @@ class CoupledmRNAandCDS(BaseGraphicFeature):
             
 class SinglePositionFeature(BaseGraphicFeature):
     '''
-::    
+ 
     
-    Draws features spanning just one position
-    
-        marker = 'o'
-        markersize = 4
+    Draws features localized just to one position
+
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        marker                marker symbol, accepts all matplotlib marker types
+                              default is circle marker ``'o'``
+        markersize            marker size as in matplotlib. default  is ``4``.
+        ===================== ==================================================
         
-        
-        available marker types:
+    Available matplotlib marker types:
         
             
-        '.'     point marker
-        ','     pixel marker
-        'o'     circle marker
-        'v'     triangle_down marker
-        '^'     triangle_up marker
-        '<'     triangle_left marker
-        '>'     triangle_right marker
-        '1'     tri_down marker
-        '2'     tri_up marker
-        '3'     tri_left marker
-        '4'     tri_right marker
-        's'     square marker
-        'p'     pentagon marker
-        '*'     star marker
-        'h'     hexagon1 marker
-        'H'     hexagon2 marker
-        '+'     plus marker
-        'x'     x marker
-        'D'     diamond marker
-        'd'     thin_diamond marker
-        '|'     vline marker
-        '_'     hline marker
-        
+        * ``'.'``     point marker
+        * ``','``     pixel marker
+        * ``'o'``     circle marker
+        * ``'v'``     triangle_down marker
+        * ``'^'``     triangle_up marker
+        * ``'<'``     triangle_left marker
+        * ``'>'``     triangle_right marker
+        * ``'1'``     tri_down marker
+        * ``'2'``     tri_up marker
+        * ``'3'``     tri_left marker
+        * ``'4'``     tri_right marker
+        * ``'s'``     square marker
+        * ``'p'``     pentagon marker
+        * ``'*'``     star marker
+        * ``'h'``     hexagon1 marker
+        * ``'H'``     hexagon2 marker
+        * ``'+'``     plus marker
+        * ``'x'``     x marker
+        * ``'D'``     diamond marker
+        * ``'d'``     thin_diamond marker
+        * ``'|'``     vline marker
+        * ``'_'``     hline marker
+    
+    Usage eg.
+    
+    ::
+    
+        feat = SinglePositionFeature(feature, name='N-glycosilation',s)
+
+
     
     '''
     def __init__(self,feature,**kwargs):
@@ -664,38 +761,61 @@ class SinglePositionFeature(BaseGraphicFeature):
         
 class TMFeature(BaseGraphicFeature):
     '''  
-::    
     
-    Draws Transmembrane helix with predicted cytoplasmic/non cytoplasmic sides
+    Draws  a line plot of proteins contaning transmembrane regions with 
+    cytoplasmic/non cytoplasmic sides.
+    
+    A list of `transmembrane` SeqFeatures is required. additional `cytoplasmic`
+    and `non cytoplasmic` SeqFeatures can be passed. If only `transmembrane` 
+    SeqFeatures are given, the remaining space is filled with an horizontal 
+    line.
 
-    TM = list of seqfeatures reporting Transmembrane regions 
-        cyto =  list of seqfeatures reporting cytoplasmic regions
-        non_cyto = list of seqfeatures reporting non cytoplasmic regions
-        
-        self.TM = kwargs.get('TM',[])
-        self.cyto = kwargs.get('cyto',[])
-        self.non_cyto = kwargs.get('non_cyto',[])
-        self.type=kwargs.get('type',self.TM[0].type)
-        self.TM_ec = kwargs.get('TM_ec',self.ec)
-        self.TM_fc = kwargs.get('TM_fc',self.fc)
-        self.TM_label = kwargs.get('TM_label','TM')
-        self.cyto_color = kwargs.get('cyto_color',self.ec)
-        self.cyto_linestyle = kwargs.get('cyto_linestyle','-')
-        self.cyto_label = kwargs.get('cyto_label','cyto')
-        self.non_cyto_color = kwargs.get('non_cyto_color',self.ec)
-        self.non_cyto_linestyle = kwargs.get('non_cyto_linestyle',':')
-        self.non_cyto_label = kwargs.get('non_cyto_label','not cyto')
-        self.fill_color = kwargs.get('fill_color',self.cyto_color)
-        self.fill_linestyle = kwargs.get('fill_linestyle',self.cyto_linestyle)
-        
-        available linestyles:
-        
-        '-'     solid line style
-        '--'     dashed line style
-        '-.'     dash-dot line style
-        ':'     dotted line style
-        
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        TM                    list of SeqFeatures reporting Transmembrane 
+                              regions. required to draw something.
+        cyto                  list of SeqFeatures reporting cytoplasmic regions.
+        non_cyto              list of SeqFeatures reporting non cytoplasmic 
+                              regions. 
+        type                  feature type
+        TM_ec                 transmembrane region edgecolor, as in matplotlib.
+        TM_fc                 transmembrane region facecolor, as in matplotlib.
+        TM_label              text that will appear under the transmembrane 
+                              regions. default is ``'TM'``
+        cyto_color            cytoplasmic line color default is ``self.ec``
+        cyto_linestyle        cytoplasmic line style default is solid ``'-'``
+        cyto_label            text that will appear under the cytoplasmic 
+                              regions. default is ``'cyto'``
+        non_cyto_color        non cytoplasmic line color default is ``self.ec``
+        non_cyto_linestyle    non cytoplasmic line style default is solid 
+                              ``'-'``
+        non_cyto_label        text that will appear under the non cytoplasmic 
+                              regions. default is ``'non cyto'``
+        fill_color            automatic fill line color default is ``self.ec``         
+        fill_linestyle        automatic fill line style default is solid ``'-'``
+        connection_lw         linewidth for cytoplasmic, non cytoplasming and
+                              automatic filled lines. default is ``'2``
+        do_not_fill           ``True`` | ``False``. if ``True`` will not 
+                              automatically fill the space between transmembrane
+                              regions with a line. default is ``False``
+        ===================== ==================================================
 
+        
+        Available linestyles for lines:
+        
+            * ``'-'``     solid line style
+            * ``'--'``    dashed line style
+            * ``'-.'``    dash-dot line style
+            * ``':'``     dotted line style
+    
+    Usage eg.
+            
+    ::
+    
+        feat = TMFeature(TM_features, cyto_features, non_features, 
+                         non_cyto_label= 'extracellular', )
     
     '''
     def __init__(self, **kwargs):
@@ -715,11 +835,12 @@ class TMFeature(BaseGraphicFeature):
         self.cyto_linestyle = kwargs.get('cyto_linestyle','-')
         self.cyto_label = kwargs.get('cyto_label','cyto')
         self.non_cyto_color = kwargs.get('non_cyto_color',self.ec)
-        self.non_cyto_linestyle = kwargs.get('non_cyto_linestyle',':')
+        self.non_cyto_linestyle = kwargs.get('non_cyto_linestyle','-')
         self.non_cyto_label = kwargs.get('non_cyto_label','non cyto')
         self.fill_color = kwargs.get('fill_color',self.cyto_color)
         self.fill_linestyle = kwargs.get('fill_linestyle',self.cyto_linestyle)
         self.connection_lw = kwargs.get('connection_lw',2)
+        self.do_not_fill = kwargs.get('do_not_fill',False)
         
         Xs = []
         for feature in self.TM:
@@ -736,10 +857,10 @@ class TMFeature(BaseGraphicFeature):
         self.start = min(Xs)
         self.end = max(Xs)
         
-        if self.cyto and self.non_cyto:
+        if (self.cyto and self.non_cyto) or self.do_not_fill:
             self.fill = False 
         else:
-            self.fill = True #draw line between TM
+            self.fill = True 
             
         #label positions
         self.TM_starts = []
@@ -751,7 +872,6 @@ class TMFeature(BaseGraphicFeature):
     
     
     def draw_feature(self):
-        'draw TM regions'
         
         def drow_orizontal_line(start, end, y, linestyle, color):
             return plt.plot((start,end), (y,y), linestyle=linestyle, color=color, 
@@ -791,7 +911,7 @@ class TMFeature(BaseGraphicFeature):
                  
                 
     def draw_feat_name(self,**kwargs):
-        '''recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name '''
+        '''draws the feature name and all the TM, cyto a non cyto labels'''
         self.feat_name=[]
         font_feat=FontProperties()
         set_size=kwargs.get('set_size','xx-small')
@@ -817,36 +937,58 @@ class TMFeature(BaseGraphicFeature):
             
 class SecStructFeature(BaseGraphicFeature):
     '''
-::    
     
-    Draws secondary structures
+    Draws secondary structures. requires at least a list of SeqFeatures 
+    indicating beta strands (`betas`), alpha helices (`alphah`), and random
+    coil (`coil`).
+
+    Beta strands are drawn as arrows, alpha helices as rectangles and coils as
+    horizontal lines. 
+
+
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        betas_ec              beta strands edgecolor, as in matplotlib.
+        betas_fc              beta strands facecolor, as in matplotlib.
+        alphah_ec             alpha helices edgecolor, as in matplotlib.
+        alphah_fc             alpha helices facecolor, as in matplotlib.
+        coil_color            random coil line color default is ``self.ec``
+        coil_linestyle        random coil line style default is solid 
+        lw                    linewidth for coil lines . default is ``'0.5'``
+        type                  feature type. default is ``''``
+        filter_struct_length  if != 0 smooths secondary structures, by 
+                              displaying only those longher than the given 
+                              value. Force coil generation, and ignore supplied 
+                              coil regions. default is ``'0'``
+        ===================== ==================================================
+        
+        Available linestyles for random coils:
+        
+            * ``'-'``     solid line style
+            * ``'--'``    dashed line style
+            * ``'-.'``    dash-dot line style
+            * ``':'``     dotted line style
+
+    Usage eg.
+            
+    ::
     
-        self.betas = kwargs.get('betas',[])
-        self.alphah = kwargs.get('alphah',[])
-        self.coil = kwargs.get('coil',[])
-        self.type=kwargs.get('type','')
-        
-        self.betas_ec = kwargs.get('betas_ec','k')
-        self.betas_fc = kwargs.get('betas_fc','yellow')
-        self.alphah_ec = kwargs.get('alphah_ec','k')
-        self.alphah_fc = kwargs.get('alphah_fc','magenta')
-        self.coil_color = kwargs.get('coil_color','k')
-        self.coil_linestyle = kwargs.get('coil_linestyle','-')
-        self.lw = kwargs.get('lw',0.5)
-        
-        self.filter_struct_length = kwargs.get('filter_struct_length',3)#if != 0 smooths secondary structures, by displaying only those longher than the given value. self.filter_struct_length force coil geneation, and ignore supplied coils regions
-        
+        feat = SecStructFeature(betas = betas_features, 
+                                alphah = alphah_features)
+    
     
     '''
-    def __init__(self,**kwargs):
+    def __init__(self, betas = [], alphah = [], coil = [], **kwargs):
         '''
 
         '''
         BaseGraphicFeature.__init__(self,**kwargs)
         
-        self.betas = kwargs.get('betas',[])
-        self.alphah = kwargs.get('alphah',[])
-        self.coil = kwargs.get('coil',[])
+        self.betas = betas
+        self.alphah = alphah
+        self.coil = coil
         self.type=kwargs.get('type','')
         
         self.betas_ec = kwargs.get('betas_ec','k')
@@ -857,7 +999,7 @@ class SecStructFeature(BaseGraphicFeature):
         self.coil_linestyle = kwargs.get('coil_linestyle','-')
         self.lw = kwargs.get('lw',2)
         
-        self.filter_struct_length = kwargs.get('filter_struct_length',3)#if != 0 smooths secondary structures, by displaying only those longher than the given value. self.filter_struct_length force coil geneation, and ignore supplied coils regions
+        self.filter_struct_length = kwargs.get('filter_struct_length', 0)#if != 0 smooths secondary structures, by displaying only those longher than the given value. self.filter_struct_length force coil geneation, and ignore supplied coils regions
         
         self.structured_regions =[]
 
@@ -932,35 +1074,64 @@ class SecStructFeature(BaseGraphicFeature):
                 
 class DomainFeature(BaseGraphicFeature):
     '''
-::    
     
-    Draws domains(encoded as seqfeatures) with FancyBboxPatch
-    can optionally drow a a line representing the complete sequence
+    Draws one ore more domains (encoded as seqfeatures) with `FancyBboxPatch`.
+    Can optionally draw a line representing the complete sequence.
+    Accepts a list of SeqFeature objects.
     
-    domains = accepts a list of SeqFeature objects
-    self.boxstyle is inherited by  BaseGraphicFeature ---> in this class accepts one or a list of matplotlib FancyBboxPatch boxstyle
-    
-    available boxstyle: (http://matplotlib.sourceforge.net/api/artist_api.html?highlight=fancybboxpatch#matplotlib.patches.FancyBboxPatch)
-    larrow 
-    rarrow 
-    round 
-    round4 
-    roundtooth 
-    sawtooth
-    square
-    
-    
-    style examples at:
-    http://matplotlib.sourceforge.net/examples/pylab_examples/fancybox_demo2.html
-    
-    self.seq_line_start, self.seq_line_end = kwargs.get('self.seq_line',(0,0))
-    
-    self.boxstyle, self.ec, self.fc, self.alpha, self.zorder can be a single value (applied to all domain features) 
-    or a list of values (each one corresponding to a  domain features)
+    Additional valid attributes:
+        ===================== ==================================================
+        Key                   Description
+        ===================== ==================================================
+        seq_line              sequence line start and end positions tuple. 
+                              default is (0,0)
+        name                  inherited by 
+                              :class:`~biograpy.features.BaseGraphicFeature`,
+                              accepts multiple values
+        boxstyle              inherited by 
+                              :class:`~biograpy.features.BaseGraphicFeature`,
+                              accepts multiple values
+        ec                    inherited by 
+                              :class:`~biograpy.features.BaseGraphicFeature`, 
+                              accepts multiple values
+        fc                    inherited by 
+                              :class:`~biograpy.features.BaseGraphicFeature`, 
+                              accepts multiple values
+        alpha                 inherited by
+                              :class:`~biograpy.features.BaseGraphicFeature`,
+                              accepts multiple values
+        zorder                use zorder to display overlapping domains. default
+                              is ``2``
+        ===================== ==================================================
 
-    use zorder to display overlapping domains
-        
-**DRAFT**
+    
+    Available boxstyles_:
+    
+    * ``'larrow'``
+    * ``'rarrow'``
+    * ``'round'``
+    * ``'round4'`` 
+    * ``'roundtooth'`` 
+    * ``'sawtooth'``
+    * ``'square'``
+    
+    with examples_.
+    
+    Usage eg.
+    
+    ::
+    
+        feat = features.DomainFeature([seqfeature,seqfeature2], 
+               name = ['test domain 1', 'test domain 2'], 
+               boxstyle = ['sawtooth, tooth_size=1.4',  
+                           'rarrow, pad = 0.1'],  
+               seq_line = (1, 766),)
+
+.. _boxstyles: http://matplotlib.sourceforge.net/api/artist_api.html?highlight\
+=fancybboxpatch#matplotlib.patches.FancyBboxPatch
+
+.. _examples: http://matplotlib.sourceforge.net/examples/pylab_examples/\
+fancybox_demo2.html
 
     '''
     def __init__(self, domains, **kwargs):
@@ -990,7 +1161,6 @@ class DomainFeature(BaseGraphicFeature):
         
             
     def draw_feature(self):
-        '''draw domains '''
         if self.seq_line_start:
             line_y = self.Y + self.height/2
             feat_draw = plt.plot((self.seq_line_start, self.seq_line_end),
@@ -1047,7 +1217,6 @@ class DomainFeature(BaseGraphicFeature):
 
             
     def draw_feat_name(self,**kwargs):
-        '''recalling self.draw_feat_name() will overwrite the previous feature name stored in self.feat_name '''
         self.feat_name=[]
         font_feat=FontProperties()
         set_size=kwargs.get('set_size','xx-small')

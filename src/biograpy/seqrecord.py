@@ -14,7 +14,7 @@ from biograpy import features, tracks
 
 class SeqRecordDrawer(object):
     '''
-    Gets a seqrecord and draws it in predefined forms
+    Take a seqrecord and draws it in predefined forms
     '''
 
 
@@ -222,7 +222,7 @@ class SeqRecordDrawer(object):
 
     def draw_features_ordered_by_gene_struct(self,gene_code=None):
 
-        '''Takes as input a seqrecord containing a gene, mRNAs, CDSs and other allowed features and display them in a defined order
+        '''Take as input a seqrecord containing a gene, mRNAs, CDSs and other allowed features and display them in a defined order
         after fusing corresponding mRNA and CDS.
 
         if gene_code is not supplied, the first 'gene' feature is selected as the gene_code to be drawn
@@ -343,13 +343,13 @@ def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]
     ''' Adapted from default biopython seqrecord slicing:
         features are retained even if they are not completely included in the slice.
 
-    def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]):
+        def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]):
 
-        include_feature=['mRNA'] ---> list of feature to include from seqrecord, if empty all features are included
-        exclude_feature=['exon'] ---> list of feature to exclude from seqrecord, if empty no feature is excluded
-        exclude_feature overrides include_feature
+            include_feature=['mRNA'] ---> list of feature to include from seqrecord, if empty all features are included
+            exclude_feature=['exon'] ---> list of feature to exclude from seqrecord, if empty no feature is excluded
+            exclude_feature overrides include_feature
 
-        feature_rename_dictionary={'Seg':'Low complexity'} ---> change the feature.type attributes to be correctly visualized in the drawer
+            feature_rename_dictionary={'Seg':'Low complexity'} ---> change the feature.type attributes to be correctly visualized in the drawer
 
     '''
     if seqrec.seq is None :
