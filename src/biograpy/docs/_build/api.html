@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API &mdash; BioGraPy v1.0 alpha documentation</title>
+    <title>API &mdash; BioGraPy v1.0 beta documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0 alpha',
+        VERSION:     '1.0 beta',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +19,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="BioGraPy v1.0 alpha documentation" href="index.html" />
+    <link rel="top" title="BioGraPy v1.0 beta documentation" href="index.html" />
  
 <script type="text/javascript">
 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="modindex.html" title="Global Module Index"
              accesskey="M">modules</a> |</li>
-        <li><a href="index.html">BioGraPy v1.0 alpha documentation</a> &raquo;</li> 
+        <li><a href="index.html">BioGraPy v1.0 beta documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -77,6 +77,10 @@
 <li><a class="reference external" href="#tmfeature">TMFeature</a></li>
 <li><a class="reference external" href="#secstructfeature">SecStructFeature</a></li>
 <li><a class="reference external" href="#domainfeature">DomainFeature</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#seqrecord">Seqrecord</a><ul>
+<li><a class="reference external" href="#seqrecorddrawer">SeqRecordDrawer</a></li>
 </ul>
 </li>
 </ul>
@@ -114,9 +118,9 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Release:</th><td class="field-body">1.0a</td>
+<tr class="field"><th class="field-name">Release:</th><td class="field-body">1.0b</td>
 </tr>
-<tr class="field"><th class="field-name">Date:</th><td class="field-body">September 05, 2011</td>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">September 08, 2011</td>
 </tr>
 </tbody>
 </table>
@@ -1892,6 +1896,96 @@ is <tt class="docutils literal"><span class="pre">2</span></tt></td>
 
 </div>
 </div>
+<div class="section" id="seqrecord">
+<h1>Seqrecord<a class="headerlink" href="#seqrecord" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="seqrecorddrawer">
+<h2>SeqRecordDrawer<a class="headerlink" href="#seqrecorddrawer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="biograpy.seqrecord.SeqRecordDrawer">
+<em class="property">class </em><tt class="descclassname">biograpy.seqrecord.</tt><tt class="descname">SeqRecordDrawer</tt><big>(</big><em>seqrecord</em>, <em>draw_type='simple'</em>, <em>gene_to_draw=None</em>, <em>feature_class_qualifier='ft_description'</em>, <em>feature_name_qualifier='hit_name'</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Takes in input a seqrecord and draws all the included features along a 
+reference object</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>draw_type</td>
+<td><tt class="docutils literal"><span class="pre">'simple'</span></tt> | <tt class="docutils literal"><span class="pre">'gene</span> <span class="pre">structure'</span></tt>, default is
+<tt class="docutils literal"><span class="pre">'simple'</span></tt>. if <cite>simple</cite> draw is selected all
+the features will be drawn.
+if <cite>gene structure</cite> is selected only features
+reporting to a given gene in
+<tt class="docutils literal"><span class="pre">feature.qualifeirs['gene']</span></tt> will be drawn.
+Gene can be set using the <cite>gene_to_draw</cite>
+function.</td>
+</tr>
+<tr><td>gene_to_draw</td>
+<td>default is <tt class="xref docutils literal"><span class="pre">None</span></tt> if a string is specified
+only features  carrying that string in the
+<tt class="docutils literal"><span class="pre">feature.qualifeirs['gene']</span></tt> qualifier will
+be drawn.  if <tt class="xref docutils literal"><span class="pre">None</span></tt>, the first feature of
+type <a href="#id3"><span class="problematic" id="id4">``</span></a>&#8216;gene&#8217;<a href="#id5"><span class="problematic" id="id6">``</span></a>is selected as the gene to draw.</td>
+</tr>
+<tr><td>feature_class_qualifier</td>
+<td>assign the qualifier key to use to set a
+feature_class</td>
+</tr>
+<tr><td>feature_name_qualifier</td>
+<td>assign the qualifier key to use to set a
+feature_name</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>all supplied kwargs are passed to the Panel object that is available at
+self.panel</p>
+<dl class="method">
+<dt id="biograpy.seqrecord.SeqRecordDrawer.boxes">
+<tt class="descname">boxes</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer.boxes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="biograpy.seqrecord.SeqRecordDrawer.draw_features">
+<tt class="descname">draw_features</tt><big>(</big><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer.draw_features" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="biograpy.seqrecord.SeqRecordDrawer.draw_features_ordered_by_gene_struct">
+<tt class="descname">draw_features_ordered_by_gene_struct</tt><big>(</big><em>gene_code=None</em><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer.draw_features_ordered_by_gene_struct" title="Permalink to this definition">¶</a></dt>
+<dd>Draws &#8216;gene structure&#8217; type.
+The input SeqRecord should include a gene, mRNAs, CDSs and other allowed
+features. they will be drawn in a defined order  after fusing 
+corresponding mRNA and CDS. if exons are passed in the seqrecord they 
+are mapped to the gene patch then corresponding mRNA and CDS are coupled
+and drawn then misc_RNA are drawed in the end the other feature present
+in the seqrecord are drawn.  
+the mRNA and CDS are coupled by using a <tt class="docutils literal"><span class="pre">qualifier['note']</span></tt> containing 
+<tt class="docutils literal"><span class="pre">'transcript_id=XXXXXXXXXXXX'</span></tt> this work for ensembl-derived 
+seqrecord, but can be impoved.</dd></dl>
+
+<dl class="method">
+<dt id="biograpy.seqrecord.SeqRecordDrawer.imagemap">
+<tt class="descname">imagemap</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer.imagemap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="biograpy.seqrecord.SeqRecordDrawer.save">
+<tt class="descname">save</tt><big>(</big><em>output</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#biograpy.seqrecord.SeqRecordDrawer.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
           </div>
@@ -1908,12 +2002,12 @@ is <tt class="docutils literal"><span class="pre">2</span></tt></td>
         <li class="right" >
           <a href="modindex.html" title="Global Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">BioGraPy v1.0 alpha documentation</a> &raquo;</li> 
+        <li><a href="index.html">BioGraPy v1.0 beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Sep 05, 2011.
+      Last updated on Sep 08, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>

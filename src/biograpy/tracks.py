@@ -507,7 +507,8 @@ class PlotTrack(BaseTrack):
     def _draw_ordered_features(self, feat_list = None):
         return
 
-    def _draw_features(self):
+    def _draw_features(self, **kwargs):
+        xoffset = kwargs.get('xoffset',0)
         for feat_numb, feat2draw in enumerate(self.features):
             if feat2draw.color_by_cm:
                 if feat2draw.use_score_for_color:
@@ -519,7 +520,7 @@ class PlotTrack(BaseTrack):
                         feat2draw.cm_value = feat_numb +1
                     feat2draw.fc = self.cm(self.norm(feat2draw.cm_value))
             feat2draw.draw_feature()
-            feat2draw.draw_feat_name()
+            feat2draw.draw_feat_name(xoffset = xoffset)
 
             
     def _sort_features(self, dpi = 80, **kwargs):

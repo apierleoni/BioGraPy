@@ -5,4 +5,9 @@ AUTHORS
 =======
 
 * Andrea Pierleoni
+
+============
+CONTRIBUTORS
+============
+
 * Mauro Amico

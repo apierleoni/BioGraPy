@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; BioGraPy v1.0 alpha documentation</title>
+    <title>Index &mdash; BioGraPy v1.0 beta documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0 alpha',
+        VERSION:     '1.0 beta',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +19,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="BioGraPy v1.0 alpha documentation" href="index.html" />
+    <link rel="top" title="BioGraPy v1.0 beta documentation" href="index.html" />
  
 <script type="text/javascript">
 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="modindex.html" title="Global Module Index"
              accesskey="M">modules</a> |</li>
-        <li><a href="index.html">BioGraPy v1.0 alpha documentation</a> &raquo;</li> 
+        <li><a href="index.html">BioGraPy v1.0 beta documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -78,7 +78,7 @@
 
    <h1 id="index">Index</h1>
 
-   <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> 
+   <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> 
 
    <hr />
 
@@ -107,6 +107,7 @@
 <dt><a href="api.html#biograpy.features.BaseGraphicFeature">BaseGraphicFeature (class in biograpy.features)</a></dt>
 <dt><a href="api.html#biograpy.tracks.BaseTrack">BaseTrack (class in biograpy.tracks)</a></dt></dl></td><td width="33%" valign="top"><dl>
 <dt><a href="api.html#module-biograpy">biograpy (module)</a></dt>
+<dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer.boxes">boxes() (biograpy.seqrecord.SeqRecordDrawer method)</a></dt>
 </dl></td></tr></table>
 
 <h2 id="C">C</h2>
@@ -136,7 +137,7 @@
     <dt><a href="api.html#biograpy.features.SinglePositionFeature.draw_feat_name">(biograpy.features.SinglePositionFeature method)</a></dt>
     <dt><a href="api.html#biograpy.features.TMFeature.draw_feat_name">(biograpy.features.TMFeature method)</a></dt>
     <dt><a href="api.html#biograpy.features.TextSequence.draw_feat_name">(biograpy.features.TextSequence method)</a></dt>
-  </dl></dd></dl></td><td width="33%" valign="top"><dl>
+  </dl></dd>
 <dt><a href="api.html#biograpy.features.BarPlotFeature.draw_feature">draw_feature() (biograpy.features.BarPlotFeature method)</a></dt>
   <dd><dl>
     <dt><a href="api.html#biograpy.features.CoupledmRNAandCDS.draw_feature">(biograpy.features.CoupledmRNAandCDS method)</a></dt>
@@ -150,7 +151,9 @@
     <dt><a href="api.html#biograpy.features.SinglePositionFeature.draw_feature">(biograpy.features.SinglePositionFeature method)</a></dt>
     <dt><a href="api.html#biograpy.features.TMFeature.draw_feature">(biograpy.features.TMFeature method)</a></dt>
     <dt><a href="api.html#biograpy.features.TextSequence.draw_feature">(biograpy.features.TextSequence method)</a></dt>
-  </dl></dd>
+  </dl></dd></dl></td><td width="33%" valign="top"><dl>
+<dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer.draw_features">draw_features() (biograpy.seqrecord.SeqRecordDrawer method)</a></dt>
+<dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer.draw_features_ordered_by_gene_struct">draw_features_ordered_by_gene_struct() (biograpy.seqrecord.SeqRecordDrawer method)</a></dt>
 </dl></td></tr></table>
 
 <h2 id="E">E</h2>
@@ -172,6 +175,13 @@
 <dt><a href="api.html#biograpy.features.GeneSeqFeature">GeneSeqFeature (class in biograpy.features)</a></dt></dl></td><td width="33%" valign="top"><dl>
 </dl></td></tr></table>
 
+<h2 id="I">I</h2>
+<table width="100%" class="indextable"><tr><td width="33%" valign="top">
+<dl>
+
+<dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer.imagemap">imagemap() (biograpy.seqrecord.SeqRecordDrawer method)</a></dt></dl></td><td width="33%" valign="top"><dl>
+</dl></td></tr></table>
+
 <h2 id="P">P</h2>
 <table width="100%" class="indextable"><tr><td width="33%" valign="top">
 <dl>
@@ -186,8 +196,12 @@
 <dl>
 
 <dt><a href="api.html#biograpy.drawer.Panel.save">save() (biograpy.drawer.Panel method)</a></dt>
+  <dd><dl>
+    <dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer.save">(biograpy.seqrecord.SeqRecordDrawer method)</a></dt>
+  </dl></dd>
 <dt><a href="api.html#biograpy.features.SecStructFeature">SecStructFeature (class in biograpy.features)</a></dt>
 <dt><a href="api.html#biograpy.features.SegmentedSeqFeature">SegmentedSeqFeature (class in biograpy.features)</a></dt></dl></td><td width="33%" valign="top"><dl>
+<dt><a href="api.html#biograpy.seqrecord.SeqRecordDrawer">SeqRecordDrawer (class in biograpy.seqrecord)</a></dt>
 <dt><a href="api.html#biograpy.features.Simple">Simple (class in biograpy.features)</a></dt>
 <dt><a href="api.html#biograpy.features.SinglePositionFeature">SinglePositionFeature (class in biograpy.features)</a></dt>
 </dl></td></tr></table>
@@ -216,12 +230,12 @@
         <li class="right" >
           <a href="modindex.html" title="Global Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">BioGraPy v1.0 alpha documentation</a> &raquo;</li> 
+        <li><a href="index.html">BioGraPy v1.0 beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Copyright 2011, Andrea Pierleoni.
-      Last updated on Sep 05, 2011.
+      Last updated on Sep 08, 2011.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
     </div>
   </body>

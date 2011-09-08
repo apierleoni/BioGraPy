@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0a'
+version = '1.0b'
 
 setup(name='biograpy',
       version=version,
@@ -15,7 +15,7 @@ setup(name='biograpy',
         ],
       keywords='',
       author='Andrea Pierleoni',
-      author_email='andrea@biocomp.unibo.it',
+      author_email='apierleoni.dev@gmail.com',
       url='',
       license='LGPL',
       packages=find_packages('src', exclude=['ez_setup']),

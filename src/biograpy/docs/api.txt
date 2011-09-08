@@ -169,4 +169,18 @@ ______________
 	:show-inheritance: 
 	:inherited-members:
 	:undoc-members:
-	
+    
+    
+=========
+Seqrecord
+=========
+
+SeqRecordDrawer
+___________________________
+
+.. autoclass:: biograpy.seqrecord.SeqRecordDrawer
+	:members: 
+	:show-inheritance: 
+	:inherited-members:
+	:undoc-members:
+    

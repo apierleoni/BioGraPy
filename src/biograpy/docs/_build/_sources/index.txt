@@ -26,11 +26,6 @@ License
 
 LGPL
 
-Authors
--------
-
-* Andrea Pierleoni 
-* Mauro Amico 
 
 Contact
 -------
@@ -47,9 +42,9 @@ Download
 --------
 You can download BioGraPy in either zip_ or tar_ formats.
 
-.. _zip: http://github.com/apierleoni/BioGraPy/zipball/v1.0a
+.. _zip: http://github.com/apierleoni/BioGraPy/zipball/v1.0b
 
-.. _tar: http://github.com/apierleoni/BioGraPy/tarball/v1.0a
+.. _tar: http://github.com/apierleoni/BioGraPy/tarball/v1.0b
 
 You can also clone BioGraPy with Git by running:
 

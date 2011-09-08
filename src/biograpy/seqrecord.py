@@ -14,7 +14,37 @@ from biograpy import features, tracks
 
 class SeqRecordDrawer(object):
     '''
-    Take a seqrecord and draws it in predefined forms
+    Takes in input a seqrecord and draws all the included features along a 
+    reference object
+    
+    
+        ======================= ================================================
+        Key                      Description
+        ======================= ================================================
+        draw_type               ``'simple'`` | ``'gene structure'``, default is
+                                ``'simple'``. if `simple` draw is selected all 
+                                the features will be drawn. 
+                                if `gene structure` is selected only features 
+                                reporting to a given gene in 
+                                ``feature.qualifeirs['gene']`` will be drawn. 
+                                Gene can be set using the `gene_to_draw` 
+                                function.
+        gene_to_draw            default is ``None`` if a string is specified 
+                                only features  carrying that string in the
+                                ``feature.qualifeirs['gene']`` qualifier will
+                                be drawn.  if ``None``, the first feature of 
+                                type ``'gene'``is selected as the gene to draw.
+        feature_class_qualifier assign the qualifier key to use to set a 
+                                feature_class
+        feature_name_qualifier  assign the qualifier key to use to set a 
+                                feature_name                        
+                                                 
+        ======================= ================================================
+
+
+    all supplied kwargs are passed to the Panel object that is available at
+    self.panel
+
     '''
 
 
@@ -25,20 +55,7 @@ class SeqRecordDrawer(object):
                  feature_class_qualifier='ft_description', 
                  feature_name_qualifier='hit_name',
                  **kwargs):
-        '''
 
-        draw_type='simple' --> draws all the features
-        draw_type='gene structure' ---> draws the gene and the corresponding coding and non coding mRNA and CDS
-                                        if 'gene structure' visualization is invoked gene_to_draw set the gene code to draw
-                                        only features reporting gene_to_draw in feature.qualifeirs['gene'] will be drawn.
-                                        if gene_to_draw is not specified, the first gene code in the SeqRecord is picked
-
-        feature_class_qualifier ---> assign the qualifier key to use to set a feature_class
-        feature_name_qualifier ---> assign the qualifier key to use to set a feature_name
-
-        **kwargs are passed to the Drawer object
-        a self.panel is created to attach all the patches and text
-        '''
         self.seqrecord=seqrecord
         self.panel = Panel(**kwargs)
         self.feature_class_qualifier=feature_class_qualifier
@@ -53,6 +70,7 @@ class SeqRecordDrawer(object):
 
     def save(self,output,**kwargs):
         self.panel.save(output,**kwargs)
+        self.panel.close()
 
     def imagemap(self, **kwargs):
         return self.panel.imagemap(**kwargs)
@@ -222,20 +240,17 @@ class SeqRecordDrawer(object):
 
     def draw_features_ordered_by_gene_struct(self,gene_code=None):
 
-        '''Take as input a seqrecord containing a gene, mRNAs, CDSs and other allowed features and display them in a defined order
-        after fusing corresponding mRNA and CDS.
-
-        if gene_code is not supplied, the first 'gene' feature is selected as the gene_code to be drawn
-        only features reporting "gene_code in feature.qualifeirs['gene']" will be drawn
-        fisrt the Gene is drawn. if exons are passed in the seqrecord they are mapped to the gene patch
-        then corresponding mRNA and CDS are coupled and drawn
-        then misc_RNA are drawed
-        in the end the other feature present in the seqrecord are drawn.  contains misc_RNA
-
-        the mRNA and CDS are coupled by using a qualifier['note'] containing 'transcript_id=XXXXXXXXXXXX'
-        this work for ensembl-derived seqrecord, but must be impoved.
-
-        no genome ref_obj is drawn. maybe an upgrade?
+        '''
+        Draws 'gene structure' type.
+        The input SeqRecord should include a gene, mRNAs, CDSs and other allowed
+        features. they will be drawn in a defined order  after fusing 
+        corresponding mRNA and CDS. if exons are passed in the seqrecord they 
+        are mapped to the gene patch then corresponding mRNA and CDS are coupled
+        and drawn then misc_RNA are drawed in the end the other feature present
+        in the seqrecord are drawn.  
+        the mRNA and CDS are coupled by using a ``qualifier['note']`` containing 
+        ``'transcript_id=XXXXXXXXXXXX'`` this work for ensembl-derived 
+        seqrecord, but can be impoved.
         '''
         # get gene info
         for feat in self.seqrecord.features:
@@ -339,18 +354,27 @@ class SeqRecordDrawer(object):
 
 
 
-def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[],feature_rename_dictionary={}):
-    ''' Adapted from default biopython seqrecord slicing:
-        features are retained even if they are not completely included in the slice.
+def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[],feature_rename_dict={}):
+    ''' 
+    Adapted from default biopython seqrecord slicing, features are retained 
+    even if they are not completely included in the slice.
 
-        def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]):
-
-            include_feature=['mRNA'] ---> list of feature to include from seqrecord, if empty all features are included
-            exclude_feature=['exon'] ---> list of feature to exclude from seqrecord, if empty no feature is excluded
-            exclude_feature overrides include_feature
-
-            feature_rename_dictionary={'Seg':'Low complexity'} ---> change the feature.type attributes to be correctly visualized in the drawer
-
+        ======================= ================================================
+        Key                      Description
+        ======================= ================================================
+        include_feature         lists of feature to include from seqrecord, 
+                                if empty all features are included
+        
+        exclude_feature         lists of feature to exclude from seqrecord, 
+                                if empty no feature is excluded. 
+                                `exclude_feature` overrides `include_feature`
+        
+        feature_rename_dict     key value dict used to change the `feature.type`
+                                attributes to be correctly visualized in the 
+                                drawer. 
+                                eg.: 
+                                ``feature_rename_dict={'Seg':'Low complexity'}`` 
+        ======================= ================================================
     '''
     if seqrec.seq is None :
         raise ValueError("If the sequence is None, we cannot slice it.")
@@ -375,8 +399,8 @@ def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]
         if (start <= f.location.end.position)  and (f.location.start.position < end):
             if (not include_feature) or f.type in include_feature:
                 if f.type not in exclude_feature:
-                    if f.type in feature_rename_dictionary:
-                        f.type=feature_rename_dictionary[f.type]
+                    if f.type in feature_rename_dict:
+                        f.type=feature_rename_dict[f.type]
                     answer.features.append(f._shift(-start))
     for key, value in seqrec.letter_annotations.iteritems() :
         answer._per_letter_annotations[key] = value[start:end]

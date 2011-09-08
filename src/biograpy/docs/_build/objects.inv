@@ -1,6 +1,6 @@
 # Sphinx inventory version 1
 # Project: BioGraPy
-# Version: 1.0a
+# Version: 1.0b
 biograpy mod api.html
 biograpy.features.CoupledmRNAandCDS.draw_feat_name method api.html
 biograpy.features.SegmentedSeqFeature.draw_feat_name method api.html
@@ -11,6 +11,7 @@ biograpy.tracks.PlotTrack.add_feature method api.html
 biograpy.features.GeneSeqFeature.draw_feature method api.html
 biograpy.features.SecStructFeature class api.html
 biograpy.tracks.PlotTrack class api.html
+biograpy.seqrecord.SeqRecordDrawer.save method api.html
 biograpy.features.DomainFeature.draw_feature method api.html
 biograpy.features.PlotFeature.draw_feat_name method api.html
 biograpy.features.SinglePositionFeature class api.html
@@ -22,6 +23,7 @@ biograpy.features.GenericSeqFeature class api.html
 biograpy.features.BaseGraphicFeature.draw_feat_name method api.html
 biograpy.features.GeneSeqFeature.draw_feat_name method api.html
 biograpy.features.TextSequence.draw_feat_name method api.html
+biograpy.seqrecord.SeqRecordDrawer.draw_features method api.html
 biograpy.features.TMFeature.draw_feat_name method api.html
 biograpy.features.Simple.draw_feat_name method api.html
 biograpy.features.TextSequence class api.html
@@ -35,6 +37,7 @@ biograpy.features.CoupledmRNAandCDS class api.html
 biograpy.features.BarPlotFeature.draw_feature method api.html
 biograpy.tracks.PlotTrack.append method api.html
 biograpy.features.Simple class api.html
+biograpy.seqrecord.SeqRecordDrawer class api.html
 biograpy.features.BaseGraphicFeature class api.html
 biograpy.tracks.PlotTrack.extend method api.html
 biograpy.features.SinglePositionFeature.draw_feature method api.html
@@ -49,8 +52,11 @@ biograpy.features.BarPlotFeature class api.html
 biograpy.features.GenericSeqFeature.draw_feature method api.html
 biograpy.drawer.Panel.add_track method api.html
 biograpy.drawer.Panel.extend method api.html
+biograpy.seqrecord.SeqRecordDrawer.imagemap method api.html
+biograpy.seqrecord.SeqRecordDrawer.boxes method api.html
 biograpy.features.TMFeature class api.html
 biograpy.features.Simple.draw_feature method api.html
 biograpy.features.TextSequence.draw_feature method api.html
 biograpy.drawer.Panel.save method api.html
 biograpy.features.SegmentedSeqFeature class api.html
+biograpy.seqrecord.SeqRecordDrawer.draw_features_ordered_by_gene_struct method api.html

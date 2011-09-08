@@ -873,9 +873,10 @@ class TMFeature(BaseGraphicFeature):
     
     def draw_feature(self):
         
-        def drow_orizontal_line(start, end, y, linestyle, color):
+        def draw_orizontal_line(start, end, y, linestyle, color, url):
             return plt.plot((start,end), (y,y), linestyle=linestyle, color=color, 
-                            lw=self.connection_lw, aa=False, alpha=self.alpha,)
+                            lw=self.connection_lw, aa=False, alpha=self.alpha,
+                            url = url)
         
         TMs=[]
         for feature in self.TM:
@@ -891,7 +892,7 @@ class TMFeature(BaseGraphicFeature):
             start = 1
             for TM_start,TM_end in sorted(self.TM_starts):
                 end = TM_start# - 1
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.fill_linestyle, self.fill_color, url = self.url,)
+                feat_draw=draw_orizontal_line(start, end, self.Y + self.height/2, self.fill_linestyle, self.fill_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 start = TM_end #+ 1
         'draw cytplasmic regions'
@@ -899,14 +900,14 @@ class TMFeature(BaseGraphicFeature):
             start = min([feature.location.start.position,feature.location.end.position])
             end = max([feature.location.start.position,feature.location.end.position])
             self.cyto_starts.append((start,end))
-            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.cyto_linestyle, self.cyto_color, url = self.url,)
+            feat_draw=draw_orizontal_line(start, end, self.Y + self.height/2, self.cyto_linestyle, self.cyto_color, url = self.url,)
             self.patches.extend(feat_draw)
         'draw non cytplasmic regions'
         for feature in self.non_cyto:
             start = min([feature.location.start.position,feature.location.end.position])
             end = max([feature.location.start.position,feature.location.end.position])
             self.non_cyto_starts.append((start,end))
-            feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.non_cyto_linestyle, self.non_cyto_color, url = self.url,)
+            feat_draw=draw_orizontal_line(start, end, self.Y + self.height/2, self.non_cyto_linestyle, self.non_cyto_color, url = self.url,)
             self.patches.extend(feat_draw)
                  
                 
@@ -1021,9 +1022,9 @@ class SecStructFeature(BaseGraphicFeature):
 
 
     def draw_feature(self):
-        def drow_orizontal_line(start, end, y, linestyle, color):
+        def draw_orizontal_line(start, end, y, linestyle, color, url):
             return plt.plot((start,end), (y,y), linestyle=linestyle, color=color, 
-                                lw=1, aa=False, alpha=self.alpha,)
+                                lw=1, aa=False, alpha=self.alpha, url = url)
         'draw beta strands'
         for feature in self.betas:
             start = min([feature.location.start.position,feature.location.end.position])
@@ -1058,7 +1059,7 @@ class SecStructFeature(BaseGraphicFeature):
             start = 1
             for region_start,region_end in sorted(self.structured_regions):
                 end = region_start #- 1
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
+                feat_draw=draw_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 start = region_end #+ 1
         else:
@@ -1068,7 +1069,7 @@ class SecStructFeature(BaseGraphicFeature):
                 type = feature.type
                 if 'score' in feature.qualifiers:#not used yet
                     score=kwargs.get('score',feature.qualifiers['score'])
-                feat_draw=drow_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
+                feat_draw=draw_orizontal_line(start, end, self.Y + self.height/2, self.coil_linestyle, self.coil_color, url = self.url,)
                 self.patches.extend(feat_draw)#use extend, since plot returns a list of Line2D objects
                 
                 
