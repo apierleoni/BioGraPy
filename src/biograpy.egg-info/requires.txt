@@ -1,0 +1,4 @@
+setuptools
+biopython
+matplotlib>=1.0
+numpy>=1.1
