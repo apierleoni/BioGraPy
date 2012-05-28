@@ -282,7 +282,7 @@ class GeneSeqFeature(BaseGraphicFeature):
             head_width=self.height
         elif self.feature.strand==-1:
             arrow_start=self.end
-            arrow_direction=-self.end-self.start
+            arrow_direction=self.start-self.end
             shape='left'
             body_width=self.height*.6667
             head_width=self.height
