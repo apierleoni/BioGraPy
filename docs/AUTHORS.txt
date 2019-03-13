@@ -1,0 +1,14 @@
+.. _authors:
+
+=======
+AUTHORS
+=======
+
+* Andrea Pierleoni
+
+============
+CONTRIBUTORS
+============
+
+* Mauro Amico
+* Marc Weber

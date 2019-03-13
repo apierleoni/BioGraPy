@@ -1,6 +1,5 @@
-src/test.py
-src/biograpy/tests/*.png
-src/biograpy/tests/*.svg
-src/biograpy/tests/*.pdf
-src/biograpy/tests/*.jpg
+tests/*.png
+tests/*.svg
+tests/*.pdf
+tests/*.jpg
 .DS_Store
