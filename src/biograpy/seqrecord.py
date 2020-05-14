@@ -274,7 +274,7 @@ class SeqRecordDrawer(object):
                     gene_name=' - '.join(Lgene_name)
                     break
         if not gene_code:
-            raise ValueError, "Cannot draw gene structure, without a gene code"
+            raise ValueError("Cannot draw gene structure, without a gene code")
 
 
 
@@ -390,7 +390,7 @@ def SliceSeqRec(seqrec,start=None,end=None,include_feature=[],exclude_feature=[]
     if end is None :
         end = -1
     if (start < 0 or end < 0) and parent_length == 0 :
-        raise ValueError, "Cannot support negative indices without the sequence length"
+        raise ValueError("Cannot support negative indices without the sequence length")
     if start < 0 :
         start = parent_length - start
     if end < 0  :

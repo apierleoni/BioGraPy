@@ -12,7 +12,7 @@ there's always a simpler solution you're not yet aware of...
 
 import matplotlib, warnings, operator
 matplotlib.use('Agg')
-import tracks 
+import biograpy.tracks
 from matplotlib.font_manager import FontProperties
 
 warnings.simplefilter("ignore")
